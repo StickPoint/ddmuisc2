@@ -20,7 +20,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane stylesheets="@../css/black.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.leewyatt.player.PlayerController">
+<BorderPane stylesheets="@../css/black.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.stickpoint.ddmusic.PlayerController">
    <center>
       <StackPane>
          <children>

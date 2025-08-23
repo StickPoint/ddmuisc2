@@ -1,4 +1,4 @@
-package com.leewyatt.player;
+package com.stickpoint.ddmusic;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -6,7 +6,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 /**
- * 转摘自 https://www.cnblogs.com/ChurchYim/p/8427373.html
+ * 转摘自 <a href="https://www.cnblogs.com/ChurchYim/p/8427373.html">...</a>
  * 作者 兰栖
  * 工具类: 作用是识别当前文件的编码; 我们读取的歌词文件, 可能是gbk,也可能是utf-8等
  *
@@ -15,44 +15,40 @@ public class EncodingDetect {
 
     public static String detect(String path) {
         BytesEncodingDetect s = new BytesEncodingDetect();
-        String fileCode = BytesEncodingDetect.javaname[s.detectEncoding(new File(path))];
-        return fileCode;
+        return BytesEncodingDetect.javaname[s.detectEncoding(new File(path))];
     }
 
     public static String detect(File file) {
         BytesEncodingDetect s = new BytesEncodingDetect();
-        String fileCode = BytesEncodingDetect.javaname[s.detectEncoding(file)];
-        return fileCode;
+        return BytesEncodingDetect.javaname[s.detectEncoding(file)];
     }
 
     public static String detect(byte[] contents) {
         BytesEncodingDetect s = new BytesEncodingDetect();
-        String fileCode = BytesEncodingDetect.javaname[s.detectEncoding(contents)];
-        return fileCode;
+        return BytesEncodingDetect.javaname[s.detectEncoding(contents)];
     }
 
     public static String detect(URL url) {
         BytesEncodingDetect s = new BytesEncodingDetect();
-        String fileCode = BytesEncodingDetect.javaname[s.detectEncoding(url)];
-        return fileCode;
+        return BytesEncodingDetect.javaname[s.detectEncoding(url)];
     }
 
 
     static class BytesEncodingDetect extends Encoding {
 
-        int GBFreq[][];
+        int[][] GBFreq;
 
-        int GBKFreq[][];
+        int[][] GBKFreq;
 
-        int Big5Freq[][];
+        int[][] Big5Freq;
 
-        int Big5PFreq[][];
+        int[][] Big5PFreq;
 
-        int EUC_TWFreq[][];
+        int[][] EUC_TWFreq;
 
-        int KRFreq[][];
+        int[][] KRFreq;
 
-        int JPFreq[][];
+        int[][] JPFreq;
 
         public boolean debug;
 
@@ -72,18 +68,17 @@ public class EncodingDetect {
         public int detectEncoding(URL testurl) {
             byte[] rawtext = new byte[10000];
             int bytesread = 0, byteoffset = 0;
-            int guess = OTHER;
+            int guess;
             InputStream is;
             try {
                 is = testurl.openStream();
                 while ((bytesread = is.read(rawtext, byteoffset, rawtext.length - byteoffset)) > 0) {
                     byteoffset += bytesread;
                 }
-                ;
                 is.close();
                 guess = detectEncoding(rawtext);
             } catch (Exception e) {
-                System.err.println("Error loading or using URL " + e.toString());
+                System.err.println("Error loading or using URL " + e);
                 guess = -1;
             }
             return guess;
@@ -134,8 +129,9 @@ public class EncodingDetect {
             scores[OTHER] = 0;
             // Tabulate Scores
             for (index = 0; index < TOTALTYPES; index++) {
-                if (debug)
+                if (debug) {
                     System.err.println("Encoding " + nicename[index] + " score " + scores[index]);
+                }
                 if (scores[index] > maxscore) {
                     encoding_guess = index;
                     maxscore = scores[index];
@@ -192,10 +188,10 @@ public class EncodingDetect {
          * probability text in array uses GBK encoding
          */
         int gbk_probability(byte[] rawtext) {
-            int i, rawtextlen = 0;
+            int i, rawtextlen;
             int dbchars = 1, gbchars = 1;
             long gbfreq = 0, totalfreq = 1;
-            float rangeval = 0, freqval = 0;
+            float rangeval, freqval;
             int row, column;
             // Stage 1: Check to see if characters fit into acceptable ranges
             rawtextlen = rawtext.length;
@@ -205,6 +201,7 @@ public class EncodingDetect {
                     // asciichars++;
                 } else {
                     dbchars++;
+                    // Extended GB range
                     if ((byte) 0xA1 <= rawtext[i] && rawtext[i] <= (byte) 0xF7 && // Original GB range
                             (byte) 0xA1 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0xFE) {
                         gbchars++;
@@ -218,9 +215,7 @@ public class EncodingDetect {
                         } else if (15 <= row && row < 55) {
                             gbfreq += 200;
                         }
-                    } else if ((byte) 0x81 <= rawtext[i] && rawtext[i] <= (byte) 0xFE && // Extended GB range
-                            (((byte) 0x80 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0xFE)
-                                    || ((byte) 0x40 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0x7E))) {
+                    } else if ((byte) 0x81 <= rawtext[i] && rawtext[i] <= (byte) 0xFE && (rawtext[i + 1] <= (byte) 0xFE || (byte) 0x40 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0x7E)) {
                         gbchars++;
                         totalfreq += 500;
                         row = rawtext[i] + 256 - 0x81;
@@ -250,10 +245,10 @@ public class EncodingDetect {
          * probability text in array uses GBK encoding
          */
         int gb18030_probability(byte[] rawtext) {
-            int i, rawtextlen = 0;
+            int i, rawtextlen;
             int dbchars = 1, gbchars = 1;
             long gbfreq = 0, totalfreq = 1;
-            float rangeval = 0, freqval = 0;
+            float rangeval, freqval;
             int row, column;
             // Stage 1: Check to see if characters fit into acceptable ranges
             rawtextlen = rawtext.length;
@@ -263,6 +258,7 @@ public class EncodingDetect {
                     // asciichars++;
                 } else {
                     dbchars++;
+                    // Extended GB range
                     if ((byte) 0xA1 <= rawtext[i] && rawtext[i] <= (byte) 0xF7 && // Original GB range
                             i + 1 < rawtextlen && (byte) 0xA1 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0xFE) {
                         gbchars++;
@@ -276,9 +272,7 @@ public class EncodingDetect {
                         } else if (15 <= row && row < 55) {
                             gbfreq += 200;
                         }
-                    } else if ((byte) 0x81 <= rawtext[i] && rawtext[i] <= (byte) 0xFE && // Extended GB range
-                            i + 1 < rawtextlen && (((byte) 0x80 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0xFE)
-                                    || ((byte) 0x40 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0x7E))) {
+                    } else if ((byte) 0x81 <= rawtext[i] && rawtext[i] <= (byte) 0xFE && i + 1 < rawtextlen && (rawtext[i + 1] <= (byte) 0xFE || (byte) 0x40 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0x7E)) {
                         gbchars++;
                         totalfreq += 500;
                         row = rawtext[i] + 256 - 0x81;
@@ -342,16 +336,6 @@ public class EncodingDetect {
                                 hzchars += 2;
                                 row = rawtext[i] - 0x21;
                                 column = rawtext[i + 1] - 0x21;
-                                totalfreq += 500;
-                                if (GBFreq[row][column] != 0) {
-                                    hzfreq += GBFreq[row][column];
-                                } else if (15 <= row && row < 55) {
-                                    hzfreq += 200;
-                                }
-                            } else if ((0xA1 <= rawtext[i] && rawtext[i] <= 0xF7) && (0xA1 <= rawtext[i + 1] && rawtext[i + 1] <= 0xF7)) {
-                                hzchars += 2;
-                                row = rawtext[i] + 256 - 0xA1;
-                                column = rawtext[i + 1] + 256 - 0xA1;
                                 totalfreq += 500;
                                 if (GBFreq[row][column] != 0) {
                                     hzfreq += GBFreq[row][column];
@@ -444,6 +428,7 @@ public class EncodingDetect {
                     // asciichars++;
                 } else {
                     dbchars++;
+                    // Extended Big5 range
                     if (0xA1 <= rawtext[i] && rawtext[i] <= 0xF9 && // Original Big5 range
                             ((0x40 <= rawtext[i + 1] && rawtext[i + 1] <= 0x7E) || (0xA1 <= rawtext[i + 1] && rawtext[i + 1] <= 0xFE))) {
                         bfchars++;
@@ -460,21 +445,6 @@ public class EncodingDetect {
                             bffreq += Big5Freq[row][column];
                         } else if (3 <= row && row < 37) {
                             bffreq += 200;
-                        }
-                    } else if (0x81 <= rawtext[i] && rawtext[i] <= 0xFE && // Extended Big5 range
-                            ((0x40 <= rawtext[i + 1] && rawtext[i + 1] <= 0x7E) || (0x80 <= rawtext[i + 1] && rawtext[i + 1] <= 0xFE))) {
-                        bfchars++;
-                        totalfreq += 500;
-                        row = rawtext[i] - 0x81;
-                        if (0x40 <= rawtext[i + 1] && rawtext[i + 1] <= 0x7E) {
-                            column = rawtext[i + 1] - 0x40;
-                        } else {
-                            column = rawtext[i + 1] - 0x40;
-                        }
-                        // System.out.println("extended row " + row + " column " +
-                        // column + " rawtext[i] " + rawtext[i]);
-                        if (Big5PFreq[row][column] != 0) {
-                            bffreq += Big5PFreq[row][column];
                         }
                     }
                     i++;
@@ -807,7 +777,7 @@ public class EncodingDetect {
             for (i = 0; i < rawtextlen - 1; i++) {
                 // System.err.println(rawtext[i]);
                 if (rawtext[i] >= 0) {
-                    // asciichars++;
+                    // SciChart++;
                 } else {
                     dbchars++;
                     if ((byte) 0xA1 <= rawtext[i] && rawtext[i] <= (byte) 0xFE && (byte) 0xA1 <= rawtext[i + 1]
@@ -858,11 +828,7 @@ public class EncodingDetect {
                     // asciichars++;
                 } else {
                     dbchars++;
-                    if (i + 1 < rawtext.length
-                            && (((byte) 0x81 <= rawtext[i] && rawtext[i] <= (byte) 0x9F)
-                                    || ((byte) 0xE0 <= rawtext[i] && rawtext[i] <= (byte) 0xEF))
-                            && (((byte) 0x40 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0x7E)
-                                    || ((byte) 0x80 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0xFC))) {
+                    if (i + 1 < rawtext.length && ((byte) 0x81 <= rawtext[i] && rawtext[i] <= (byte) 0x9F || (byte) 0xE0 <= rawtext[i] && rawtext[i] <= (byte) 0xEF) && ((byte) 0x40 <= rawtext[i + 1] && rawtext[i + 1] <= (byte) 0x7E || rawtext[i + 1] <= (byte) 0xFC)) {
                         jpchars++;
                         totalfreq += 500;
                         row = rawtext[i] + 256;

@@ -1,4 +1,4 @@
-package com.leewyatt.player;
+package com.stickpoint.ddmusic;
 
 import com.leewyatt.rxcontrols.controls.RXAudioSpectrum;
 import com.leewyatt.rxcontrols.controls.RXLrcView;

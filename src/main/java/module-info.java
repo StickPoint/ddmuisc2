@@ -1,13 +1,30 @@
-/**
- * @author LeeWyatt
- * QQ 9670453
- */
-module simple.musicplayer {
-    requires javafx.controls;
-    requires javafx.media;
-    requires javafx.fxml;
-    requires rxcontrols;
 
-    exports com.leewyatt.player;
-    opens com.leewyatt.player to javafx.fxml;
+open module com.stickpoint.ddmusic {
+    uses com.stickpoint.ddmusic.config.DdmusicSpiMonitor;
+    // 第三方依赖
+    requires animatefx;
+    requires rxcontrols;
+    requires ch.qos.logback.classic;
+    requires ch.qos.logback.core;
+    requires org.slf4j;
+    requires com.google.gson;
+    //requires org.kordamp.ikonli.antdesignicons;
+    //requires org.kordamp.ikonli.javafx;
+    // 网络依赖
+    requires java.net.http;
+    // sql依赖
+    //requires org.xerial.sqlitejdbc;
+    requires java.sql;
+    // 下面的依赖全是javafx依赖
+    requires javafx.graphics;
+    requires javafx.controls;
+    requires javafx.fxml;
+    requires javafx.media;
+    requires javafx.base;
+    requires javafx.swing;
+    // 配置SPI机制下的HttpConfig封装
+    //provides com.stickpoint.ddmusic.common.config.DdmusicSpiMonitor  with com.stickpoint.ddmusic.common.config.DdMusicHttpConfig;
+    // 导出SPI依赖
+    exports com.stickpoint.ddmusic;
+    exports com.stickpoint.ddmusic.config;
 }

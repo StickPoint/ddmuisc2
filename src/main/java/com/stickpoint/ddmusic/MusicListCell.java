@@ -1,4 +1,4 @@
-package com.leewyatt.player;
+package com.stickpoint.ddmusic;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
