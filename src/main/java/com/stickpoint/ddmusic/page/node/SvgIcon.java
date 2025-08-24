@@ -23,6 +23,8 @@ public class SvgIcon extends Region {
         setMaxSize(24, 24);
     }
 
+
+
     public void setIconSize(double width, double height) {
         setPrefSize(width, height);
         setMinSize(width, height);

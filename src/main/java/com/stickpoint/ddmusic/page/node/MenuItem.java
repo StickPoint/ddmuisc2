@@ -4,7 +4,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
+
+import java.util.Objects;
 
 /**
  * @author fntp
@@ -12,21 +13,20 @@ import javafx.scene.text.FontWeight;
  */
 public class MenuItem extends HBox {
 
-    private final Label iconLabel;
+    private final SvgIcon iconLabel;
     private final Label textLabel;
 
-    public MenuItem(String icon, String text) {
-        this.iconLabel = new Label(icon);
+    public MenuItem(String iconPath, Integer iconSize, String text) {
+        this.iconLabel = new SvgIcon(iconPath);
+        if (Objects.nonNull(iconSize)) {
+            iconLabel.setIconSize(iconSize, iconSize);
+        }
         this.textLabel = new Label(text);
-
-        // 设置图标样式
-        iconLabel.setFont(Font.font("Segoe UI", FontWeight.BOLD, 14));
-        iconLabel.setTextFill(Color.web("#666"));
         iconLabel.setPadding(new javafx.geometry.Insets(0, 8, 0, 12));
 
         // 设置文字样式
         textLabel.setFont(Font.font("Microsoft YaHei", 13));
-        textLabel.setTextFill(Color.web("#666"));
+        textLabel.setTextFill(Color.web("#7f7f7f"));
         textLabel.setPadding(new javafx.geometry.Insets(0, 0, 0, 8));
 
         // 组合布局
@@ -39,11 +39,11 @@ public class MenuItem extends HBox {
 
     public void setSelected(boolean selected) {
         if (selected) {
-            iconLabel.setTextFill(Color.RED);
+            iconLabel.setFill("#7f7f7f");
             textLabel.setTextFill(Color.RED);
             setStyle("-fx-background-color: #f5f5f5; -fx-border-radius: 4px;");
         } else {
-            iconLabel.setTextFill(Color.web("#666"));
+            iconLabel.setFill("#7f7f7f");
             textLabel.setTextFill(Color.web("#666"));
             setStyle("-fx-background-color: transparent;");
         }
