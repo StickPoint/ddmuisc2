@@ -1,6 +1,6 @@
 
 open module com.stickpoint.ddmusic {
-    uses com.stickpoint.ddmusic.config.DdmusicSpiMonitor;
+    uses com.stickpoint.ddmusic.common.config.DdmusicSpiMonitor;
     // 第三方依赖
     requires animatefx;
     requires rxcontrols;
@@ -26,5 +26,8 @@ open module com.stickpoint.ddmusic {
     //provides com.stickpoint.ddmusic.common.config.DdmusicSpiMonitor  with com.stickpoint.ddmusic.common.config.DdMusicHttpConfig;
     // 导出SPI依赖
     exports com.stickpoint.ddmusic;
-    exports com.stickpoint.ddmusic.config;
+    exports com.stickpoint.ddmusic.common.config;
+    exports com.stickpoint.ddmusic.common.utils;
+    exports com.stickpoint.ddmusic.page.node;
+    exports com.stickpoint.ddmusic.page.controller;
 }
