@@ -1,5 +1,6 @@
 package com.stickpoint.ddmusic.page.node;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -22,13 +23,12 @@ public class MenuItem extends HBox {
             iconLabel.setIconSize(iconSize, iconSize);
         }
         this.textLabel = new Label(text);
-        iconLabel.setPadding(new javafx.geometry.Insets(0, 8, 0, 12));
+        iconLabel.setPadding(new Insets(0, 8, 0, 12));
 
         // 设置文字样式
         textLabel.setFont(Font.font("Microsoft YaHei", 13));
         textLabel.setTextFill(Color.web("#7f7f7f"));
-        textLabel.setPadding(new javafx.geometry.Insets(0, 0, 0, 8));
-
+        textLabel.setPadding(new Insets(0, 0, 0, 8));
         // 组合布局
         getChildren().addAll(iconLabel, textLabel);
         setSpacing(8);

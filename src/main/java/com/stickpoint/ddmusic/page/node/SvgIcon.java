@@ -1,12 +1,13 @@
 package com.stickpoint.ddmusic.page.node;
 
+
+import javafx.scene.layout.Region;
+import javafx.scene.shape.SVGPath;
+
 /**
  * @author fntp
  * @date 2025/8/24
  */
-import javafx.scene.layout.Region;
-import javafx.scene.shape.SVGPath;
-
 public class SvgIcon extends Region {
 
     public SvgIcon(String svgContent) {
