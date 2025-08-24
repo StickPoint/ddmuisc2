@@ -1,10 +1,5 @@
 package com.stickpoint.ddmusic.page.node;
 
-/**
- * @author fntp
- * @date 2025/8/24
- */
-
 import javafx.geometry.Insets;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
@@ -14,15 +9,20 @@ import javafx.scene.layout.Region;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-public class MainView extends BorderPane {
+/**
+ * 首页-顶点音乐播放器首页
+ * @author fntp
+ * @date 2025/8/24
+ */
+public class HomePage extends BorderPane {
 
-    private final MenuPanel menuPanel;
+    private final HomePageMenuPanel homePageMenuPanel;
 
-    public MainView() {
-        menuPanel = new MenuPanel();
+    public HomePage() {
+        homePageMenuPanel = new HomePageMenuPanel();
 
         // 设置左侧菜单
-        setLeft(menuPanel);
+        setLeft(homePageMenuPanel);
 
         // 设置右侧内容区（占位）
         Region contentArea = new Region();
@@ -45,7 +45,7 @@ public class MainView extends BorderPane {
         setClip(clip);
     }
 
-    public MenuPanel getMenuPanel() {
-        return menuPanel;
+    public HomePageMenuPanel getMenuPanel() {
+        return homePageMenuPanel;
     }
 }

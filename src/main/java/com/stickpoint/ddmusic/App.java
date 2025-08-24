@@ -2,7 +2,7 @@ package com.stickpoint.ddmusic;
 
 import com.stickpoint.ddmusic.common.config.DdmusicSpiMonitor;
 import com.stickpoint.ddmusic.common.utils.SystemPropertiesUtil;
-import com.stickpoint.ddmusic.page.node.MainView;
+import com.stickpoint.ddmusic.page.node.HomePage;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
@@ -42,8 +42,8 @@ public class App extends Application {
     @SuppressWarnings("exports")
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(Objects.requireNonNull(App.class.getResource("/fxml/player.fxml")));
-        MainView mainView = new MainView();
-        Scene scene = new Scene(mainView, null);
+        HomePage homePage = new HomePage();
+        Scene scene = new Scene(homePage, null);
         primaryStage.setScene(scene);
         primaryStage.initStyle(StageStyle.TRANSPARENT);
         primaryStage.setFullScreenExitHint("1");
