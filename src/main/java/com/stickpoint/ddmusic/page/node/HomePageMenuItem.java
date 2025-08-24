@@ -1,10 +1,10 @@
 package com.stickpoint.ddmusic.page.node;
 
+import com.stickpoint.ddmusic.common.utils.FontUtil;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 
 import java.util.Objects;
 
@@ -30,13 +30,13 @@ public class HomePageMenuItem extends HBox {
         // 创建内容容器来控制背景范围
         contentContainer = new HBox();
         contentContainer.getChildren().addAll(iconLabel, textLabel);
-        contentContainer.setSpacing(8);
+        contentContainer.setSpacing(15);
         contentContainer.setAlignment(javafx.geometry.Pos.CENTER_LEFT);
         contentContainer.setPadding(new Insets(0, 50, 0, 10));
         // 原来的设置保持不变
         iconLabel.setPadding(new Insets(0, 8, 0, 0));
         // 设置文字样式
-        textLabel.setFont(Font.font("Microsoft YaHei", 13));
+        textLabel.setFont(FontUtil.loadFont("/font/Y-B008YeZiGongChangDanDanHei-2.ttf", 15));
         textLabel.setTextFill(Color.web("#7f7f7f"));
         // 组合布局
         getChildren().add(contentContainer);

@@ -18,8 +18,8 @@ import javafx.scene.text.Text;
 public class HomePageMenuPanel extends VBox {
 
     public HomePageMenuPanel() {
-        setMinWidth(200);
-        setPrefWidth(200);
+        setMinWidth(180);
+        setPrefWidth(180);
         setSpacing(12);
         setPadding(new Insets(20, 0, 0, 0));
 
@@ -37,7 +37,7 @@ public class HomePageMenuPanel extends VBox {
 
         // 应用名称
         Text appName = new Text("顶点音乐");
-        appName.setFont(FontUtil.loadFont("/font/Y-B008YeZiGongChangDanDanHei-2.ttf", 16));
+        appName.setFont(FontUtil.loadFont("/font/Y-B008YeZiGongChangDanDanHei-2.ttf", 20));
         appName.setFill(Color.BLACK);
 
         // 组合到水平布局中
