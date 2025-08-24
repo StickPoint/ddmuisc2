@@ -18,9 +18,8 @@ import javafx.scene.text.Text;
 public class HomePageMenuPanel extends VBox {
 
     public HomePageMenuPanel() {
-        setPrefWidth(200);
-        setMaxWidth(200);
         setMinWidth(200);
+        setPrefWidth(200);
         setSpacing(12);
         setPadding(new Insets(20, 0, 0, 0));
 
