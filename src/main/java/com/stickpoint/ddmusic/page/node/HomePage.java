@@ -25,16 +25,16 @@ public class HomePage extends BorderPane {
         setLeft(homePageMenuPanel);
 
         // 创建右侧内容容器
-        BorderPane rightContent = new BorderPane();
+        BorderPane centerPanel = new BorderPane();
 
         // 将header放在右侧内容区域的顶部
-        rightContent.setTop(headerContainer);
+        centerPanel.setTop(headerContainer);
 
         // 将内容面板放在右侧内容区域的中部
-        rightContent.setCenter(contentPanel);
+        centerPanel.setCenter(contentPanel);
 
         // 将右侧内容容器设置为主区域
-        setCenter(rightContent);
+        setCenter(centerPanel);
 
         // 设置内边距
         setPadding(new Insets(0));

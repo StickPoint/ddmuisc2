@@ -28,7 +28,7 @@ public class HomePageMenuPanel extends VBox {
         headerPane.setSpacing(12);
         headerPane.setAlignment(Pos.CENTER_LEFT);
         // 只保留必要的 padding
-        headerPane.setPadding(new Insets(0, 0, 0, 16));
+        headerPane.setPadding(new Insets(30, 0, 0, 30));
         headerPane.setStyle("-fx-background-color: transparent;");
 
         // Logo
@@ -48,6 +48,7 @@ public class HomePageMenuPanel extends VBox {
 
         // 添加菜单项面板
         HomePageMenuItemPanel homePageMenuItemPanel = new HomePageMenuItemPanel();
+        homePageMenuItemPanel.setPadding(new Insets(35, 0, 0, 30));
         getChildren().add(homePageMenuItemPanel);
 
         // 设置背景
