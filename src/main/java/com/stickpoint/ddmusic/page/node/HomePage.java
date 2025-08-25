@@ -1,61 +1,54 @@
 package com.stickpoint.ddmusic.page.node;
 
 import javafx.geometry.Insets;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.shape.Rectangle;
 
 /**
  * 首页-顶点音乐播放器首页
  * @author fntp
  * @date 2025/8/24
  */
-public class HomePage extends AnchorPane {
+public class HomePage extends BorderPane {
 
     private final HomePageMenuPanel homePageMenuPanel;
     private final ContentPanel contentPanel;
+    private final HomePageHeaderContainer headerContainer;
 
     public HomePage() {
+        headerContainer = new HomePageHeaderContainer();
         homePageMenuPanel = new HomePageMenuPanel();
         contentPanel = new ContentPanel();
 
-        // 设置锚点，实现响应式布局
-        AnchorPane.setTopAnchor(homePageMenuPanel, 0.0);
-        AnchorPane.setBottomAnchor(homePageMenuPanel, 0.0);
-        AnchorPane.setLeftAnchor(homePageMenuPanel, 0.0);
+        // 设置左侧菜单栏
+        homePageMenuPanel.setPrefWidth(200);
+        setLeft(homePageMenuPanel);
 
-        AnchorPane.setTopAnchor(contentPanel, 0.0);
-        AnchorPane.setBottomAnchor(contentPanel, 0.0);
-        AnchorPane.setLeftAnchor(contentPanel, 200.0);
-        AnchorPane.setRightAnchor(contentPanel, 0.0);
+        // 创建右侧内容容器
+        BorderPane rightContent = new BorderPane();
 
-        //// 设置左侧菜单
-        //setLeft(homePageMenuPanel);
-        //
-        //// 设置右侧内容区（占位）
-        //Region contentArea = new Region();
-        //contentArea.setPrefSize(800, 600);
-        //contentArea.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, null)));
-        //setCenter(contentArea);
+        // 将header放在右侧内容区域的顶部
+        rightContent.setTop(headerContainer);
 
-        getChildren().addAll(homePageMenuPanel, contentPanel);
+        // 将内容面板放在右侧内容区域的中部
+        rightContent.setCenter(contentPanel);
 
-        // 设置整体背景
-        //setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, null)));
+        // 将右侧内容容器设置为主区域
+        setCenter(rightContent);
 
         // 设置内边距
-        setPadding(new Insets(10));
+        setPadding(new Insets(0));
 
-        // 使用Clip实现圆角
-        //Rectangle clip = new Rectangle();
-        //clip.setArcWidth(18);
-        //clip.setArcHeight(18);
-        //clip.widthProperty().bind(widthProperty());
-        //clip.heightProperty().bind(heightProperty());
-        //setClip(clip);
+        // 设置背景样式
+        setStyle("-fx-background-color: white;");
 
-        // 在 HomePage 构造函数最后添加
-        setStyle("-fx-background-color: white; -fx-background-radius: 18px;");
+        Rectangle clip = new Rectangle();
+        clip.setArcWidth(18);
+        clip.setArcHeight(18);
+        clip.widthProperty().bind(widthProperty());
+        clip.heightProperty().bind(heightProperty());
+        setClip(clip);
 
-        //setStyle("-fx-background-color: white;");
     }
 
     public HomePageMenuPanel getMenuPanel() {

@@ -35,4 +35,5 @@ public class SvgIcon extends Region {
     public void setFill(String color) {
         setStyle("-fx-background-color: " + color + ";");
     }
+
 }
