@@ -2,6 +2,8 @@ package com.stickpoint.ddmusic.page.node;
 
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
 /**
@@ -14,11 +16,17 @@ public class HomePage extends BorderPane {
     private final HomePageMenuPanel homePageMenuPanel;
     private final ContentPanel contentPanel;
     private final HomePageHeaderContainer headerContainer;
+    private final HomePageContentContainer homePageContentContainer;
+    private final CommonMusicPlayOpContainer musicPlaybackControlContaine;
+    private final BottomMusicContainer bottomMusicContainer;
 
     public HomePage() {
         headerContainer = new HomePageHeaderContainer();
         homePageMenuPanel = new HomePageMenuPanel();
         contentPanel = new ContentPanel();
+        homePageContentContainer = new HomePageContentContainer();
+        musicPlaybackControlContaine = new CommonMusicPlayOpContainer();
+        bottomMusicContainer = new BottomMusicContainer();
 
         // 设置左侧菜单栏
         homePageMenuPanel.setPrefWidth(200);
@@ -30,11 +38,18 @@ public class HomePage extends BorderPane {
         // 将header放在右侧内容区域的顶部
         centerPanel.setTop(headerContainer);
 
+        // 创建主内容区域容器
+        VBox mainContentContainer = new VBox();
+        mainContentContainer.getChildren().addAll(homePageContentContainer, musicPlaybackControlContaine);
+        VBox.setVgrow(homePageContentContainer, Priority.ALWAYS);
+
         // 将内容面板放在右侧内容区域的中部
         centerPanel.setCenter(contentPanel);
 
         // 将右侧内容容器设置为主区域
         setCenter(centerPanel);
+
+        setBottom(bottomMusicContainer);
 
         // 设置内边距
         setPadding(new Insets(0));

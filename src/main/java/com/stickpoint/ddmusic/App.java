@@ -35,7 +35,7 @@ public class App extends Application {
     public void init() throws Exception {
         super.init();
         // 初始化系统配置
-        initApplicationProperties();
+        //initApplicationProperties();
     }
 
 
@@ -44,7 +44,7 @@ public class App extends Application {
     public void start(Stage primaryStage) throws Exception {
         //Parent root = FXMLLoader.load(Objects.requireNonNull(App.class.getResource("/fxml/player.fxml")));
         HomePage homePage = new HomePage();
-        Scene scene = new Scene(homePage, 1200,800, Color.TRANSPARENT);
+        Scene scene = new Scene(homePage, 1060,750, Color.TRANSPARENT);
         primaryStage.setTitle("DdMusic");
         primaryStage.setScene(scene);
         primaryStage.setMinWidth(800);

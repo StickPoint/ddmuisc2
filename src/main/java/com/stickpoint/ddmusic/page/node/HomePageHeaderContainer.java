@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
 
 /**
  * 顶部容器组件 - 包含搜索框和功能按钮
@@ -19,6 +20,7 @@ public class HomePageHeaderContainer extends HBox {
     private final SvgIcon menuButton;
     private final SvgIcon minimizeButton;
     private final SvgIcon maximizeButton;
+    private boolean isMaximized = false;
 
     public HomePageHeaderContainer() {
         // 设置整体样式
@@ -29,7 +31,7 @@ public class HomePageHeaderContainer extends HBox {
 
         // 创建搜索框
         searchField = new TextField();
-        searchField.setPromptText("搜索音乐");
+        searchField.setPromptText("请输入 歌曲|歌手|专辑|MV ");
         searchField.setPrefWidth(120);
         searchField.setPrefHeight(36);
         searchField.setStyle("-fx-background-color: white; " +
@@ -41,6 +43,10 @@ public class HomePageHeaderContainer extends HBox {
                 "-fx-padding: 0 12px;");
 
         searchField.setFont(Font.font("Microsoft YaHei", 14));
+        // 设置不通过Tab键获得焦点
+        searchField.setFocusTraversable(false);
+        // 添加鼠标点击事件来获取焦点
+        searchField.setOnMouseClicked(event -> searchField.requestFocus());
 
         // 让搜索框占据剩余空间
         HBox.setHgrow(searchField, Priority.ALWAYS);
@@ -105,8 +111,18 @@ public class HomePageHeaderContainer extends HBox {
      * 最大化按钮点击事件
      */
     protected void onMaximizeButtonClick() {
-        // 预留的最大化按钮点击事件处理
-        System.out.println("最大化按钮被点击");
+        // 先最大化
+        Stage homepageStage = (Stage) this.getScene().getWindow();
+        if (!isMaximized) {
+            homepageStage.setMaximized(true);
+            // 然后设置按钮样式为最小化按钮
+            maximizeButton.modifyContent("M658.773333 752.64H365.226667c-51.2 0-92.16-40.96-92.16-92.16V365.226667c0-51.2 40.96-92.16 92.16-92.16h295.253333c51.2 0 92.16 40.96 92.16 92.16v295.253333c0 49.493333-42.666667 92.16-93.866667 92.16zM365.226667 322.56c-22.186667 0-40.96 18.773333-40.96 40.96v295.253333c0 22.186667 18.773333 40.96 40.96 40.96h295.253333c22.186667 0 40.96-18.773333 40.96-40.96V365.226667c0-22.186667-18.773333-40.96-40.96-40.96H365.226667zM203.093333 989.866667c-13.653333 0-25.6-11.946667-25.6-25.6v-117.76H59.733333c-13.653333 0-25.6-10.24-25.6-25.6s11.946667-25.6 25.6-25.6h143.36c13.653333 0 25.6 11.946667 25.6 25.6v143.36c0 13.653333-11.946667 25.6-25.6 25.6zM820.906667 989.866667c-13.653333 0-25.6-11.946667-25.6-25.6v-143.36c0-13.653333 11.946667-25.6 25.6-25.6h143.36c13.653333 0 25.6 11.946667 25.6 25.6s-11.946667 25.6-25.6 25.6h-117.76v117.76c0 13.653333-10.24 25.6-25.6 25.6zM203.093333 228.693333H59.733333c-13.653333 0-25.6-11.946667-25.6-25.6s11.946667-25.6 25.6-25.6h117.76V59.733333c0-13.653333 10.24-25.6 25.6-25.6s25.6 11.946667 25.6 25.6v143.36c0 13.653333-11.946667 25.6-25.6 25.6zM964.266667 228.693333h-143.36c-13.653333 0-25.6-11.946667-25.6-25.6V59.733333c0-13.653333 11.946667-25.6 25.6-25.6s25.6 11.946667 25.6 25.6v117.76h117.76c13.653333 0 25.6 11.946667 25.6 25.6s-11.946667 25.6-25.6 25.6z");
+        }else {
+            homepageStage.setMaximized(false);
+            maximizeButton.modifyContent("M812.3 959.4H213.7c-81.6 0-148-66.4-148-148V212.9c0-81.6 66.4-148 148-148h598.5c81.6 0 148 66.4 148 148v598.5C960.3 893 893.9 959.4 812.3 959.4zM213.7 120.9c-50.7 0-92 41.3-92 92v598.5c0 50.7 41.3 92 92 92h598.5c50.7 0 92-41.3 92-92V212.9c0-50.7-41.3-92-92-92H213.7z");
+        }
+        // 更改标记
+        isMaximized = !isMaximized;
     }
 
     // Getter 方法

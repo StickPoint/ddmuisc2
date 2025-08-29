@@ -10,8 +10,15 @@ import javafx.scene.shape.SVGPath;
  */
 public class SvgIcon extends Region {
 
+    private SVGPath svgPath;
+
+
+    public SvgIcon() {
+        this("");
+    }
+
     public SvgIcon(String svgContent) {
-        SVGPath svgPath = new SVGPath();
+        svgPath = new SVGPath();
         svgPath.setContent(svgContent);
 
         // 设置默认样式
@@ -34,6 +41,13 @@ public class SvgIcon extends Region {
 
     public void setFill(String color) {
         setStyle("-fx-background-color: " + color + ";");
+    }
+
+    @SuppressWarnings("unused")
+    public void modifyContent(String newSvgPath) {
+        svgPath.setContent(newSvgPath);
+        svgPath.applyCss();
+        this.layout();
     }
 
 }
