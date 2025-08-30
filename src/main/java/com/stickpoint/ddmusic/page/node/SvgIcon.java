@@ -3,6 +3,7 @@ package com.stickpoint.ddmusic.page.node;
 
 import javafx.scene.layout.Region;
 import javafx.scene.shape.SVGPath;
+import javafx.scene.shape.Shape;
 
 /**
  * @author fntp
@@ -11,6 +12,10 @@ import javafx.scene.shape.SVGPath;
 public class SvgIcon extends Region {
 
     private SVGPath svgPath;
+    /**
+     * 如果一个SVG包含多段PATH 则可以通过合并PATH实现
+     */
+    private SVGPath anotherPath;
 
 
     public SvgIcon() {
@@ -47,6 +52,15 @@ public class SvgIcon extends Region {
     public void modifyContent(String newSvgPath) {
         svgPath.setContent(newSvgPath);
         svgPath.applyCss();
+        this.layout();
+    }
+
+    public void modifyContent(String newSvgPath, String newAnotherPath) {
+        svgPath.setContent(newSvgPath);
+        anotherPath = new SVGPath();
+        anotherPath.setContent(newAnotherPath);
+        Shape newShape = Shape.union(svgPath, anotherPath);
+        setShape(newShape);
         this.layout();
     }
 

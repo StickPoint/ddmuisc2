@@ -40,23 +40,25 @@ public class App extends Application {
 
 
     @Override
-    @SuppressWarnings("exports")
-    public void start(Stage primaryStage) throws Exception {
-        //Parent root = FXMLLoader.load(Objects.requireNonNull(App.class.getResource("/fxml/player.fxml")));
-        HomePage homePage = new HomePage();
-        Scene scene = new Scene(homePage, 1060,750, Color.TRANSPARENT);
-        primaryStage.setTitle("DdMusic");
-        primaryStage.setScene(scene);
-        primaryStage.setMinWidth(800);
-        primaryStage.setMinHeight(600);
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
-        primaryStage.setFullScreenExitHint("1");
-        // 当点击了窗口的功能放大窗口后
-        //primaryStage.setMaximized(true);
-        primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/img/logo.svg")).toExternalForm()));
-        primaryStage.show();
-        addResizeSupport(primaryStage, scene);
-        primaryStage.centerOnScreen();
+    public void start(Stage primaryStage) {
+        try {
+            HomePage homePage = new HomePage();
+            Scene scene = new Scene(homePage, 1060,750, Color.TRANSPARENT);
+            primaryStage.setTitle("DdMusic");
+            primaryStage.setScene(scene);
+            primaryStage.setMinWidth(800);
+            primaryStage.setMinHeight(600);
+            primaryStage.initStyle(StageStyle.TRANSPARENT);
+            primaryStage.setFullScreenExitHint("1");
+            // 当点击了窗口的功能放大窗口后
+            //primaryStage.setMaximized(true);
+            primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/img/logo.svg")).toExternalForm()));
+            primaryStage.show();
+            addResizeSupport(primaryStage, scene);
+            primaryStage.centerOnScreen();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
