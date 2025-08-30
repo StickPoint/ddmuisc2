@@ -1,0 +1,46 @@
+.root-pane {
+    -fx-background-color: #f5f5f5;
+}
+
+.recommend-container {
+    -fx-background-color: white;
+    -fx-padding: 16px;
+    -fx-border-width: 1px;
+    -fx-border-color: #eee;
+    -fx-border-radius: 8px;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 4, 0, 0, 2);
+}
+
+.rx-carousel .nav-pane .nav-bar .nav-button:hover {
+    -fx-background-color: rgb(255, 0, 0);
+}
+.rx-carousel .nav-pane .nav-bar .nav-button:selected {
+    /*-fx-background-color: rgb(255, 147, 147);*/
+    -fx-background-color: rgb(255, 0, 0);
+    -fx-pref-height: 5;
+    -fx-min-height: 5;
+}
+
+.rx-carousel .root-pane .carousel-subscene,
+.rx-carousel .root-pane .effect-pane {
+    -fx-border-radius: 20;
+}
+.rx-carousel .nav-pane .nav-bar .nav-button {
+    -fx-background-color: rgb(192, 192, 192);
+    -fx-cursor: hand;
+    -fx-pref-width: 5;
+    -fx-min-width: 5;
+    -fx-pref-height: 2;
+    -fx-min-height: 2;
+    -fx-background-radius: 2;
+}
+.rx-carousel{
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+
+.rx-carousel .root-pane{
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+
+}
