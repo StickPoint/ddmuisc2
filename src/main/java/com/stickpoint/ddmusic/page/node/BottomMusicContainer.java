@@ -121,7 +121,7 @@ public class BottomMusicContainer extends HBox {
 
 
     public BottomMusicContainer() {
-        albumImageView = new RXAvatar("https://qnm.hunliji.com/o_1j3m01ogr2mm1qr61g8r6ud8ea9.jpg");
+        albumImageView = new RXAvatar("https://qnm.hunliji.com/o_1j3tjm1ceud2cup11k31hpfh7217.jpeg");
         songNameLabel = new Label();
         artistNameLabel = new Label();
         playPauseButton = new SvgIcon();
