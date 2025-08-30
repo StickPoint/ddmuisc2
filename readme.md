@@ -65,7 +65,7 @@ DdMusic 采用模块化设计，通过 JavaFX 框架构建用户界面，支持�
 ## 使用说明
 
 ### 系统要求
-- Java 8 或更高版本
+- Java 17 或更高版本
 - 支持 JavaFX 的操作系统（Windows、macOS、Linux）
 
 ### 运行方式
