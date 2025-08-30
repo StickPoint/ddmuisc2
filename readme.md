@@ -1,4 +1,5 @@
 # DdMusic 音乐播放器
+![headerPic.png](doc/headerPic.png)
 
 DdMusic 是一个基于 JavaFX 开发的现代化桌面音乐播放器应用，提供流畅的用户体验和丰富的音乐播放功能。
 

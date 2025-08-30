@@ -1,5 +1,7 @@
 # DdMusic Music Player
 
+![headerPic.png](doc/headerPic.png)
+
 DdMusic is a modern desktop music player application developed with JavaFX, providing a smooth user experience and rich music playback features.
 
 ## Project Overview
