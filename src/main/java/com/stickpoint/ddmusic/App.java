@@ -12,6 +12,8 @@ import javafx.stage.StageStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.awt.SystemTray;
+import java.awt.TrayIcon;
 import java.util.Objects;
 import java.util.ServiceLoader;
 
@@ -20,6 +22,8 @@ import java.util.ServiceLoader;
  * @date 2025/8/23
  */
 public class App extends Application {
+
+    private static Stage stage;
 
     private double offsetX,offsetY;
     /**
@@ -51,7 +55,7 @@ public class App extends Application {
             primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setFullScreenExitHint("1");
             // 当点击了窗口的功能放大窗口后
-            //primaryStage.setMaximized(true);
+            setStage(primaryStage);
             primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/img/logo.svg")).toExternalForm()));
             primaryStage.show();
             addResizeSupport(primaryStage, scene);
@@ -187,6 +191,21 @@ public class App extends Application {
      */
     @Override
     public void stop() {
+        if (SystemTray.isSupported()) {
+            SystemTray systemTray = SystemTray.getSystemTray();
+            for (TrayIcon icon : systemTray.getTrayIcons()) {
+                systemTray.remove(icon);
+            }
+        }
         System.exit(0);
     }
+
+    public void setStage(Stage stage) {
+        App.stage = stage;
+    }
+
+    public static Stage getStage() {
+        return stage;
+    }
+
 }

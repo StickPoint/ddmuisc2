@@ -29,5 +29,5 @@ open module com.stickpoint.ddmusic {
     exports com.stickpoint.ddmusic.common.config;
     exports com.stickpoint.ddmusic.common.utils;
     exports com.stickpoint.ddmusic.page.node;
-    exports com.stickpoint.ddmusic.page.controller;
+    exports com.stickpoint.ddmusic.page.component;
 }

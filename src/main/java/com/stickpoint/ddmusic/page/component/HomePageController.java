@@ -1,4 +1,4 @@
-package com.stickpoint.ddmusic.page.controller;
+package com.stickpoint.ddmusic.page.component;
 
 /**
  * @author fntp

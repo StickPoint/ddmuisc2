@@ -26,8 +26,10 @@ public class HomePageContentRecommendContainer extends HBox {
         Rectangle clip = new Rectangle();
         clip.widthProperty().bind(widthProperty());
         clip.setHeight(138);
-        clip.setArcWidth(20);  // 设置圆角宽度
-        clip.setArcHeight(20); // 设置圆角高度
+        // 设置圆角宽度
+        clip.setArcWidth(20);
+        // 设置圆角高度
+        clip.setArcHeight(20);
         setClip(clip);
 
         // 创建ImageView并加载图片

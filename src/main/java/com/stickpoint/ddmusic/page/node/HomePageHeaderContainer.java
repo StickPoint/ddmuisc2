@@ -1,6 +1,8 @@
 // HeaderContainer.java
 package com.stickpoint.ddmusic.page.node;
 
+import com.stickpoint.ddmusic.page.component.DdMusicTray;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -8,6 +10,14 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.awt.AWTException;
+import java.awt.Image;
+import java.awt.SystemTray;
+import java.awt.Toolkit;
+import java.awt.TrayIcon;
 
 /**
  * 顶部容器组件 - 包含搜索框和功能按钮
@@ -21,6 +31,7 @@ public class HomePageHeaderContainer extends HBox {
     private final SvgIcon minimizeButton;
     private final SvgIcon maximizeButton;
     private boolean isMaximized = false;
+    private static final Logger log = LoggerFactory.getLogger(HomePageHeaderContainer.class);
 
     public HomePageHeaderContainer() {
         // 设置整体样式
@@ -69,7 +80,7 @@ public class HomePageHeaderContainer extends HBox {
 
         // 收起按钮
         minimizeButton = createIconButton(20, 20,"M397.963636 791.272727H162.909091c-25.6 0-46.545455-20.945455-46.545455-46.545454V186.181818c0-25.6 20.945455-46.545455 46.545455-46.545454h558.545454c25.6 0 46.545455 20.945455 46.545455 46.545454v290.909091c0 11.636364 11.636364 20.945455 23.272727 20.945455s23.272727-9.309091 23.272728-20.945455V186.181818c0-51.2-41.890909-93.090909-93.09091-93.090909H162.909091C111.709091 93.090909 69.818182 134.981818 69.818182 186.181818v558.545455c0 51.2 41.890909 93.090909 93.090909 93.090909h235.054545c11.636364 0 20.945455-11.636364 20.945455-23.272727s-9.309091-23.272727-20.945455-23.272728zM442.181818 256c-13.963636 0-23.272727 9.309091-23.272727 23.272727v162.909091h-162.909091c-13.963636 0-23.272727 9.309091-23.272727 23.272727s9.309091 23.272727 23.272727 23.272728h186.181818c13.963636 0 23.272727-9.309091 23.272727-23.272728v-186.181818c0-13.963636-11.636364-23.272727-23.272727-23.272727zM242.036364 265.309091c-9.309091 9.309091-9.309091 23.272727 0 32.581818l132.654545 132.654546c9.309091 9.309091 23.272727 9.309091 32.581818 0s9.309091-23.272727 0-32.581819l-132.654545-132.654545c-9.309091-9.309091-23.272727-9.309091-32.581818 0zM861.090909 558.545455H581.818182c-51.2 0-93.090909 41.890909-93.090909 93.090909v186.181818c0 51.2 41.890909 93.090909 93.090909 93.090909h279.272727c51.2 0 93.090909-41.890909 93.090909-93.090909v-186.181818c0-51.2-41.890909-93.090909-93.090909-93.090909z m46.545455 279.272727c0 25.6-20.945455 46.545455-46.545455 46.545454H581.818182c-25.6 0-46.545455-20.945455-46.545455-46.545454v-186.181818c0-25.6 20.945455-46.545455 46.545455-46.545455h279.272727c25.6 0 46.545455 20.945455 46.545455 46.545455v186.181818z");
-        minimizeButton.setOnMouseClicked(event -> onMinimizeButtonClick());
+        initializeMinSize();
 
         // 最大化按钮
         maximizeButton = createIconButton(20, 20,"M812.3 959.4H213.7c-81.6 0-148-66.4-148-148V212.9c0-81.6 66.4-148 148-148h598.5c81.6 0 148 66.4 148 148v598.5C960.3 893 893.9 959.4 812.3 959.4zM213.7 120.9c-50.7 0-92 41.3-92 92v598.5c0 50.7 41.3 92 92 92h598.5c50.7 0 92-41.3 92-92V212.9c0-50.7-41.3-92-92-92H213.7z");
@@ -107,11 +118,66 @@ public class HomePageHeaderContainer extends HBox {
     }
 
     /**
-     * 收起按钮点击事件
+     * 初始化最小化按钮及其点击事件
+     * 修复了系统托盘初始化的问题
      */
-    protected void onMinimizeButtonClick() {
-        // 预留的收起按钮点击事件处理
-        System.out.println("收起按钮被点击");
+    private void initializeMinSize() {
+        // 检查系统托盘是否支持
+        if (!SystemTray.isSupported()) {
+            log.warn("SystemTray is not supported on this platform. Minimize to tray feature will be disabled.");
+            // 不支持系统托盘时，改为普通最小化
+            minimizeButton.setOnMouseClicked(event -> {
+                Stage mainStage = (Stage) getScene().getWindow();
+                mainStage.setIconified(true); // 改为普通最小化
+            });
+            return;
+        }
+
+        // 设置最小化按钮的点击事件 - 延迟托盘初始化到实际点击时
+        minimizeButton.setOnMouseClicked(event -> {
+            try {
+                // 确保在JavaFX应用线程中执行[6](@ref)
+                Platform.runLater(() -> {
+                    try {
+                        // 延迟加载托盘图标
+                        Image image = Toolkit.getDefaultToolkit().getImage(getClass().getResource("/img/logo.png"));
+                        if (image == null) {
+                            log.error("Tray icon image not found! Please check the path: /img/logo-ddmusic.png");
+                            return;
+                        }
+
+                        DdMusicTray myTray = new DdMusicTray(image, "顶点音乐");
+
+                        // 确保系统托盘已初始化
+                        SystemTray systemTray = SystemTray.getSystemTray();
+
+                        // 移除已存在的托盘图标（如果存在）
+                        for (TrayIcon existingIcon : systemTray.getTrayIcons()) {
+                            systemTray.remove(existingIcon);
+                        }
+
+                        // 添加新托盘图标
+                        systemTray.add(myTray);
+
+                        // 隐藏主窗口
+                        Stage mainStage = (Stage) getScene().getWindow();
+                        Platform.setImplicitExit(false);
+                        mainStage.hide(); // 使用hide()而不是close()
+
+                    } catch (AWTException e) {
+                        log.error("Failed to add tray icon to system tray: {}", e.getMessage());
+                        // 回退到普通最小化
+                        Stage mainStage = (Stage) getScene().getWindow();
+                        mainStage.setIconified(true);
+                    }
+                });
+            } catch (Exception e) {
+                log.error("Unexpected error during minimize to tray: {}", e.getMessage());
+                // 确保有回退方案
+                Stage mainStage = (Stage) getScene().getWindow();
+                mainStage.setIconified(true);
+            }
+        });
     }
 
     /**
