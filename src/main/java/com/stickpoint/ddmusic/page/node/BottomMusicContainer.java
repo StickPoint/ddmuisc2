@@ -505,6 +505,13 @@ public class BottomMusicContainer extends HBox {
 
 
     }
+    /**
+     * 设置专辑封面点击事件处理器
+     * @param handler 点击事件处理器
+     */
+    public void setAlbumImageClickHandler(EventHandler<MouseEvent> handler) {
+        albumImageView.setOnMouseClicked(handler);
+    }
 
 
 }

@@ -15,12 +15,16 @@ public class HomePage extends BorderPane {
     private final HomePageHeaderContainer headerContainer;
     private final HomePageContentContainer homePageContentContainer;
     private final BottomMusicContainer bottomMusicContainer;
+    private final MusicPlayDetailContainer musicPlayDetailContainer;
 
     public HomePage() {
         headerContainer = new HomePageHeaderContainer();
         homePageMenuPanel = new HomePageMenuPanel();
         homePageContentContainer = new HomePageContentContainer();
         bottomMusicContainer = new BottomMusicContainer();
+        musicPlayDetailContainer = new MusicPlayDetailContainer();
+        musicPlayDetailContainer.setVisible(false);
+        setCenter(musicPlayDetailContainer);
 
         // 设置左侧菜单栏
         homePageMenuPanel.setPrefWidth(200);
@@ -53,6 +57,46 @@ public class HomePage extends BorderPane {
         clip.heightProperty().bind(heightProperty());
         setClip(clip);
 
+        // 在构造函数末尾添加专辑封面点击监听
+        bottomMusicContainer.setAlbumImageClickHandler(event -> showMusicDetail());
+        musicPlayDetailContainer.setOnReturnHandler(event -> backToHome());
+
+    }
+
+    /**
+     * 显示音乐详情页面
+     */
+    public void showMusicDetail() {
+        // 隐藏原有的中心内容
+        if (getCenter() != musicPlayDetailContainer) {
+            // 保存当前中心内容
+            homePageContentContainer.setVisible(false);
+            headerContainer.setVisible(false);
+            homePageMenuPanel.setVisible(false);
+
+            // 显示音乐详情页面
+            musicPlayDetailContainer.setVisible(true);
+            setCenter(musicPlayDetailContainer);
+        }
+    }
+
+    /**
+     * 返回主页
+     */
+    public void backToHome() {
+        // 隐藏音乐详情页面
+        musicPlayDetailContainer.setVisible(false);
+
+        // 显示主页内容
+        homePageContentContainer.setVisible(true);
+        headerContainer.setVisible(true);
+        homePageMenuPanel.setVisible(true);
+
+        // 恢复原来的布局结构
+        BorderPane centerPanel = new BorderPane();
+        centerPanel.setTop(headerContainer);
+        centerPanel.setCenter(homePageContentContainer);
+        setCenter(centerPanel);
     }
 
     public HomePageMenuPanel getMenuPanel() {
