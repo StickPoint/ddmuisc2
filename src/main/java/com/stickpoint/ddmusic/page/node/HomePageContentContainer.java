@@ -71,7 +71,7 @@ public class HomePageContentContainer extends VBox {
         topContainer.getChildren().addAll(sceneryCarousel, recommendContainer);
 
         // 设置水平布局优先级，让两个组件都能撑满高度
-        HBox.setHgrow(sceneryCarousel, Priority.ALWAYS);
+        HBox.setHgrow(sceneryCarousel, Priority.NEVER);
         HBox.setHgrow(recommendContainer, Priority.ALWAYS);
 
         // 设置轮播图尺寸
