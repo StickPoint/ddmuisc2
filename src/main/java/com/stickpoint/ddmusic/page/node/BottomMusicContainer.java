@@ -168,6 +168,7 @@ public class BottomMusicContainer extends HBox {
         Region spacer2 = new Region();
         HBox.setHgrow(spacer2, Priority.ALWAYS);
 
+
         // 添加所有部分到主容器
         getChildren().addAll(
                 imageSection,
@@ -305,6 +306,8 @@ public class BottomMusicContainer extends HBox {
         progressSection.setAlignment(Pos.CENTER);
         progressSection.setPadding(new Insets(0, 15, 0, 15));
         progressSection.setSpacing(10);
+        // 让进度条区域可以水平增长
+        HBox.setHgrow(progressSection, Priority.ALWAYS);
 
         // 当前时间标签
         playerTimeLabel = new Label("00:00");
@@ -315,17 +318,18 @@ public class BottomMusicContainer extends HBox {
 
         // 进度滑块
         playerProgressBar.setPrefWidth(350);
+        HBox.setHgrow(playerProgressBar, Priority.ALWAYS);
+        playerProgressBar.setMinWidth(200);
+
         // 为进度条设置样式类
         playerProgressBar.setMaxHeight(18);
         playerProgressBar.setMinHeight(18);
         playerProgressBar.getStyleClass().add("rx-media-progress-bar");
-        playerProgressBar.setMinWidth(200);
         // 设置最小宽度
         // 音乐总时长
         playerProgressBar.durationProperty().bind(musicPlayer.getMedia().durationProperty());
         //播放器的进度修改监听器
         musicPlayer.currentTimeProperty().addListener(durationChangeListener);
-
 
         progressSection.getChildren().addAll(playerProgressBar, playerTimeLabel);
     }
@@ -337,6 +341,9 @@ public class BottomMusicContainer extends HBox {
         extraControlsSection.setAlignment(Pos.CENTER);
         extraControlsSection.setPadding(new Insets(0, 15, 0, 15));
         extraControlsSection.setSpacing(15);
+        // 设置最小宽度以确保所有按钮都能显示
+        extraControlsSection.setMinWidth(200);
+        HBox.setHgrow(extraControlsSection, Priority.NEVER);
 
         // 音量调节按钮 初始化声音控制
         volumeButton.modifyContent("M580.096 907.264c-19.968 0-39.424-6.144-56.32-17.92l-215.04-157.696c-11.264-8.192-25.6-12.288-40.448-12.288H194.048c-53.76 0-97.792-44.032-97.792-97.792V402.944c0-53.76 44.032-97.792 97.792-97.792h74.24c14.848 0 29.184-4.608 40.96-12.8l214.016-156.672 0.512-0.512c35.84-25.088 82.432-23.552 116.736 3.072 23.552 18.432 37.376 48.128 37.376 79.36v589.312c0 28.16-10.752 54.272-29.696 72.704-18.432 17.92-42.496 27.648-68.096 27.648zM194.048 375.808c-14.848 0-27.136 12.288-27.136 27.136v218.624c0 14.848 12.288 27.136 27.136 27.136h74.24c29.184 0 57.856 8.704 81.92 25.6l215.552 157.696c4.096 2.56 9.216 4.608 14.848 4.608 5.12 0 12.288-1.536 19.456-8.192 5.12-4.608 7.68-12.8 7.68-20.992V217.6c0-10.24-3.584-18.944-10.24-23.552-9.728-7.68-22.528-8.192-32.256-1.024L350.72 349.696c-24.576 17.408-52.736 26.112-82.432 26.112H194.048zM837.632 694.784c-6.656 0-13.312-2.048-18.944-5.632-16.384-10.752-21.504-32.256-10.752-49.152 66.048-103.424 66.048-193.536 0-283.136-11.776-15.872-8.192-37.888 7.168-49.664s37.888-8.192 49.664 7.168c83.456 113.152 84.48 235.008 3.072 363.008-7.168 11.776-18.432 17.408-30.208 17.408z");

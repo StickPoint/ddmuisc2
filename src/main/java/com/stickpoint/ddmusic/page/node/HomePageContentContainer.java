@@ -3,6 +3,7 @@ package com.stickpoint.ddmusic.page.node;
 import com.leewyatt.rxcontrols.animation.carousel.AnimFade;
 import com.leewyatt.rxcontrols.controls.RXCarousel;
 import com.leewyatt.rxcontrols.pane.RXCarouselPane;
+import javafx.geometry.Insets;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -48,7 +49,7 @@ public class HomePageContentContainer extends VBox {
         // 设置左右间距为10px
         topContainer.setSpacing(10);
         // 设置内边距，左右各10px
-        topContainer.setPadding(new javafx.geometry.Insets(0, 10, 0, 10));
+        topContainer.setPadding(new Insets(0, 10, 0, 10));
 
         // 初始化轮播图
         List<String> bannerList = List.of(

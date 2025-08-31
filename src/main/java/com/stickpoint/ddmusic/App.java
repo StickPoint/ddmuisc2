@@ -46,7 +46,7 @@ public class App extends Application {
             Scene scene = new Scene(homePage, 1060,750, Color.TRANSPARENT);
             primaryStage.setTitle("DdMusic");
             primaryStage.setScene(scene);
-            primaryStage.setMinWidth(800);
+            primaryStage.setMinWidth(878);
             primaryStage.setMinHeight(600);
             primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setFullScreenExitHint("1");
