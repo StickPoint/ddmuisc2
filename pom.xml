@@ -74,7 +74,7 @@
             <artifactId>logback-core</artifactId>
             <version>1.5.13</version>
         </dependency>
-        <!--  支持模块化的JSON工具，孩子太不容易了,,,,我操了，阿里巴巴这帮傻逼就他妈java8用到死傻逼东西-->
+        <!--  支持模块化的JSON工具-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

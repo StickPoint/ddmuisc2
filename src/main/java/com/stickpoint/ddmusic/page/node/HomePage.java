@@ -65,6 +65,8 @@ public class HomePage extends BorderPane {
     public void showMusicDetail() {
         // 隐藏原有的中心内容
         if (getCenter() != musicPlayDetailContainer) {
+            // 隐藏左侧菜单栏实现全屏效果
+            setLeft(null);
             // 显示音乐详情页面
             musicPlayDetailContainer.setVisible(true);
             // 直接切换中心内容，而不是隐藏其他组件
@@ -76,6 +78,8 @@ public class HomePage extends BorderPane {
      * 返回主页
      */
     public void backToHome() {
+        // 恢复左侧菜单栏
+        setLeft(homePageMenuPanel);
         // 恢复原来的布局结构
         setCenter(centerPanel);
     }

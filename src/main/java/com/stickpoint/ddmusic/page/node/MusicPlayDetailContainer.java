@@ -19,6 +19,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
 
+import java.util.Objects;
+
 /**
  * 音乐播放详情容器
  * @author fntp
@@ -27,7 +29,9 @@ import javafx.util.Duration;
 public class MusicPlayDetailContainer extends VBox {
 
     private RotateTransition rotateTransition;
+    private RotateTransition needleTransition;
     private StackPane recordPane;
+    private ImageView needleImageView;
     private Label backButton;
     // 歌曲信息组件
     private Label songTitle;
@@ -49,6 +53,9 @@ public class MusicPlayDetailContainer extends VBox {
     private void initialize() {
         // 初始化唱片区域
         recordPane = createRecord();
+        
+        // 初始化唱针
+        needleImageView = createNeedle();
 
         // 初始化歌曲信息
         songTitle = new Label("My My My!");
@@ -91,7 +98,7 @@ public class MusicPlayDetailContainer extends VBox {
     private void setupLayout() {
         setSpacing(20);
         setAlignment(Pos.TOP_CENTER);
-        setStyle("-fx-background-color: linear-gradient(to bottom, #2c3e50, #3498db);");
+        setStyle("-fx-background-color: gray");
 
         // 返回按钮靠左对齐
         StackPane topPane = new StackPane();
@@ -106,7 +113,12 @@ public class MusicPlayDetailContainer extends VBox {
         // 左侧唱片区域
         VBox leftPane = new VBox();
         leftPane.setAlignment(Pos.CENTER);
-        leftPane.getChildren().add(recordPane);
+        
+        // 创建唱片和唱针的容器
+        StackPane recordWithNeedle = new StackPane();
+        recordWithNeedle.getChildren().addAll(recordPane, needleImageView);
+        
+        leftPane.getChildren().add(recordWithNeedle);
 
         // 右侧信息区域
         VBox rightPane = new VBox();
@@ -231,6 +243,45 @@ public class MusicPlayDetailContainer extends VBox {
         return record;
     }
 
+    /**
+     * 创建唱针
+     */
+    private ImageView createNeedle() {
+        try {
+            // 从本地资源加载唱针图片
+            Image needleImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/img/cz.png")));
+            ImageView needle = new ImageView(needleImage);
+            
+            // 设置唱针的尺寸
+            needle.setFitWidth(80);
+            needle.setFitHeight(400);
+            needle.setPreserveRatio(true);
+            
+            // 设置唱针的初始位置（抬起状态）
+            needle.setRotate(-30); // 初始抬起 30 度
+            
+            // 设置唱针的旋转中心点（左上角）
+            needle.setTranslateX(100); // 向右偏移
+            needle.setTranslateY(-50); // 向上偏移
+            
+            // 创建唱针的旋转动画
+            needleTransition = new RotateTransition(Duration.millis(800), needle);
+            needleTransition.setInterpolator(Interpolator.EASE_BOTH);
+            
+            return needle;
+            
+        } catch (Exception e) {
+            System.err.println("唱针图片加载失败: " + e.getMessage());
+            
+            // 如果图片加载失败，创建一个简单的占位符
+            ImageView placeholder = new ImageView();
+            placeholder.setFitWidth(150);
+            placeholder.setFitHeight(150);
+            placeholder.setStyle("-fx-background-color: #666666;");
+            return placeholder;
+        }
+    }
+
     private Label createButton(String text) {
         Label btn = new Label(text);
         btn.setStyle("-fx-background-color: rgba(255,255,255,0.2); -fx-padding: 8px 16px; -fx-text-fill: white; -fx-background-radius: 15px; -fx-cursor: hand;");
@@ -242,7 +293,19 @@ public class MusicPlayDetailContainer extends VBox {
 
     // 控制唱片旋转的方法
     public void startRotation() {
-        if (rotateTransition != null) {
+        if (needleTransition != null) {
+            // 唱针放下（从 -30 度旋转到 -5 度）
+            needleTransition.setFromAngle(-30);
+            needleTransition.setToAngle(-5);
+            needleTransition.setOnFinished(e -> {
+                // 唱针放下后开始唱片旋转
+                if (rotateTransition != null) {
+                    rotateTransition.play();
+                }
+            });
+            needleTransition.play();
+        } else if (rotateTransition != null) {
+            // 如果没有唱针，直接开始唱片旋转
             rotateTransition.play();
         }
     }
@@ -251,11 +314,19 @@ public class MusicPlayDetailContainer extends VBox {
         if (rotateTransition != null) {
             rotateTransition.pause();
         }
+        // 暂停时不抬起唱针，保持在唱片上
     }
 
     public void stopRotation() {
         if (rotateTransition != null) {
             rotateTransition.stop();
+        }
+        if (needleTransition != null) {
+            // 停止时抬起唱针
+            needleTransition.setFromAngle(needleImageView.getRotate());
+            needleTransition.setToAngle(-30);
+            needleTransition.setOnFinished(null); // 清除之前的事件处理
+            needleTransition.play();
         }
     }
 
