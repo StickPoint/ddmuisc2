@@ -1,9 +1,12 @@
 package com.stickpoint.ddmusic.page.node;
 
 import com.leewyatt.rxcontrols.controls.RXLrcView;
+import com.stickpoint.ddmusic.page.state.MusicState;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.RotateTransition;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -44,6 +47,8 @@ public class MusicPlayDetailContainer extends VBox {
 
     // 主内容区域
     private HBox mainContent;
+
+    private ChangeListener<Boolean> playingStateListener;
 
     public MusicPlayDetailContainer() {
         initialize();
@@ -253,8 +258,8 @@ public class MusicPlayDetailContainer extends VBox {
             ImageView needle = new ImageView(needleImage);
             
             // 设置唱针的尺寸
-            needle.setFitWidth(80);
-            needle.setFitHeight(400);
+            needle.setFitWidth(100);
+            needle.setFitHeight(500);
             needle.setPreserveRatio(true);
             
             // 设置唱针的初始位置（抬起状态）
@@ -355,5 +360,20 @@ public class MusicPlayDetailContainer extends VBox {
     public void updateAlbumCover(String imageUrl) {
         // 这里需要重新创建专辑封面组件并替换原有的
         // 具体实现可以根据需要添加
+    }
+
+    public void setSharedStateModel(MusicState musicState) {
+        // 创建监听器
+        playingStateListener = (obs, oldVal, newVal) -> {
+            Platform.runLater(() -> {
+                if (newVal) {
+                    startRotation();
+                } else {
+                    pauseRotation();
+                }
+            });
+        };
+        // 注册弱监听器
+        musicState.addWeakPlayingListener(playingStateListener);
     }
 }
