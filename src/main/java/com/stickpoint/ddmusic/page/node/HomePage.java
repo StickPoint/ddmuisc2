@@ -1,5 +1,6 @@
 package com.stickpoint.ddmusic.page.node;
 
+import com.stickpoint.ddmusic.page.state.MusicState;
 import javafx.geometry.Insets;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
@@ -16,16 +17,18 @@ public class HomePage extends BorderPane {
     private final HomePageContentContainer homePageContentContainer;
     private final BottomMusicContainer bottomMusicContainer;
     private final MusicPlayDetailContainer musicPlayDetailContainer;
+    private final MusicState musicState;
 
     // 保存右侧内容容器的引用
     private final BorderPane centerPanel;
 
     public HomePage() {
+        musicState = new MusicState();
         headerContainer = new HomePageHeaderContainer();
         homePageMenuPanel = new HomePageMenuPanel();
         homePageContentContainer = new HomePageContentContainer();
-        bottomMusicContainer = new BottomMusicContainer();
-        musicPlayDetailContainer = new MusicPlayDetailContainer();
+        bottomMusicContainer = new BottomMusicContainer(musicState);
+        musicPlayDetailContainer = new MusicPlayDetailContainer(musicState);
         musicPlayDetailContainer.setVisible(false);
 
         // 设置左侧菜单栏

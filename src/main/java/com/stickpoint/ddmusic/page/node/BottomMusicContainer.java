@@ -3,6 +3,7 @@ package com.stickpoint.ddmusic.page.node;
 import com.leewyatt.rxcontrols.controls.RXAvatar;
 import com.leewyatt.rxcontrols.controls.RXMediaProgressBar;
 import com.stickpoint.ddmusic.page.skin.RedVerticalSliderSkin;
+import com.stickpoint.ddmusic.page.state.MusicState;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
@@ -116,11 +117,14 @@ public class BottomMusicContainer extends HBox {
      * 分享按钮
      */
     private SvgIcon shareButton;
+    /**
+     * 音乐播放核心State
+     */
+    private MusicState musicState;
 
 
-
-
-    public BottomMusicContainer() {
+    public BottomMusicContainer(MusicState musicState) {
+        this.musicState = musicState;
         albumImageView = new RXAvatar("https://qnm.hunliji.com/o_1j3tjm1ceud2cup11k31hpfh7217.jpeg");
         songNameLabel = new Label();
         artistNameLabel = new Label();
@@ -187,14 +191,21 @@ public class BottomMusicContainer extends HBox {
 
         // 为播放/暂停按钮添加点击事件处理器
         playPauseButton.setOnMouseClicked(event -> {
-            if (musicPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-                playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
-                musicPlayer.pause();
+            MediaPlayer.Status currentStatus = musicPlayer.getStatus();
+            if (currentStatus == MediaPlayer.Status.PLAYING) {
                 // 更新按钮图标为播放图标
+                playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
+                // 播放暂停
+                musicPlayer.pause();
+                // 通过 MusicState 控制播放状态
+                musicState.setPlayerStatusProperty(MediaPlayer.Status.PAUSED);
             } else {
                 // 更新按钮图标为暂停图标 (你可以替换为实际的暂停图标路径)
                 playPauseButton.modifyContent("M512 1024C228.266667 1024 0 795.733333 0 512S228.266667 0 512 0s512 228.266667 512 512-228.266667 512-512 512z m0-42.666667c260.266667 0 469.333333-209.066667 469.333333-469.333333S772.266667 42.666667 512 42.666667 42.666667 251.733333 42.666667 512s209.066667 469.333333 469.333333 469.333333z m-106.666667-682.666666c12.8 0 21.333333 8.533333 21.333334 21.333333v384c0 12.8-8.533333 21.333333-21.333334 21.333333s-21.333333-8.533333-21.333333-21.333333V320c0-12.8 8.533333-21.333333 21.333333-21.333333z m213.333334 0c12.8 0 21.333333 8.533333 21.333333 21.333333v384c0 12.8-8.533333 21.333333-21.333333 21.333333s-21.333333-8.533333-21.333334-21.333333V320c0-12.8 8.533333-21.333333 21.333334-21.333333z");
+                // 播放
                 musicPlayer.play();
+                // 更新MusicState
+                musicState.setPlayerStatusProperty(MediaPlayer.Status.PLAYING);
             }
         });
 
@@ -222,6 +233,9 @@ public class BottomMusicContainer extends HBox {
              playerProgressBar.durationProperty().bind(musicPlayer.getMedia().durationProperty());
              musicPlayer.currentTimeProperty().addListener(durationChangeListener);
         });
+
+        // 绑定音乐状态到 MusicState
+        bindToMusicState();
     }
 
     /**
@@ -511,6 +525,32 @@ public class BottomMusicContainer extends HBox {
      */
     public void setAlbumImageClickHandler(EventHandler<MouseEvent> handler) {
         albumImageView.setOnMouseClicked(handler);
+    }
+
+    private void bindToMusicState() {
+        if (musicState == null) {
+            return;
+        }
+
+        // 监听 MediaPlayer 状态变化并同步到 MusicState
+        musicPlayer.statusProperty().addListener((obs, oldStatus, newStatus) -> {
+            if (newStatus == MediaPlayer.Status.PLAYING) {
+                musicState.setPlayerStatusProperty(MediaPlayer.Status.PLAYING);
+            } else if (newStatus == MediaPlayer.Status.PAUSED) {
+                musicState.setPlayerStatusProperty(MediaPlayer.Status.PAUSED);
+            }else if (newStatus == MediaPlayer.Status.STOPPED) {
+                musicState.setPlayerStatusProperty(MediaPlayer.Status.STOPPED);
+            }
+        });
+
+        // 监听 MusicState 的播放状态变化并控制 MediaPlayer
+        musicState.playerStatusPropertyProperty().addListener((obs, oldVal, newVal) -> {
+            if (Objects.equals(newVal, MediaPlayer.Status.PLAYING) && Objects.equals(musicPlayer.getStatus(), MediaPlayer.Status.PLAYING)) {
+                musicPlayer.play();
+            } else if (Objects.equals(newVal, MediaPlayer.Status.PAUSED) && Objects.equals(musicPlayer.getStatus(), MediaPlayer.Status.PAUSED)) {
+                musicPlayer.pause();
+            }
+        });
     }
 
 

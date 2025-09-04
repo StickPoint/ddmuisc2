@@ -16,6 +16,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
@@ -44,15 +45,16 @@ public class MusicPlayDetailContainer extends VBox {
     private Label sourceInfo;
     private HBox infoBar;
     private RXLrcView lrcView;
-
     // 主内容区域
     private HBox mainContent;
-
     private ChangeListener<Boolean> playingStateListener;
+    private MusicState musicState;
 
-    public MusicPlayDetailContainer() {
+    public MusicPlayDetailContainer(MusicState musicState) {
+        this.musicState = musicState;
         initialize();
         setupLayout();
+        setSharedStateModel(musicState);
     }
 
     private void initialize() {
@@ -362,7 +364,8 @@ public class MusicPlayDetailContainer extends VBox {
         // 具体实现可以根据需要添加
     }
 
-    public void setSharedStateModel(MusicState musicState) {
+    private void setSharedStateModel(MusicState musicState) {
+        this.musicState = musicState;
         // 创建监听器
         playingStateListener = (obs, oldVal, newVal) -> {
             Platform.runLater(() -> {
@@ -375,5 +378,11 @@ public class MusicPlayDetailContainer extends VBox {
         };
         // 注册弱监听器
         musicState.addWeakPlayingListener(playingStateListener);
+        // 初始化唱片状态
+        if (Objects.equals(musicState.getPlayerStatusProperty(), MediaPlayer.Status.PLAYING)) {
+            startRotation();
+        } else {
+            pauseRotation();
+        }
     }
 }

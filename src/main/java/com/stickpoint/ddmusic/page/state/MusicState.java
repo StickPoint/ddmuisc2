@@ -1,10 +1,10 @@
 package com.stickpoint.ddmusic.page.state;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
-import javafx.beans.value.WeakChangeListener;
 import javafx.scene.media.MediaPlayer;
 
 /**
@@ -12,15 +12,19 @@ import javafx.scene.media.MediaPlayer;
  * @author fntp
  * @date 2025/9/3
  */
+@SuppressWarnings("unused")
 public class MusicState {
 
-    private BooleanProperty isPlayingProperty;
-
+    /**
+     * 歌曲标题
+     */
     private StringProperty songTitleProperty;
-
+    /**
+     * 歌手信息
+     */
     private StringProperty singerProperty;
     /**
-     * 专辑
+     * 专辑信息
      */
     private StringProperty albumProperty;
     /**
@@ -40,9 +44,101 @@ public class MusicState {
      */
     private ObjectProperty<MediaPlayer.Status> playerStatusProperty;
 
-    public void addWeakPlayingListener(ChangeListener<Boolean> listener) {
-        // 使用 WeakChangeListener 包装用户传入的监听器
-        isPlayingProperty.addListener(new WeakChangeListener<>(listener));
+    public MusicState() {
+        songTitleProperty = new SimpleStringProperty();
+        singerProperty = new SimpleStringProperty();
+        albumProperty = new SimpleStringProperty();
+        albumCoverProperty = new SimpleStringProperty();
+        sourceProperty = new SimpleStringProperty();
+        playUrlProperty = new SimpleStringProperty();
+        playerStatusProperty = new SimpleObjectProperty<>();
     }
 
+    public void addWeakPlayingListener(ChangeListener<Boolean> listener) {
+
+    }
+
+    public String getSongTitleProperty() {
+        return songTitleProperty.get();
+    }
+
+    public StringProperty songTitlePropertyProperty() {
+        return songTitleProperty;
+    }
+
+    public void setSongTitleProperty(String songTitleProperty) {
+        this.songTitleProperty.set(songTitleProperty);
+    }
+
+    public String getSingerProperty() {
+        return singerProperty.get();
+    }
+
+    public StringProperty singerPropertyProperty() {
+        return singerProperty;
+    }
+
+    public void setSingerProperty(String singerProperty) {
+        this.singerProperty.set(singerProperty);
+    }
+
+    public String getAlbumProperty() {
+        return albumProperty.get();
+    }
+
+    public StringProperty albumPropertyProperty() {
+        return albumProperty;
+    }
+
+    public void setAlbumProperty(String albumProperty) {
+        this.albumProperty.set(albumProperty);
+    }
+
+    public String getAlbumCoverProperty() {
+        return albumCoverProperty.get();
+    }
+
+    public StringProperty albumCoverPropertyProperty() {
+        return albumCoverProperty;
+    }
+
+    public void setAlbumCoverProperty(String albumCoverProperty) {
+        this.albumCoverProperty.set(albumCoverProperty);
+    }
+
+    public String getSourceProperty() {
+        return sourceProperty.get();
+    }
+
+    public StringProperty sourcePropertyProperty() {
+        return sourceProperty;
+    }
+
+    public void setSourceProperty(String sourceProperty) {
+        this.sourceProperty.set(sourceProperty);
+    }
+
+    public String getPlayUrlProperty() {
+        return playUrlProperty.get();
+    }
+
+    public StringProperty playUrlPropertyProperty() {
+        return playUrlProperty;
+    }
+
+    public void setPlayUrlProperty(String playUrlProperty) {
+        this.playUrlProperty.set(playUrlProperty);
+    }
+
+    public MediaPlayer.Status getPlayerStatusProperty() {
+        return playerStatusProperty.get();
+    }
+
+    public ObjectProperty<MediaPlayer.Status> playerStatusPropertyProperty() {
+        return playerStatusProperty;
+    }
+
+    public void setPlayerStatusProperty(MediaPlayer.Status playerStatusProperty) {
+        this.playerStatusProperty.set(playerStatusProperty);
+    }
 }

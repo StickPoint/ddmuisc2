@@ -2,7 +2,7 @@
 open module com.stickpoint.ddmusic {
     uses com.stickpoint.ddmusic.common.config.DdmusicSpiMonitor;
     // 第三方依赖
-    requires animatefx;
+    // requires animatefx;
     requires rxcontrols;
     requires ch.qos.logback.classic;
     requires ch.qos.logback.core;

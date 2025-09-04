@@ -44,24 +44,69 @@ public class App extends Application {
 
 
     @Override
-    public void start(Stage primaryStage) {
+    public void start(Stage primaryStage) throws Exception {
+        log.info("=== 应用启动调试信息 ===");
+        log.info("Java 版本: " + System.getProperty("java.version"));
+        log.info("JavaFX 版本: " + System.getProperty("javafx.version", "未知"));
+        log.info("工作目录: " + System.getProperty("user.dir"));
+
         try {
+            log.info("1. 开始创建 HomePage");
             HomePage homePage = new HomePage();
-            Scene scene = new Scene(homePage, 1060,750, Color.TRANSPARENT);
+            log.info("2. HomePage 创建成功");
+
+            log.info("3. 开始创建场景");
+            Scene scene = new Scene(homePage, 1060, 750, Color.TRANSPARENT);
+            log.info("4. 场景创建成功");
+
+            log.info("5. 设置舞台属性");
             primaryStage.setTitle("DdMusic");
             primaryStage.setScene(scene);
             primaryStage.setMinWidth(878);
             primaryStage.setMinHeight(600);
             primaryStage.initStyle(StageStyle.TRANSPARENT);
             primaryStage.setFullScreenExitHint("1");
-            // 当点击了窗口的功能放大窗口后
             setStage(primaryStage);
-            primaryStage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/img/logo.svg")).toExternalForm()));
+            log.info("6. 舞台属性设置完成");
+
+            log.info("7. 加载图标");
+            java.net.URL logoUrl = getClass().getResource("/img/logo.svg");
+            if (logoUrl != null) {
+                log.info("图标URL: " + logoUrl);
+                Image logoImage = new Image(logoUrl.toExternalForm());
+                primaryStage.getIcons().add(logoImage);
+                log.info("8. 图标加载成功");
+            } else {
+                log.info("警告: 找不到图标文件，继续启动");
+            }
+
+            log.info("9. 显示舞台");
             primaryStage.show();
+            log.info("10. 添加窗口缩放支持");
             addResizeSupport(primaryStage, scene);
+            log.info("11. 居中显示");
             primaryStage.centerOnScreen();
+            log.info("12. 应用启动完成");
+
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            System.err.println("=== 应用启动异常详情 ===");
+            System.err.println("异常类型: " + e.getClass().getName());
+            System.err.println("异常信息: " + e.getMessage());
+            System.err.println("堆栈跟踪:");
+            e.printStackTrace();
+
+            Throwable cause = e.getCause();
+            int level = 1;
+            while (cause != null) {
+                System.err.println("第 " + level + " 层原因:");
+                System.err.println("  类型: " + cause.getClass().getName());
+                System.err.println("  信息: " + cause.getMessage());
+                cause.printStackTrace();
+                cause = cause.getCause();
+                level++;
+            }
+
+            throw e;
         }
     }
 
