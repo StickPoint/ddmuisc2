@@ -24,10 +24,10 @@ public class HomePage extends BorderPane {
 
     public HomePage() {
         musicState = new MusicState();
+        bottomMusicContainer = new BottomMusicContainer(musicState);
         headerContainer = new HomePageHeaderContainer();
         homePageMenuPanel = new HomePageMenuPanel();
         homePageContentContainer = new HomePageContentContainer();
-        bottomMusicContainer = new BottomMusicContainer(musicState);
         musicPlayDetailContainer = new MusicPlayDetailContainer(musicState);
         musicPlayDetailContainer.setVisible(false);
 

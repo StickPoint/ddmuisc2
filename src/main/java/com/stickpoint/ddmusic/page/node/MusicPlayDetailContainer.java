@@ -1,6 +1,8 @@
 package com.stickpoint.ddmusic.page.node;
 
 import com.leewyatt.rxcontrols.controls.RXLrcView;
+import com.leewyatt.rxcontrols.pojo.LrcDoc;
+import com.stickpoint.ddmusic.common.utils.EncodingDetectUtil;
 import com.stickpoint.ddmusic.page.state.MusicState;
 import javafx.animation.Animation;
 import javafx.animation.Interpolator;
@@ -49,15 +51,19 @@ public class MusicPlayDetailContainer extends VBox {
     private HBox mainContent;
     private ChangeListener<Boolean> playingStateListener;
     private MusicState musicState;
+    private ChangeListener<String> lrcUrlListener;
 
-    public MusicPlayDetailContainer(MusicState musicState) {
-        this.musicState = musicState;
+    public MusicPlayDetailContainer(MusicState paramState) {
+        musicState = paramState;
         initialize();
         setupLayout();
         setSharedStateModel(musicState);
     }
 
     private void initialize() {
+        // 初始化的时候加载css文件
+        getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/MusicPlayDetailContainer.css")).toExternalForm());
+
         // 初始化唱片区域
         recordPane = createRecord();
         
@@ -91,6 +97,7 @@ public class MusicPlayDetailContainer extends VBox {
         // 歌词组件
         lrcView = new RXLrcView();
         lrcView.setPrefHeight(200);
+        lrcView.getStyleClass().add("rx-lrc-view");
         //lrcView.setLrcText("Oh my, my, my\n哦 我的挚爱\nLiving for your every move\n你的举手投足都让我沉迷...");
 
         // 添加返回按钮
@@ -194,8 +201,7 @@ public class MusicPlayDetailContainer extends VBox {
             vinylView.setPreserveRatio(true);
 
             // 加载专辑图片
-            Image albumImage = new Image("https://qnm.hunliji.com/o_1j4004gdbik71aj219fb1ahrqk4j.jpg");
-            ImageView albumView = new ImageView(albumImage);
+            ImageView albumView = new ImageView();
             albumView.setFitWidth(167);
             albumView.setFitHeight(167);
             albumView.setPreserveRatio(true);
@@ -223,6 +229,28 @@ public class MusicPlayDetailContainer extends VBox {
             // 只添加黑胶唱片和专辑容器
             record.getChildren().addAll(vinylView, albumContainer);
 
+            // 绑定专辑封面属性
+            musicState.albumCoverPropertyProperty().addListener((obs, oldVal, newVal) -> {
+                Platform.runLater(() -> {
+                    if (newVal != null && !newVal.isEmpty()) {
+                        try {
+                            Image newAlbumImage = new Image(newVal);
+                            albumView.setImage(newAlbumImage);
+                        } catch (Exception e) {
+                            System.err.println("专辑封面加载失败: " + e.getMessage());
+                        }
+                    }
+                });
+            });
+            // 初始化专辑封面
+            if (musicState.getAlbumCoverProperty() != null && !musicState.getAlbumCoverProperty().isEmpty()) {
+                try {
+                    Image initialAlbumImage = new Image(musicState.getAlbumCoverProperty());
+                    albumView.setImage(initialAlbumImage);
+                } catch (Exception e) {
+                    System.err.println("初始专辑封面加载失败: " + e.getMessage());
+                }
+            }
         } catch (Exception e) {
             // 如果图片加载失败，使用默认占位符
             System.err.println("图片加载失败: " + e.getMessage());
@@ -364,8 +392,8 @@ public class MusicPlayDetailContainer extends VBox {
         // 具体实现可以根据需要添加
     }
 
-    private void setSharedStateModel(MusicState musicState) {
-        this.musicState = musicState;
+    private void setSharedStateModel(MusicState paramState) {
+        musicState = paramState;
         // 创建监听器
         playingStateListener = (obs, oldVal, newVal) -> {
             Platform.runLater(() -> {
@@ -384,5 +412,74 @@ public class MusicPlayDetailContainer extends VBox {
         } else {
             pauseRotation();
         }
+        // 监听歌曲标题变化
+        musicState.songTitlePropertyProperty().addListener((obs, oldVal, newVal) -> {
+            Platform.runLater(() -> setSongTitle(newVal));
+        });
+        // 监听艺术家信息变化
+        musicState.singerPropertyProperty().addListener((obs, oldVal, newVal) -> {
+            Platform.runLater(() -> setArtistInfo(newVal));
+        });
+        // 监听专辑信息变化
+        musicState.albumPropertyProperty().addListener((obs, oldVal, newVal) -> {
+            Platform.runLater(() -> setAlbumInfo(newVal));
+        });
+        // 监听来源信息变化
+        musicState.sourcePropertyProperty().addListener((obs, oldVal, newVal) -> {
+            Platform.runLater(() -> setSourceInfo(newVal));
+        });
+        // 监听歌词URL变化
+        lrcUrlListener = (obs, oldVal, newVal) -> {
+            Platform.runLater(() -> loadAndSetLrc(newVal));
+        };
+        // 监听歌词进度 - 创建独立的监听器
+        ChangeListener<Duration> currentTimeListener = (obs, oldVal, newVal) -> {
+            if (lrcView != null && newVal != null) {
+                lrcView.setCurrentTime(newVal);
+            }
+        };
+        musicState.currentTimePropertyProperty().addListener(currentTimeListener);
+        musicState.lrcTextPropertyProperty().addListener(lrcUrlListener);
+    }
+
+    // 添加加载和设置歌词的方法
+    private void loadAndSetLrc(String lrcUrl) {
+        if (lrcUrl == null || lrcUrl.isEmpty()) {
+            return;
+        }
+
+        // 在后台线程中加载歌词
+        new Thread(() -> {
+            try {
+                // 从URL读取字节数据
+                java.net.URL url = new java.net.URL(lrcUrl);
+                byte[] bytes;
+                try (java.io.InputStream inputStream = url.openStream();
+                     java.io.ByteArrayOutputStream buffer = new java.io.ByteArrayOutputStream()) {
+                    int nRead;
+                    byte[] data = new byte[1024];
+                    while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+                        buffer.write(data, 0, nRead);
+                    }
+                    buffer.flush();
+                    bytes = buffer.toByteArray();
+                }
+
+                // 解析歌词
+                LrcDoc lrcDoc = LrcDoc.parseLrcDoc(
+                        new String(bytes, EncodingDetectUtil.detect(bytes))
+                );
+
+                // 在JavaFX线程中设置歌词
+                Platform.runLater(() -> {
+                    if (lrcView != null && lrcDoc != null) {
+                        lrcView.setLrcDoc(lrcDoc);
+                    }
+                });
+            } catch (Exception e) {
+                System.err.println("歌词加载失败: " + e.getMessage());
+                e.printStackTrace();
+            }
+        }).start();
     }
 }

@@ -1,0 +1,18 @@
+/* LrcView 歌词显示组件*/
+.rx-lrc-view {
+    -fx-border-color: transparent;
+    -fx-border-width: 1.0;
+    -rx-line-height: 50;
+    -fx-font-size: 19;
+    /*字体*/
+    -fx-font-family: "华文行楷";
+}
+
+.rx-lrc-view .lrc-line {
+    -fx-alignment: center;
+    -fx-text-fill: black;
+}
+
+.rx-lrc-view .lrc-line:playing {
+    -fx-text-fill: red;
+}

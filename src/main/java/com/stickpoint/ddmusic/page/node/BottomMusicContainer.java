@@ -138,7 +138,7 @@ public class BottomMusicContainer extends HBox {
         shareButton = new SvgIcon();
         playerProgressBar = new RXMediaProgressBar();
         playerTimeLabel = new Label();
-        musicPlayer = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/media/jar-of-love.mp3")).toString()));
+        musicPlayer = new MediaPlayer(new Media("https://qnm.hunliji.com/o_1j4aiov931him1nmo1ujh2221jdqo.mp3"));
 
         // 设置容器基本属性
         setPrefHeight(70);
@@ -204,8 +204,16 @@ public class BottomMusicContainer extends HBox {
                 playPauseButton.modifyContent("M512 1024C228.266667 1024 0 795.733333 0 512S228.266667 0 512 0s512 228.266667 512 512-228.266667 512-512 512z m0-42.666667c260.266667 0 469.333333-209.066667 469.333333-469.333333S772.266667 42.666667 512 42.666667 42.666667 251.733333 42.666667 512s209.066667 469.333333 469.333333 469.333333z m-106.666667-682.666666c12.8 0 21.333333 8.533333 21.333334 21.333333v384c0 12.8-8.533333 21.333333-21.333334 21.333333s-21.333333-8.533333-21.333333-21.333333V320c0-12.8 8.533333-21.333333 21.333333-21.333333z m213.333334 0c12.8 0 21.333333 8.533333 21.333333 21.333333v384c0 12.8-8.533333 21.333333-21.333333 21.333333s-21.333333-8.533333-21.333334-21.333333V320c0-12.8 8.533333-21.333333 21.333334-21.333333z");
                 // 播放
                 musicPlayer.play();
-                // 更新MusicState
-                musicState.setPlayerStatusProperty(MediaPlayer.Status.PLAYING);
+                // 初始化播放音乐
+                musicState.playMusic("Jar Of Love",
+                        "曲婉婷",
+                        "我的歌声里",
+                        //"https://imge.kugou.com/stdmusic/20250221/20250221180758694578.jpg",
+                        "https://qnm.hunliji.com/o_1j4004gdbik71aj219fb1ahrqk4j.jpg",
+                        "网易云",
+                        "https://qnm.hunliji.com/o_1j4aiov931him1nmo1ujh2221jdqo.mp3",
+                        "https://qnm.hunliji.com/o_1j4ai6c611vfmr8ql9nng1a8oe.lrc",
+                        musicPlayer.getCurrentTime());
             }
         });
 
