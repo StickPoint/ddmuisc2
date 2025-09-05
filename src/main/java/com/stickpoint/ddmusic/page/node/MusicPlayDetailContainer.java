@@ -96,9 +96,8 @@ public class MusicPlayDetailContainer extends VBox {
 
         // 歌词组件
         lrcView = new RXLrcView();
-        lrcView.setPrefHeight(200);
+        lrcView.setPrefHeight(350);
         lrcView.getStyleClass().add("rx-lrc-view");
-        //lrcView.setLrcText("Oh my, my, my\n哦 我的挚爱\nLiving for your every move\n你的举手投足都让我沉迷...");
 
         // 添加返回按钮
         backButton = new Label("← 返回");
@@ -275,6 +274,9 @@ public class MusicPlayDetailContainer extends VBox {
         rotateTransition.setInterpolator(Interpolator.LINEAR);
         rotateTransition.setRate(1.0);
 
+        // 暂停动画，直到需要播放
+        rotateTransition.pause();
+
         return record;
     }
 
@@ -293,7 +295,7 @@ public class MusicPlayDetailContainer extends VBox {
             needle.setPreserveRatio(true);
             
             // 设置唱针的初始位置（抬起状态）
-            needle.setRotate(-30); // 初始抬起 30 度
+            needle.setRotate(-30); // 初始抬起 45 度
             
             // 设置唱针的旋转中心点（左上角）
             needle.setTranslateX(100); // 向右偏移
@@ -330,7 +332,7 @@ public class MusicPlayDetailContainer extends VBox {
     public void startRotation() {
         if (needleTransition != null) {
             // 唱针放下（从 -30 度旋转到 -5 度）
-            needleTransition.setFromAngle(-30);
+            needleTransition.setFromAngle(needleImageView.getRotate());
             needleTransition.setToAngle(-5);
             needleTransition.setOnFinished(e -> {
                 // 唱针放下后开始唱片旋转
@@ -406,12 +408,7 @@ public class MusicPlayDetailContainer extends VBox {
         };
         // 注册弱监听器
         musicState.addWeakPlayingListener(playingStateListener);
-        // 初始化唱片状态
-        if (Objects.equals(musicState.getPlayerStatusProperty(), MediaPlayer.Status.PLAYING)) {
-            startRotation();
-        } else {
-            pauseRotation();
-        }
+
         // 监听歌曲标题变化
         musicState.songTitlePropertyProperty().addListener((obs, oldVal, newVal) -> {
             Platform.runLater(() -> setSongTitle(newVal));
@@ -440,6 +437,14 @@ public class MusicPlayDetailContainer extends VBox {
         };
         musicState.currentTimePropertyProperty().addListener(currentTimeListener);
         musicState.lrcTextPropertyProperty().addListener(lrcUrlListener);
+        // 初始化唱片状态 - 移到方法末尾确保所有组件都已初始化
+        Platform.runLater(() -> {
+            if (Objects.equals(musicState.getPlayerStatusProperty(), MediaPlayer.Status.PLAYING)) {
+                startRotation();
+            } else {
+                pauseRotation();
+            }
+        });
     }
 
     // 添加加载和设置歌词的方法

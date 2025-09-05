@@ -458,6 +458,10 @@ public class BottomMusicContainer extends HBox {
     private final ChangeListener<Duration> durationChangeListener = (ob1, ov1, nv1) -> {
         playerProgressBar.setCurrentTime(nv1);
         changeTimeLabel(nv1);
+        // 添加这一行将当前播放时间同步到MusicState
+        if (musicState != null) {
+            musicState.setCurrentTimeProperty(nv1);
+        }
     };
 
     /**
