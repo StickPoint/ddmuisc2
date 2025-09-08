@@ -22,6 +22,7 @@ open module com.stickpoint.ddmusic {
     requires javafx.media;
     requires javafx.base;
     requires javafx.swing;
+    requires animatefx;
     // 配置SPI机制下的HttpConfig封装
     //provides com.stickpoint.ddmusic.common.config.DdmusicSpiMonitor  with com.stickpoint.ddmusic.common.config.DdMusicHttpConfig;
     // 导出SPI依赖

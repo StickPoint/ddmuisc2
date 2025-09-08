@@ -122,8 +122,8 @@ public class MusicState {
         return lrcTextProperty;
     }
 
-    public void addWeakPlayingListener(ChangeListener<Boolean> listener) {
-
+    public void addWeakPlayingListener(ChangeListener<MediaPlayer.Status> listener) {
+        this.playerStatusProperty.addListener(listener);
     }
 
     public String getSongTitleProperty() {

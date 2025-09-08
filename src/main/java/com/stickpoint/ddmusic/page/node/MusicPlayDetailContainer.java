@@ -24,6 +24,8 @@ import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Duration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Objects;
 
@@ -34,7 +36,6 @@ import java.util.Objects;
  */
 public class MusicPlayDetailContainer extends VBox {
 
-    private RotateTransition rotateTransition;
     private RotateTransition needleTransition;
     private StackPane recordPane;
     private ImageView needleImageView;
@@ -49,9 +50,13 @@ public class MusicPlayDetailContainer extends VBox {
     private RXLrcView lrcView;
     // 主内容区域
     private HBox mainContent;
-    private ChangeListener<Boolean> playingStateListener;
+    private ChangeListener<MediaPlayer.Status> playingStateListener;
     private MusicState musicState;
     private ChangeListener<String> lrcUrlListener;
+    /**
+     * 构建日志工具
+     */
+    private static final Logger log = LoggerFactory.getLogger(MusicPlayDetailContainer.class);
 
     public MusicPlayDetailContainer(MusicState paramState) {
         musicState = paramState;
@@ -267,16 +272,6 @@ public class MusicPlayDetailContainer extends VBox {
             record.getChildren().add(placeholderContainer);
         }
 
-        // 创建旋转动画
-        rotateTransition = new RotateTransition(Duration.seconds(5), record);
-        rotateTransition.setByAngle(360);
-        rotateTransition.setCycleCount(Animation.INDEFINITE);
-        rotateTransition.setInterpolator(Interpolator.LINEAR);
-        rotateTransition.setRate(1.0);
-
-        // 暂停动画，直到需要播放
-        rotateTransition.pause();
-
         return record;
     }
 
@@ -335,29 +330,14 @@ public class MusicPlayDetailContainer extends VBox {
             needleTransition.setFromAngle(needleImageView.getRotate());
             needleTransition.setToAngle(-5);
             needleTransition.setOnFinished(e -> {
-                // 唱针放下后开始唱片旋转
-                if (rotateTransition != null) {
-                    rotateTransition.play();
-                }
             });
             needleTransition.play();
-        } else if (rotateTransition != null) {
-            // 如果没有唱针，直接开始唱片旋转
-            rotateTransition.play();
         }
     }
 
-    public void pauseRotation() {
-        if (rotateTransition != null) {
-            rotateTransition.pause();
-        }
-        // 暂停时不抬起唱针，保持在唱片上
-    }
+
 
     public void stopRotation() {
-        if (rotateTransition != null) {
-            rotateTransition.stop();
-        }
         if (needleTransition != null) {
             // 停止时抬起唱针
             needleTransition.setFromAngle(needleImageView.getRotate());
@@ -384,10 +364,6 @@ public class MusicPlayDetailContainer extends VBox {
         sourceInfo.setText("来源: " + source);
     }
 
-    public void setLrcText(String lrc) {
-        //lrcView.setLrcText(lrc);
-    }
-
     // 更新专辑封面的方法
     public void updateAlbumCover(String imageUrl) {
         // 这里需要重新创建专辑封面组件并替换原有的
@@ -397,14 +373,37 @@ public class MusicPlayDetailContainer extends VBox {
     private void setSharedStateModel(MusicState paramState) {
         musicState = paramState;
         // 创建监听器
+        RotateTransition rotateTransition = new RotateTransition();
+        rotateTransition.setNode(recordPane);
+        // 25秒一圈
+        rotateTransition.setDuration(Duration.seconds(25));
+        // 旋转360度
+        rotateTransition.setByAngle(360);
+        // 无限循环
+        rotateTransition.setCycleCount(Animation.INDEFINITE);
+        // 取消自动倒转
+        rotateTransition.setAutoReverse(false);
         playingStateListener = (obs, oldVal, newVal) -> {
-            Platform.runLater(() -> {
-                if (newVal) {
+            if (MediaPlayer.Status.PLAYING.equals(newVal)) {
+                //startRotation();
+                //log.info("开始旋转");
+                Platform.runLater(()->{
+                    rotateTransition.play();
+                    needleImageView.setRotate(needleImageView.getRotate() + 20);
                     startRotation();
-                } else {
-                    pauseRotation();
-                }
-            });
+                });
+                // 将唱针顺时针旋转20度
+            } else if (MediaPlayer.Status.PAUSED.equals(newVal) || MediaPlayer.Status.STOPPED.equals(newVal)){
+                //pauseRotation();
+                log.info("暂停旋转");
+                log.info("当前播放状态: " + newVal);
+                Platform.runLater(()->{
+                    rotateTransition.stop();
+                    needleImageView.setRotate(needleImageView.getRotate() - 20);
+                    //needleImageView.setRotate(needleImageView.getRotate() + 20);
+                    startRotation();
+                });
+            }
         };
         // 注册弱监听器
         musicState.addWeakPlayingListener(playingStateListener);
@@ -438,13 +437,6 @@ public class MusicPlayDetailContainer extends VBox {
         musicState.currentTimePropertyProperty().addListener(currentTimeListener);
         musicState.lrcTextPropertyProperty().addListener(lrcUrlListener);
         // 初始化唱片状态 - 移到方法末尾确保所有组件都已初始化
-        Platform.runLater(() -> {
-            if (Objects.equals(musicState.getPlayerStatusProperty(), MediaPlayer.Status.PLAYING)) {
-                startRotation();
-            } else {
-                pauseRotation();
-            }
-        });
     }
 
     // 添加加载和设置歌词的方法
