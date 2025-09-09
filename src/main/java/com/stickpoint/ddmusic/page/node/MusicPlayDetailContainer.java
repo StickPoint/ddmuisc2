@@ -23,6 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -255,6 +256,8 @@ public class MusicPlayDetailContainer extends VBox {
                     System.err.println("初始专辑封面加载失败: " + e.getMessage());
                 }
             }
+
+            record.setTranslateX(-25);
         } catch (Exception e) {
             // 如果图片加载失败，使用默认占位符
             System.err.println("图片加载失败: " + e.getMessage());
@@ -295,10 +298,17 @@ public class MusicPlayDetailContainer extends VBox {
             // 设置唱针的旋转中心点（左上角）
             needle.setTranslateX(100); // 向右偏移
             needle.setTranslateY(-50); // 向上偏移
+
+
+            Rotate rotateTransform = new Rotate();
+            rotateTransform.setPivotX(needle.getX() / 2);  // 水平中心点
+            rotateTransform.setPivotY(0);
+            needle.getTransforms().add(rotateTransform);
             
             // 创建唱针的旋转动画
             needleTransition = new RotateTransition(Duration.millis(800), needle);
             needleTransition.setInterpolator(Interpolator.EASE_BOTH);
+
             
             return needle;
             
@@ -326,11 +336,11 @@ public class MusicPlayDetailContainer extends VBox {
     // 控制唱片旋转的方法
     public void startRotation() {
         if (needleTransition != null) {
-            // 唱针放下（从 -30 度旋转到 -5 度）
+            // 确保从当前角度开始
             needleTransition.setFromAngle(needleImageView.getRotate());
-            needleTransition.setToAngle(-5);
-            needleTransition.setOnFinished(e -> {
-            });
+            needleTransition.setToAngle(-5); // 放下唱针
+            needleTransition.setCycleCount(1); // 只执行一次
+            needleTransition.setAutoReverse(false);
             needleTransition.play();
         }
     }
@@ -339,10 +349,11 @@ public class MusicPlayDetailContainer extends VBox {
 
     public void stopRotation() {
         if (needleTransition != null) {
-            // 停止时抬起唱针
+            // 确保从当前角度开始
             needleTransition.setFromAngle(needleImageView.getRotate());
-            needleTransition.setToAngle(-30);
-            needleTransition.setOnFinished(null); // 清除之前的事件处理
+            needleTransition.setToAngle(-30); // 抬起唱针
+            needleTransition.setCycleCount(1); // 只执行一次
+            needleTransition.setAutoReverse(false);
             needleTransition.play();
         }
     }
@@ -390,9 +401,9 @@ public class MusicPlayDetailContainer extends VBox {
                 Platform.runLater(()->{
                     rotateTransition.play();
                     needleImageView.setRotate(needleImageView.getRotate() + 20);
+                    // 将唱针顺时针旋转20度
                     startRotation();
                 });
-                // 将唱针顺时针旋转20度
             } else if (MediaPlayer.Status.PAUSED.equals(newVal) || MediaPlayer.Status.STOPPED.equals(newVal)){
                 //pauseRotation();
                 log.info("暂停旋转");
@@ -401,7 +412,7 @@ public class MusicPlayDetailContainer extends VBox {
                     rotateTransition.stop();
                     needleImageView.setRotate(needleImageView.getRotate() - 20);
                     //needleImageView.setRotate(needleImageView.getRotate() + 20);
-                    startRotation();
+                    stopRotation();
                 });
             }
         };
