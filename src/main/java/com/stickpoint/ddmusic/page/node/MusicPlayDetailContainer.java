@@ -23,7 +23,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -292,22 +291,20 @@ public class MusicPlayDetailContainer extends VBox {
             needle.setFitHeight(500);
             needle.setPreserveRatio(true);
             
-            // 设置唱针的初始位置（抬起状态）
-            needle.setRotate(-30); // 初始抬起 45 度
-            
-            // 设置唱针的旋转中心点（左上角）
-            needle.setTranslateX(100); // 向右偏移
-            needle.setTranslateY(-50); // 向上偏移
+            // 设置唱针的初始位置（抬起状态） 初始抬起 30 度
+            needle.setRotate(-30);
 
+            // 设置唱针的旋转中心点（左上角） 向右偏移
+            needle.setTranslateX(85);
+            // 向上偏移
+            needle.setTranslateY(-60);
 
-            Rotate rotateTransform = new Rotate();
-            rotateTransform.setPivotX(needle.getX() / 2);  // 水平中心点
-            rotateTransform.setPivotY(0);
-            needle.getTransforms().add(rotateTransform);
             
             // 创建唱针的旋转动画
-            needleTransition = new RotateTransition(Duration.millis(800), needle);
+            needleTransition = new RotateTransition(Duration.millis(2000), needleImageView);
             needleTransition.setInterpolator(Interpolator.EASE_BOTH);
+            needleTransition.setCycleCount(1);
+            needleTransition.setAutoReverse(false);
 
             
             return needle;
@@ -336,11 +333,9 @@ public class MusicPlayDetailContainer extends VBox {
     // 控制唱片旋转的方法
     public void startRotation() {
         if (needleTransition != null) {
-            // 确保从当前角度开始
+            // 设置从当前角度摆动到放下位置
             needleTransition.setFromAngle(needleImageView.getRotate());
-            needleTransition.setToAngle(-5); // 放下唱针
-            needleTransition.setCycleCount(1); // 只执行一次
-            needleTransition.setAutoReverse(false);
+            needleTransition.setToAngle(-5); // 放下唱针位置
             needleTransition.play();
         }
     }
@@ -350,10 +345,9 @@ public class MusicPlayDetailContainer extends VBox {
     public void stopRotation() {
         if (needleTransition != null) {
             // 确保从当前角度开始
+            // 设置从当前角度摆动到抬起位置
             needleTransition.setFromAngle(needleImageView.getRotate());
-            needleTransition.setToAngle(-30); // 抬起唱针
-            needleTransition.setCycleCount(1); // 只执行一次
-            needleTransition.setAutoReverse(false);
+            needleTransition.setToAngle(-30); // 抬起唱针位置
             needleTransition.play();
         }
     }
