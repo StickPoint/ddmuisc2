@@ -5,8 +5,10 @@ import com.leewyatt.rxcontrols.pojo.LrcDoc;
 import com.stickpoint.ddmusic.common.utils.EncodingDetectUtil;
 import com.stickpoint.ddmusic.page.state.MusicState;
 import javafx.animation.Animation;
-import javafx.animation.Interpolator;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
 import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
@@ -16,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
@@ -23,6 +26,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.transform.Rotate;
 import javafx.util.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,10 +40,9 @@ import java.util.Objects;
  */
 public class MusicPlayDetailContainer extends VBox {
 
-    private RotateTransition needleTransition;
     private StackPane recordPane;
     private ImageView needleImageView;
-    private Label backButton;
+    private SvgIcon backButton;
     // 歌曲信息组件
     private Label songTitle;
     private Label songTags;
@@ -76,28 +79,23 @@ public class MusicPlayDetailContainer extends VBox {
         needleImageView = createNeedle();
 
         // 初始化歌曲信息
-        songTitle = new Label("My My My!");
+        songTitle = new Label("歌曲名称");
         songTitle.setFont(Font.font("Arial", FontWeight.BOLD, 24));
-        songTitle.setStyle("-fx-text-fill: white;");
+        songTitle.setStyle("-fx-text-fill: #141313;");
 
         songTags = new Label("VIP MV");
-        songTags.setStyle("-fx-text-fill: #00ff00; -fx-font-size: 12px; -fx-padding: 2 6 2 6; -fx-background-color: rgba(0,0,0,0.3); -fx-background-radius: 4;");
+        songTags.setStyle("-fx-text-fill: #ffffff; -fx-font-size: 12px; -fx-padding: 2 6 2 6; -fx-background-color: rgba(0,0,0,0.48); -fx-background-radius: 4;");
 
         albumInfo = new Label("专辑: Bloom");
-        albumInfo.setStyle("-fx-text-fill: #cccccc;");
+        albumInfo.setStyle("-fx-text-fill: #262626;");
         artistInfo = new Label("歌手: Troye Sivan");
-        artistInfo.setStyle("-fx-text-fill: #cccccc;");
+        artistInfo.setStyle("-fx-text-fill: #262626;");
         sourceInfo = new Label("来源: Wild");
-        sourceInfo.setStyle("-fx-text-fill: #cccccc;");
+        sourceInfo.setStyle("-fx-text-fill: #262626;");
 
         // 操作按钮
         infoBar = new HBox(10);
         infoBar.setAlignment(Pos.CENTER_LEFT);
-        infoBar.getChildren().addAll(
-                createButton("歌词"),
-                createButton("百科"),
-                createButton("相似推荐")
-        );
 
         // 歌词组件
         lrcView = new RXLrcView();
@@ -105,28 +103,26 @@ public class MusicPlayDetailContainer extends VBox {
         lrcView.getStyleClass().add("rx-lrc-view");
 
         // 添加返回按钮
-        backButton = new Label("← 返回");
-        backButton.setStyle("-fx-text-fill: white; -fx-font-size: 16px; -fx-cursor: hand; -fx-padding: 10;");
-        backButton.setOnMouseClicked(e -> {
-            // 这里需要获取到主容器来恢复显示其他内容
-            // 实现方式取决于你的具体布局结构
-        });
+        backButton = new SvgIcon("M333.436236 512.002048l363.098222-362.900598c18.226434-18.226434 18.226434-47.770666 0-65.998124s-47.770666-18.226434-65.998124 0L234.422666 479.000938c-18.226434 18.226434-18.226434 47.770666 0 65.998124l396.112643 395.942666c18.227458 18.18138 47.77169 18.18138 65.998124 0 18.226434-18.227458 18.226434-47.77169 0-65.998124L333.436236 512.002048z");
+        backButton.setFill("#030303");
+        backButton.setIconSize(15,22);
     }
 
     private void setupLayout() {
         setSpacing(20);
         setAlignment(Pos.TOP_CENTER);
-        setStyle("-fx-background-color: gray");
+        setStyle("-fx-background-color: rgba(43,40,40,0.02)");
 
         // 返回按钮靠左对齐
-        StackPane topPane = new StackPane();
+        Pane topPane = new Pane();
+        backButton.setLayoutX(30);
+        backButton.setLayoutY(35);
         topPane.getChildren().add(backButton);
-        StackPane.setAlignment(backButton, Pos.CENTER_LEFT);
 
         // 创建左右布局
         mainContent = new HBox(50);
         mainContent.setAlignment(Pos.CENTER);
-        mainContent.setPrefWidth(900); // 设置首选宽度
+        mainContent.setPrefWidth(900);
 
         // 左侧唱片区域
         VBox leftPane = new VBox();
@@ -292,19 +288,14 @@ public class MusicPlayDetailContainer extends VBox {
             needle.setPreserveRatio(true);
             
             // 设置唱针的初始位置（抬起状态） 初始抬起 30 度
-            needle.setRotate(-30);
+            needle.setRotate(-80);
 
             // 设置唱针的旋转中心点（左上角） 向右偏移
-            needle.setTranslateX(85);
+            needle.setTranslateX(165);
             // 向上偏移
-            needle.setTranslateY(-60);
+            needle.setTranslateY(-220);
 
-            
-            // 创建唱针的旋转动画
-            needleTransition = new RotateTransition(Duration.millis(2000), needleImageView);
-            needleTransition.setInterpolator(Interpolator.EASE_BOTH);
-            needleTransition.setCycleCount(1);
-            needleTransition.setAutoReverse(false);
+            log.info("唱针旋转角度: " + needle.getRotate());
 
             
             return needle;
@@ -318,37 +309,6 @@ public class MusicPlayDetailContainer extends VBox {
             placeholder.setFitHeight(150);
             placeholder.setStyle("-fx-background-color: #666666;");
             return placeholder;
-        }
-    }
-
-    private Label createButton(String text) {
-        Label btn = new Label(text);
-        btn.setStyle("-fx-background-color: rgba(255,255,255,0.2); -fx-padding: 8px 16px; -fx-text-fill: white; -fx-background-radius: 15px; -fx-cursor: hand;");
-        btn.setOnMouseEntered(e -> btn.setStyle("-fx-background-color: rgba(255,255,255,0.3); -fx-padding: 8px 16px; -fx-text-fill: white; -fx-background-radius: 15px; -fx-cursor: hand;"));
-        btn.setOnMouseExited(e -> btn.setStyle("-fx-background-color: rgba(255,255,255,0.2); -fx-padding: 8px 16px; -fx-text-fill: white; -fx-background-radius: 15px; -fx-cursor: hand;"));
-        btn.setOnMouseClicked(e -> System.out.println("Clicked: " + text));
-        return btn;
-    }
-
-    // 控制唱片旋转的方法
-    public void startRotation() {
-        if (needleTransition != null) {
-            // 设置从当前角度摆动到放下位置
-            needleTransition.setFromAngle(needleImageView.getRotate());
-            needleTransition.setToAngle(-5); // 放下唱针位置
-            needleTransition.play();
-        }
-    }
-
-
-
-    public void stopRotation() {
-        if (needleTransition != null) {
-            // 确保从当前角度开始
-            // 设置从当前角度摆动到抬起位置
-            needleTransition.setFromAngle(needleImageView.getRotate());
-            needleTransition.setToAngle(-30); // 抬起唱针位置
-            needleTransition.play();
         }
     }
 
@@ -378,35 +338,46 @@ public class MusicPlayDetailContainer extends VBox {
     private void setSharedStateModel(MusicState paramState) {
         musicState = paramState;
         // 创建监听器
-        RotateTransition rotateTransition = new RotateTransition();
-        rotateTransition.setNode(recordPane);
+        RotateTransition recordRotateTransition = new RotateTransition();
+        recordRotateTransition.setNode(recordPane);
         // 25秒一圈
-        rotateTransition.setDuration(Duration.seconds(25));
+        recordRotateTransition.setDuration(Duration.seconds(25));
         // 旋转360度
-        rotateTransition.setByAngle(360);
+        recordRotateTransition.setByAngle(360);
         // 无限循环
-        rotateTransition.setCycleCount(Animation.INDEFINITE);
+        recordRotateTransition.setCycleCount(Animation.INDEFINITE);
         // 取消自动倒转
-        rotateTransition.setAutoReverse(false);
+        recordRotateTransition.setAutoReverse(false);
+
+        // 创建一个 Rotate 变换，指定旋转中心点
+        // 初始角度 -30°，pivot=(20,20)
+        Rotate needleRotate = new Rotate(60, 45, 45);
+        needleImageView.getTransforms().add(needleRotate);
+
+        log.info("旋转角度: " + needleRotate.getAngle());
+        Timeline needleUp = new Timeline(
+                new KeyFrame(Duration.seconds(0.6),
+                        new KeyValue(needleRotate.angleProperty(), 40)) // 抬针位置
+        );
+        Timeline downUp = new Timeline(
+                new KeyFrame(Duration.seconds(0.6),
+                        new KeyValue(needleRotate.angleProperty(), 60)) // 抬针位置
+        );
         playingStateListener = (obs, oldVal, newVal) -> {
             if (MediaPlayer.Status.PLAYING.equals(newVal)) {
-                //startRotation();
-                //log.info("开始旋转");
                 Platform.runLater(()->{
-                    rotateTransition.play();
-                    needleImageView.setRotate(needleImageView.getRotate() + 20);
-                    // 将唱针顺时针旋转20度
-                    startRotation();
+                    recordRotateTransition.play();
+                    downUp.playFromStart();
+                    log.info("当前旋转角度: 暂停-" + needleImageView.getRotate());
                 });
             } else if (MediaPlayer.Status.PAUSED.equals(newVal) || MediaPlayer.Status.STOPPED.equals(newVal)){
                 //pauseRotation();
                 log.info("暂停旋转");
                 log.info("当前播放状态: " + newVal);
                 Platform.runLater(()->{
-                    rotateTransition.stop();
-                    needleImageView.setRotate(needleImageView.getRotate() - 20);
-                    //needleImageView.setRotate(needleImageView.getRotate() + 20);
-                    stopRotation();
+                    recordRotateTransition.stop();
+                    needleUp.playFromStart(); // 抬针
+                    log.info("当前旋转角度: 播放-" + needleImageView.getRotate());
                 });
             }
         };
