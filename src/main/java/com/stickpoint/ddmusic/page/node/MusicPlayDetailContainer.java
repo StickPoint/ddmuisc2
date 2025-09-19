@@ -84,7 +84,7 @@ public class MusicPlayDetailContainer extends VBox {
         songTitle.setStyle("-fx-text-fill: #141313;");
 
         songTags = new Label("VIP MV");
-        songTags.setStyle("-fx-text-fill: #ffffff; -fx-font-size: 12px; -fx-padding: 2 6 2 6; -fx-background-color: rgba(0,0,0,0.48); -fx-background-radius: 4;");
+        songTags.setStyle("-fx-text-fill: #ffffff; -fx-font-size: 12px; -fx-padding: 2 6 2 6; -fx-background-color: rgba(0,0,0,0.48); -fx-background-radius: 4; -fx-font-weight: bold;");
 
         albumInfo = new Label("专辑: Bloom");
         albumInfo.setStyle("-fx-text-fill: #262626;");
@@ -288,14 +288,12 @@ public class MusicPlayDetailContainer extends VBox {
             needle.setPreserveRatio(true);
             
             // 设置唱针的初始位置（抬起状态） 初始抬起 30 度
-            needle.setRotate(-80);
+            needle.setRotate(-95);
 
             // 设置唱针的旋转中心点（左上角） 向右偏移
-            needle.setTranslateX(165);
+            needle.setTranslateX(175);
             // 向上偏移
-            needle.setTranslateY(-220);
-
-            log.info("唱针旋转角度: " + needle.getRotate());
+            needle.setTranslateY(-250);
 
             
             return needle;
@@ -355,14 +353,8 @@ public class MusicPlayDetailContainer extends VBox {
         needleImageView.getTransforms().add(needleRotate);
 
         log.info("旋转角度: " + needleRotate.getAngle());
-        Timeline needleUp = new Timeline(
-                new KeyFrame(Duration.seconds(0.6),
-                        new KeyValue(needleRotate.angleProperty(), 40)) // 抬针位置
-        );
-        Timeline downUp = new Timeline(
-                new KeyFrame(Duration.seconds(0.6),
-                        new KeyValue(needleRotate.angleProperty(), 60)) // 抬针位置
-        );
+        Timeline needleUp = new Timeline(new KeyFrame(Duration.seconds(0.6), new KeyValue(needleRotate.angleProperty(), 60)));
+        Timeline downUp = new Timeline(new KeyFrame(Duration.seconds(0.6), new KeyValue(needleRotate.angleProperty(), 80)));
         playingStateListener = (obs, oldVal, newVal) -> {
             if (MediaPlayer.Status.PLAYING.equals(newVal)) {
                 Platform.runLater(()->{
