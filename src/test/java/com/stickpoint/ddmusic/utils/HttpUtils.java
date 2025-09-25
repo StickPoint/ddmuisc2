@@ -1,19 +1,22 @@
-package com.stickpoint.ddmusic.common.utils;
+package com.stickpoint.ddmusic.utils;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import com.stickpoint.ddmusic.common.DdmusicException;
 import com.stickpoint.ddmusic.common.entity.DdMusicFileInfo;
 import com.stickpoint.ddmusic.common.enums.DdMusicExceptionEnums;
 import com.stickpoint.ddmusic.common.enums.InfoEnums;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.RandomAccessFile;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -225,6 +228,34 @@ public class HttpUtils {
         }
         return conn;
     }
+
+    private static HttpURLConnection initConnectionV2(String requestUrl, String requestMethod, Map<String, String> otherHeader) {
+        HttpURLConnection conn = null;
+        try {
+            URL realUrl = URI.create(requestUrl).toURL();
+            conn = (HttpURLConnection) realUrl.openConnection();
+
+            if (otherHeader != null && !otherHeader.isEmpty()) {
+                otherHeader.forEach(conn::setRequestProperty);
+            }
+
+            conn.setRequestMethod(requestMethod);
+            conn.setDoInput(true);
+
+            // 🔑 这里根据请求方法决定是否允许写 body
+            boolean hasRequestBody = "POST".equalsIgnoreCase(requestMethod)
+                    || "PUT".equalsIgnoreCase(requestMethod)
+                    || "PATCH".equalsIgnoreCase(requestMethod);
+            conn.setDoOutput(hasRequestBody);
+
+            conn.setConnectTimeout(WRITE_TIME_OUT);
+            conn.setReadTimeout(READ_TIME_OUT);
+        } catch (IOException e) {
+            log.error("initConnection error: {}", e.getMessage(), e);
+        }
+        return conn;
+    }
+
 
     /**
      * 发送 HTTP POST 请求
@@ -637,7 +668,7 @@ public class HttpUtils {
      * @throws URISyntaxException URI异常
      */
     private static String checkFileIfExist(DdMusicFileInfo fileInfo) throws IOException, InterruptedException, URISyntaxException {
-        String url = "https://up.mediy.cn/?action=upbigfile";
+        String url = "https://img.mediy.cn/?action=upbigfile";
         File file = new File(fileInfo.getFilePath());
         long filesize;
         long fileLastModified;
@@ -675,9 +706,9 @@ public class HttpUtils {
         HttpRequest request = HttpRequest.newBuilder(new URI(url))
                 // 设置Header:
                 .header("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36")
-                .header("Referer", "https://up.mediy.cn/")
+                .header("Referer", "https://img.mediy.cn/")
                 // .header("Host", "img.mediy.cn")
-                .header("Origin", "https://up.mediy.cn")
+                .header("Origin", "https://img.mediy.cn")
                 .header("X-Requested-With", "XMLHttpRequest")
                 .header("Sec-Ch-Ua", "\"Not.A/Brand\";v=\"8\", \"Chromium\";v=\"114\", \"Google Chrome\";v=\"114\"")
                 .header("Sec-Ch-Ua-Mobile", "?0")
@@ -735,89 +766,76 @@ public class HttpUtils {
     }
 
     /**
-     * 使用指定的参数执行文件上传请求
-     * @param upbigfilename 文件名
-     * @param filesize 文件大小
-     * @param filelastModified 文件最后修改时间
-     * @param filemd5 文件的MD5值
-     * @return 服务器响应内容
-     * @throws IOException 如果发生I/O错误
-     * @throws InterruptedException 如果操作被中断
-     * @throws URISyntaxException 如果URI语法错误
+     * 上传文件到 uhsea.com
+     *
+     * @param uploadUrl  上传地址，例如 https://www.uhsea.com/Frontend/upload
+     * @param file       要上传的文件
+     * @param cookie     请求所需的 Cookie
+     * @return 服务器响应字符串
+     * @throws IOException 如果网络或IO错误
      */
-    public static String uploadFileWithDetails(String upbigfilename, String filesize,
-                                               String filelastModified, String filemd5)
-            throws IOException, InterruptedException, URISyntaxException {
+    public static String uploadToUhsea(String uploadUrl, File file, String cookie) throws IOException {
+        String boundary = "----WebKitFormBoundaryppeRfnsGqJR6REXu";
+        String LINE_FEED = "\r\n";
 
-        String url = "https://up.mediy.cn/?action=upbigfile";
+        // 构造请求头
+        Map<String, String> headers = new HashMap<>();
+        headers.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36");
+        headers.put("Accept", "*/*");
+        headers.put("Origin", "https://www.uhsea.com");
+        headers.put("Referer", "https://www.uhsea.com/");
+        headers.put("X-Requested-With", "XMLHttpRequest");
+        headers.put("Cookie", cookie);
+        headers.put("Content-Type", "multipart/form-data; boundary=" + boundary);
 
-        // 构建请求参数
-        Map<String, String> formData = new HashMap<>();
-        formData.put("upbigfilename", upbigfilename);
-        formData.put("filesize", filesize);
-        formData.put("filelastModified", filelastModified);
-        formData.put("filemd5", filemd5);
-
-        // 使用与curl相同的boundary
-        String boundary = "----WebKitFormBoundaryLvJ3ariLQ3d0NNhz";
-        String contentType = "multipart/form-data; boundary=" + boundary;
-
-        // 构建multipart请求体
-        HttpRequest.BodyPublisher bodyPublisher = buildMultipartBodyV2(formData, boundary);
-
-        // 创建请求对象
-        HttpRequest request = HttpRequest.newBuilder(new URI(url))
-                .header("accept", "*/*")
-                .header("accept-language", "zh-CN,zh;q=0.9,en;q=0.8")
-                .header("cache-control", "no-cache")
-                .header("content-type", contentType)
-                .header("origin", "https://up.mediy.cn")
-                .header("pragma", "no-cache")
-                .header("priority", "u=1, i")
-                .header("referer", "https://up.mediy.cn/")
-                .header("sec-ch-ua", "\"Chromium\";v=\"130\", \"Google Chrome\";v=\"130\", \"Not?A_Brand\";v=\"99\"")
-                .header("sec-ch-ua-mobile", "?0")
-                .header("sec-ch-ua-platform", "\"Windows\"")
-                .header("sec-fetch-dest", "empty")
-                .header("sec-fetch-mode", "cors")
-                .header("sec-fetch-site", "same-origin")
-                .header("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36")
-                .header("x-requested-with", "XMLHttpRequest")
-                .timeout(Duration.ofSeconds(30))
-                .version(Version.HTTP_1_1)
-                .POST(bodyPublisher)
-                .build();
-
-        // 发送请求并获取响应
-        HttpResponse<String> response = HTTP_CLIENT.send(request, BodyHandlers.ofString());
-
-        // 检查响应状态
-        int statusCode = response.statusCode();
-        if (statusCode != 200) {
-            log.warn("文件上传请求返回非200状态码: {}", statusCode);
+        HttpURLConnection conn = initConnectionV2(uploadUrl, "POST", headers);
+        if (conn == null) {
+            throw new IOException("初始化连接失败: " + uploadUrl);
         }
 
-        return response.body();
-    }
+        try (OutputStream out = conn.getOutputStream();
+             FileInputStream fis = new FileInputStream(file)) {
 
-    /**
-     * 构建multipart/form-data请求体
-     * 注意：这个方法需要与你已有的buildMultipartBody方法保持一致
-     */
-    private static HttpRequest.BodyPublisher buildMultipartBodyV2(Map<String, String> formData, String boundary) {
-        var builder = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
+            // 表单 file 部分头
+            sb.append("--").append(boundary).append(LINE_FEED);
+            sb.append("Content-Disposition: form-data; name=\"file\"; filename=\"")
+                    .append(file.getName()).append("\"").append(LINE_FEED);
+            sb.append("Content-Type: audio/mpeg").append(LINE_FEED);
+            sb.append(LINE_FEED);
 
-        // 添加每个表单字段
-        for (Entry<String, String> entry : formData.entrySet()) {
-            builder.append("--").append(boundary).append("\r\n");
-            builder.append("Content-Disposition: form-data; name=\"")
-                    .append(entry.getKey()).append("\"\r\n");
-            builder.append("\r\n");
-            builder.append(entry.getValue()).append("\r\n");
+            out.write(sb.toString().getBytes(StandardCharsets.UTF_8));
+
+            // 写文件内容
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            while ((bytesRead = fis.read(buffer)) != -1) {
+                out.write(buffer, 0, bytesRead);
+            }
+            out.write(LINE_FEED.getBytes(StandardCharsets.UTF_8));
+
+            // 结束 boundary
+            String end = "--" + boundary + "--" + LINE_FEED;
+            out.write(end.getBytes(StandardCharsets.UTF_8));
+            out.flush();
         }
 
-        builder.append("--").append(boundary).append("--").append("\r\n");
+        // 读取响应
+        int responseCode = conn.getResponseCode();
+        InputStream responseStream = (responseCode == 200)
+                ? conn.getInputStream()
+                : (conn.getErrorStream() != null ? conn.getErrorStream() : conn.getInputStream());
 
-        return HttpRequest.BodyPublishers.ofString(builder.toString(), StandardCharsets.UTF_8);
+        StringBuilder result = new StringBuilder();
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(responseStream, StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = in.readLine()) != null) {
+                result.append(line);
+            }
+        } finally {
+            conn.disconnect();
+        }
+        return result.toString();
     }
+
 }
