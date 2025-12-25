@@ -116,7 +116,10 @@ public class MusicPlayDetailContainer extends VBox {
         // 创建唱片和唱针的容器
         StackPane recordWithNeedle = new StackPane();
         recordWithNeedle.getChildren().addAll(recordPane, needleImageView);
-        
+        // 设置唱片容器的下边距为30，实现整体下移
+        VBox.setMargin(recordWithNeedle, new javafx.geometry.Insets(30, 0, 0, 0));
+
+        //装载左右两个容器
         leftPane.getChildren().add(recordWithNeedle);
 
         // 右侧信息区域
