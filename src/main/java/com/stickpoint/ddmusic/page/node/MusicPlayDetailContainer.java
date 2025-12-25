@@ -11,14 +11,11 @@ import javafx.animation.RotateTransition;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
-import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
@@ -42,7 +39,6 @@ public class MusicPlayDetailContainer extends VBox {
 
     private StackPane recordPane;
     private ImageView needleImageView;
-    private SvgIcon backButton;
     // 歌曲信息组件
     private Label songTitle;
     private Label songTags;
@@ -101,23 +97,12 @@ public class MusicPlayDetailContainer extends VBox {
         lrcView = new RXLrcView();
         lrcView.setPrefHeight(350);
         lrcView.getStyleClass().add("rx-lrc-view");
-
-        // 添加返回按钮
-        backButton = new SvgIcon("M333.436236 512.002048l363.098222-362.900598c18.226434-18.226434 18.226434-47.770666 0-65.998124s-47.770666-18.226434-65.998124 0L234.422666 479.000938c-18.226434 18.226434-18.226434 47.770666 0 65.998124l396.112643 395.942666c18.227458 18.18138 47.77169 18.18138 65.998124 0 18.226434-18.227458 18.226434-47.77169 0-65.998124L333.436236 512.002048z");
-        backButton.setFill("#030303");
-        backButton.setIconSize(15,22);
     }
 
     private void setupLayout() {
         setSpacing(20);
         setAlignment(Pos.TOP_CENTER);
         setStyle("-fx-background-color: rgba(43,40,40,0.02)");
-
-        // 返回按钮靠左对齐
-        Pane topPane = new Pane();
-        backButton.setLayoutX(30);
-        backButton.setLayoutY(35);
-        topPane.getChildren().add(backButton);
 
         // 创建左右布局
         mainContent = new HBox(50);
@@ -162,8 +147,9 @@ public class MusicPlayDetailContainer extends VBox {
         mainContent.getChildren().addAll(leftPane, rightPane);
 
         // 添加到主容器
-        getChildren().addAll(topPane, mainContent);
-
+        getChildren().addAll(mainContent);
+        mainContent.setMaxHeight(javafx.scene.layout.Region.USE_PREF_SIZE);
+        setMaxHeight(javafx.scene.layout.Region.USE_COMPUTED_SIZE);
         // 绑定宽度自适应
         bindWidthProperties();
     }
@@ -181,13 +167,6 @@ public class MusicPlayDetailContainer extends VBox {
         recordPane.prefHeightProperty().bind(recordPane.prefWidthProperty());
     }
 
-    // 添加设置返回按钮事件处理器的方法
-    public void setOnReturnHandler(EventHandler<MouseEvent> handler) {
-        if (backButton != null) {
-            backButton.setOnMouseClicked(handler);
-        }
-    }
-
     private StackPane createRecord() {
         StackPane record = new StackPane();
         record.setPrefSize(380, 380);
@@ -196,8 +175,8 @@ public class MusicPlayDetailContainer extends VBox {
             // 加载黑胶唱片素材
             Image vinylImage = new Image("https://qnm.hunliji.com/o_1j3vvv7781s3jvbe13pa1vu81o7le.png");
             ImageView vinylView = new ImageView(vinylImage);
-            vinylView.setFitWidth(380);
-            vinylView.setFitHeight(380);
+            vinylView.setFitWidth(370);
+            vinylView.setFitHeight(370);
             vinylView.setPreserveRatio(true);
 
             // 加载专辑图片

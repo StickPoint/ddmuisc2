@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import java.awt.SystemTray;
 import java.awt.TrayIcon;
-import java.util.Objects;
 import java.util.ServiceLoader;
 
 /**

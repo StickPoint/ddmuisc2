@@ -58,14 +58,22 @@ public class HomePage extends BorderPane {
         setClip(clip);
 
         // 在构造函数末尾添加专辑封面点击监听
-        bottomMusicContainer.setAlbumImageClickHandler(event -> showMusicDetail());
-        musicPlayDetailContainer.setOnReturnHandler(event -> backToHome());
+        bottomMusicContainer.setAlbumImageClickHandler(event -> {
+            if (getCenter() == musicPlayDetailContainer) {
+                // 如果当前显示的是音乐详情页面，则返回主页
+                backToHome();
+            } else {
+                // 如果当前显示的是主页内容，则显示音乐详情
+                showMusicDetail();
+            }
+        });
     }
 
     /**
      * 显示音乐详情页面
      */
     public void showMusicDetail() {
+        System.out.println("调用了显示音乐播放器详情页面");
         // 隐藏原有的中心内容
         if (getCenter() != musicPlayDetailContainer) {
             // 隐藏左侧菜单栏实现全屏效果
@@ -81,10 +89,13 @@ public class HomePage extends BorderPane {
      * 返回主页
      */
     public void backToHome() {
+        System.out.println("调用了返回主页");
         // 恢复左侧菜单栏
         setLeft(homePageMenuPanel);
         // 恢复原来的布局结构
         setCenter(centerPanel);
+        // 隐藏音乐详情页面
+        musicPlayDetailContainer.setVisible(false);
     }
 
     public HomePageMenuPanel getMenuPanel() {
