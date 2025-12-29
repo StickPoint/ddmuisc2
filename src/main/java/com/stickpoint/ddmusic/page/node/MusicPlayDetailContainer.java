@@ -47,11 +47,28 @@ public class MusicPlayDetailContainer extends VBox {
     private Label sourceInfo;
     private HBox infoBar;
     private RXLrcView lrcView;
+    private ImageView albumView;
     // 主内容区域
     private HBox mainContent;
     private ChangeListener<MediaPlayer.Status> playingStateListener;
     private MusicState musicState;
     private ChangeListener<String> lrcUrlListener;
+    /**
+     * 当前专辑封面图片
+     */
+    private Image currentAlbumImage;
+    /**
+     * 图片缓存
+     */
+    private final java.util.Map<String, Image> imageCache = new java.util.concurrent.ConcurrentHashMap<>();
+    /**
+     * 歌词加载线程池
+     */
+    private final java.util.concurrent.ExecutorService lyricsExecutor = java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "Lyrics-Loader");
+        t.setDaemon(true);
+        return t;
+    });
     /**
      * 构建日志工具
      */
@@ -183,7 +200,7 @@ public class MusicPlayDetailContainer extends VBox {
             vinylView.setPreserveRatio(true);
 
             // 加载专辑图片
-            ImageView albumView = new ImageView();
+            albumView = new ImageView();
             albumView.setFitWidth(167);
             albumView.setFitHeight(167);
             albumView.setPreserveRatio(true);
@@ -216,8 +233,7 @@ public class MusicPlayDetailContainer extends VBox {
                 Platform.runLater(() -> {
                     if (newVal != null && !newVal.isEmpty()) {
                         try {
-                            Image newAlbumImage = new Image(newVal);
-                            albumView.setImage(newAlbumImage);
+                            loadAlbumCover(newVal);
                         } catch (Exception e) {
                             System.err.println("专辑封面加载失败: " + e.getMessage());
                         }
@@ -227,8 +243,7 @@ public class MusicPlayDetailContainer extends VBox {
             // 初始化专辑封面
             if (musicState.getAlbumCoverProperty() != null && !musicState.getAlbumCoverProperty().isEmpty()) {
                 try {
-                    Image initialAlbumImage = new Image(musicState.getAlbumCoverProperty());
-                    albumView.setImage(initialAlbumImage);
+                    loadAlbumCover(musicState.getAlbumCoverProperty());
                 } catch (Exception e) {
                     System.err.println("初始专辑封面加载失败: " + e.getMessage());
                 }
@@ -315,6 +330,68 @@ public class MusicPlayDetailContainer extends VBox {
         // 具体实现可以根据需要添加
     }
 
+    /**
+     * 加载专辑封面（带缓存）
+     * @param imageUrl 图片URL
+     */
+    private void loadAlbumCover(String imageUrl) {
+        // 检查缓存
+        Image cachedImage = imageCache.get(imageUrl);
+        if (cachedImage != null) {
+            albumView.setImage(cachedImage);
+            return;
+        }
+
+        // 创建新图片
+        Image newImage = new Image(imageUrl, true);
+        newImage.progressProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal.doubleValue() >= 1.0) {
+                // 图片加载完成，加入缓存
+                imageCache.put(imageUrl, newImage);
+            }
+        });
+
+        // 释放旧图片
+        if (currentAlbumImage != null) {
+            currentAlbumImage = null;
+        }
+
+        // 设置新图片
+        albumView.setImage(newImage);
+        currentAlbumImage = newImage;
+    }
+
+    /**
+     * 清理资源
+     */
+    public void dispose() {
+        // 清理图片缓存
+        imageCache.clear();
+        
+        // 释放当前图片
+        if (currentAlbumImage != null) {
+            currentAlbumImage = null;
+        }
+
+        // 停止动画
+        if (recordPane != null) {
+            recordPane.getTransforms().clear();
+        }
+
+        // 关闭歌词加载线程池
+        if (lyricsExecutor != null && !lyricsExecutor.isShutdown()) {
+            lyricsExecutor.shutdown();
+            try {
+                if (!lyricsExecutor.awaitTermination(2, java.util.concurrent.TimeUnit.SECONDS)) {
+                    lyricsExecutor.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                lyricsExecutor.shutdownNow();
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
     private void setSharedStateModel(MusicState paramState) {
         musicState = paramState;
         // 创建监听器
@@ -396,7 +473,7 @@ public class MusicPlayDetailContainer extends VBox {
         }
 
         // 在后台线程中加载歌词
-        new Thread(() -> {
+        lyricsExecutor.submit(() -> {
             try {
                 // 从URL读取字节数据
                 java.net.URL url = new java.net.URL(lrcUrl);
@@ -427,6 +504,6 @@ public class MusicPlayDetailContainer extends VBox {
                 System.err.println("歌词加载失败: " + e.getMessage());
                 e.printStackTrace();
             }
-        }).start();
+        });
     }
 }

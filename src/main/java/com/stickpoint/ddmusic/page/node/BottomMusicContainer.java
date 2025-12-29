@@ -69,6 +69,14 @@ public class BottomMusicContainer extends HBox {
      */
     private MediaPlayer musicPlayer;
     /**
+     * 当前媒体对象
+     */
+    private Media currentMedia;
+    /**
+     * Media对象缓存
+     */
+    private final java.util.Map<String, Media> mediaCache = new java.util.concurrent.ConcurrentHashMap<>();
+    /**
      * 播放/暂停按钮
      */
     private SvgIcon playPauseButton;
@@ -138,7 +146,8 @@ public class BottomMusicContainer extends HBox {
         shareButton = new SvgIcon();
         playerProgressBar = new RXMediaProgressBar();
         playerTimeLabel = new Label();
-        musicPlayer = new MediaPlayer(new Media("https://qnm.hunliji.com/o_1j4aiov931him1nmo1ujh2221jdqo.mp3"));
+        musicPlayer = null;
+        currentMedia = null;
 
         // 设置容器基本属性
         setPrefHeight(70);
@@ -191,59 +200,31 @@ public class BottomMusicContainer extends HBox {
 
         // 为播放/暂停按钮添加点击事件处理器
         playPauseButton.setOnMouseClicked(event -> {
-            MediaPlayer.Status currentStatus = musicPlayer.getStatus();
-            if (currentStatus == MediaPlayer.Status.PLAYING) {
-                // 更新按钮图标为播放图标
-                playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
-                // 播放暂停
-                musicPlayer.pause();
-                // 通过 MusicState 控制播放状态
-                musicState.setPlayerStatusProperty(MediaPlayer.Status.PAUSED);
-            } else {
-                // 更新按钮图标为暂停图标 (你可以替换为实际的暂停图标路径)
-                playPauseButton.modifyContent("M512 1024C228.266667 1024 0 795.733333 0 512S228.266667 0 512 0s512 228.266667 512 512-228.266667 512-512 512z m0-42.666667c260.266667 0 469.333333-209.066667 469.333333-469.333333S772.266667 42.666667 512 42.666667 42.666667 251.733333 42.666667 512s209.066667 469.333333 469.333333 469.333333z m-106.666667-682.666666c12.8 0 21.333333 8.533333 21.333334 21.333333v384c0 12.8-8.533333 21.333333-21.333334 21.333333s-21.333333-8.533333-21.333333-21.333333V320c0-12.8 8.533333-21.333333 21.333333-21.333333z m213.333334 0c12.8 0 21.333333 8.533333 21.333333 21.333333v384c0 12.8-8.533333 21.333333-21.333333 21.333333s-21.333333-8.533333-21.333334-21.333333V320c0-12.8 8.533333-21.333333 21.333334-21.333333z");
-                // 播放
+            if (musicPlayer == null) {
+                loadMedia("https://qnm.hunliji.com/o_1j4aiov931him1nmo1ujh2221jdqo.mp3");
                 musicPlayer.play();
-                // 初始化播放音乐 TODO 这里后续根据接口初始化播放音乐
                 musicState.playMusic("Jar Of Love",
                         "曲婉婷",
                         "我的歌声里",
-                        //"https://imge.kugou.com/stdmusic/20250221/20250221180758694578.jpg",
                         "https://qnm.hunliji.com/o_1j4004gdbik71aj219fb1ahrqk4j.jpg",
                         "网易云",
                         "https://qnm.hunliji.com/o_1j4aiov931him1nmo1ujh2221jdqo.mp3",
                         "https://qnm.hunliji.com/o_1j4ai6c611vfmr8ql9nng1a8oe.lrc",
-                        musicPlayer.getCurrentTime());
-            }
-        });
-
-        // 监听播放器状态变化，同步更新按钮图标
-        musicPlayer.statusProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == MediaPlayer.Status.PLAYING) {
-                // 可以设置为暂停图标
-                playPauseButton.modifyContent("M512 1024C228.266667 1024 0 795.733333 0 512S228.266667 0 512 0s512 228.266667 512 512-228.266667 512-512 512z m0-42.666667c260.266667 0 469.333333-209.066667 469.333333-469.333333S772.266667 42.666667 512 42.666667 42.666667 251.733333 42.666667 512s209.066667 469.333333 469.333333 469.333333z m-106.666667-682.666666c12.8 0 21.333333 8.533333 21.333334 21.333333v384c0 12.8-8.533333 21.333333-21.333334 21.333333s-21.333333-8.533333-21.333333-21.333333V320c0-12.8 8.533333-21.333333 21.333333-21.333333z m213.333334 0c12.8 0 21.333333 8.533333 21.333333 21.333333v384c0 12.8-8.533333 21.333333-21.333333 21.333333s-21.333333-8.533333-21.333334-21.333333V320c0-12.8 8.533333-21.333333 21.333334-21.333333z");
+                        musicPlayer != null ? musicPlayer.getCurrentTime() : Duration.ZERO);
             } else {
-                // 设置为播放图标
-                playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
+                MediaPlayer.Status currentStatus = musicPlayer.getStatus();
+                if (currentStatus == MediaPlayer.Status.PLAYING) {
+                    musicPlayer.pause();
+                    musicState.setPlayerStatusProperty(MediaPlayer.Status.PAUSED);
+                } else {
+                    musicPlayer.play();
+                    musicState.setPlayerStatusProperty(MediaPlayer.Status.PLAYING);
+                }
             }
         });
 
-        // 监听播放完成事件，释放资源
-        musicPlayer.setOnEndOfMedia(() -> {
-            // 播放完成后释放资源
-            musicPlayer.dispose();
-
-            // 重置按钮状态为播放图标
-            playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
-
-            // 重新加载媒体，这里重新创建 MediaPlayer
-             musicPlayer = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/media/jar-of-love.mp3")).toString()));
-             playerProgressBar.durationProperty().bind(musicPlayer.getMedia().durationProperty());
-             musicPlayer.currentTimeProperty().addListener(durationChangeListener);
-        });
-
-        // 绑定音乐状态到 MusicState
-        bindToMusicState();
+        // 绑定音乐状态到 MusicState（延迟到loadMedia之后）
+        // bindToMusicState() 将在loadMedia()中调用
     }
 
     /**
@@ -348,10 +329,8 @@ public class BottomMusicContainer extends HBox {
         playerProgressBar.setMinHeight(18);
         playerProgressBar.getStyleClass().add("rx-media-progress-bar");
         // 设置最小宽度
-        // 音乐总时长
-        playerProgressBar.durationProperty().bind(musicPlayer.getMedia().durationProperty());
-        //播放器的进度修改监听器
-        musicPlayer.currentTimeProperty().addListener(durationChangeListener);
+        // 音乐总时长 - 延迟到loadMedia中设置
+        //播放器的进度修改监听器 - 延迟到loadMedia中设置
 
         progressSection.getChildren().addAll(playerProgressBar, playerTimeLabel);
     }
@@ -473,10 +452,101 @@ public class BottomMusicContainer extends HBox {
             if (musicPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
                 musicPlayer.stop();
             }
+            // 移除所有监听器
+            try {
+                musicPlayer.statusProperty().removeListener((obs, oldVal, newVal) -> {});
+                musicPlayer.currentTimeProperty().removeListener(durationChangeListener);
+                musicPlayer.setOnEndOfMedia(null);
+                musicPlayer.setOnError(null);
+            } catch (Exception e) {
+                System.err.println("移除监听器时出错: " + e.getMessage());
+            }
             // 释放资源
             musicPlayer.dispose();
             musicPlayer = null;
         }
+        // 不释放Media对象，因为可能被缓存重用
+        currentMedia = null;
+    }
+
+    /**
+     * 清理所有资源
+     */
+    public void disposeAll() {
+        disposeMediaPlayer();
+        // 清理Media缓存
+        mediaCache.clear();
+    }
+
+    /**
+     * 加载媒体文件
+     * @param mediaUrl 媒体URL
+     */
+    private void loadMedia(String mediaUrl) {
+        // 先释放旧的资源
+        disposeMediaPlayer();
+        
+        try {
+            // 检查Media缓存
+            Media cachedMedia = mediaCache.get(mediaUrl);
+            if (cachedMedia != null) {
+                currentMedia = cachedMedia;
+            } else {
+                // 创建新的Media对象
+                currentMedia = new Media(mediaUrl);
+                // 加入缓存
+                mediaCache.put(mediaUrl, currentMedia);
+            }
+            
+            // 创建新的MediaPlayer
+            musicPlayer = new MediaPlayer(currentMedia);
+            
+            // 重新绑定进度条
+            playerProgressBar.durationProperty().bind(musicPlayer.getMedia().durationProperty());
+            musicPlayer.currentTimeProperty().addListener(durationChangeListener);
+            
+            // 重新设置监听器
+            setupPlayerListeners();
+            
+            // 绑定音乐状态到 MusicState
+            bindToMusicState();
+            
+        } catch (Exception e) {
+            System.err.println("加载媒体失败: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 设置播放器监听器
+     */
+    private void setupPlayerListeners() {
+        if (musicPlayer == null) {
+            return;
+        }
+        
+        // 监听播放器状态变化，同步更新按钮图标
+        musicPlayer.statusProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == MediaPlayer.Status.PLAYING) {
+                // 可以设置为暂停图标
+                playPauseButton.modifyContent("M512 1024C228.266667 1024 0 795.733333 0 512S228.266667 0 512 0s512 228.266667 512 512-228.266667 512-512 512z m0-42.666667c260.266667 0 469.333333-209.066667 469.333333-469.333333S772.266667 42.666667 512 42.666667 42.666667 251.733333 42.666667 512s209.066667 469.333333 469.333333 469.333333z m-106.666667-682.666666c12.8 0 21.333333 8.533333 21.333334 21.333333v384c0 12.8-8.533333 21.333333-21.333334 21.333333s-21.333333-8.533333-21.333333-21.333333V320c0-12.8 8.533333-21.333333 21.333333-21.333333z m213.333334 0c12.8 0 21.333333 8.533333 21.333333 21.333333v384c0 12.8-8.533333 21.333333-21.333333 21.333333s-21.333333-8.533333-21.333334-21.333333V320c0-12.8 8.533333-21.333333 21.333334-21.333333z");
+            } else {
+                // 设置为播放图标
+                playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
+            }
+        });
+
+        // 监听播放完成事件，释放资源
+        musicPlayer.setOnEndOfMedia(() -> {
+            // 播放完成后释放资源
+            disposeMediaPlayer();
+
+            // 重置按钮状态为播放图标
+            playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
+
+            // 重新加载媒体，这里重新创建 MediaPlayer
+            loadMedia(Objects.requireNonNull(getClass().getResource("/media/jar-of-love.mp3")).toString());
+        });
     }
 
     /**
@@ -545,22 +615,26 @@ public class BottomMusicContainer extends HBox {
         }
 
         // 监听 MediaPlayer 状态变化并同步到 MusicState
-        musicPlayer.statusProperty().addListener((obs, oldStatus, newStatus) -> {
-            if (newStatus == MediaPlayer.Status.PLAYING) {
-                musicState.setPlayerStatusProperty(MediaPlayer.Status.PLAYING);
-            } else if (newStatus == MediaPlayer.Status.PAUSED) {
-                musicState.setPlayerStatusProperty(MediaPlayer.Status.PAUSED);
-            }else if (newStatus == MediaPlayer.Status.STOPPED) {
-                musicState.setPlayerStatusProperty(MediaPlayer.Status.STOPPED);
-            }
-        });
+        if (musicPlayer != null) {
+            musicPlayer.statusProperty().addListener((obs, oldStatus, newStatus) -> {
+                if (newStatus == MediaPlayer.Status.PLAYING) {
+                    musicState.setPlayerStatusProperty(MediaPlayer.Status.PLAYING);
+                } else if (newStatus == MediaPlayer.Status.PAUSED) {
+                    musicState.setPlayerStatusProperty(MediaPlayer.Status.PAUSED);
+                } else if (newStatus == MediaPlayer.Status.STOPPED) {
+                    musicState.setPlayerStatusProperty(MediaPlayer.Status.STOPPED);
+                }
+            });
+        }
 
         // 监听 MusicState 的播放状态变化并控制 MediaPlayer
         musicState.playerStatusPropertyProperty().addListener((obs, oldVal, newVal) -> {
-            if (Objects.equals(newVal, MediaPlayer.Status.PLAYING) && Objects.equals(musicPlayer.getStatus(), MediaPlayer.Status.PLAYING)) {
-                musicPlayer.play();
-            } else if (Objects.equals(newVal, MediaPlayer.Status.PAUSED) && Objects.equals(musicPlayer.getStatus(), MediaPlayer.Status.PAUSED)) {
-                musicPlayer.pause();
+            if (musicPlayer != null) {
+                if (Objects.equals(newVal, MediaPlayer.Status.PLAYING) && !Objects.equals(musicPlayer.getStatus(), MediaPlayer.Status.PLAYING)) {
+                    musicPlayer.play();
+                } else if (Objects.equals(newVal, MediaPlayer.Status.PAUSED) && !Objects.equals(musicPlayer.getStatus(), MediaPlayer.Status.PAUSED)) {
+                    musicPlayer.pause();
+                }
             }
         });
     }
