@@ -14,7 +14,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- <junit.version>5.8.2</junit.version>-->
         <open-jfx-version>21.0.7</open-jfx-version>
-        <animatefx-version>1.2.4</animatefx-version>
+        <animatefx-version>1.3.0</animatefx-version>
         <rxcontroller-version>11.0.3</rxcontroller-version>
         <kordamp.ikonli.version>12.3.1</kordamp.ikonli.version>
         <sql-lite-version>3.41.2.2</sql-lite-version>

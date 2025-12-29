@@ -1,0 +1,5 @@
+18:57:51.602 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+18:57:51.603 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: null
+18:57:51.603 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+18:57:51.604 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+18:57:51.604 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================

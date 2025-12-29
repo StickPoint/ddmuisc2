@@ -252,4 +252,12 @@ public class App extends Application {
         return stage;
     }
 
+    /**
+     * 主程序入口
+     * @param args 命令行参数
+     */
+    public static void main(String[] args) {
+        launch(args);
+    }
+
 }
