@@ -38,6 +38,11 @@ public class HomePageContentContainer extends VBox {
 
     private final Map<String, SoftReference<Image>> imageCache = new HashMap<>();
 
+    /**
+     * 发现音乐容器
+     */
+    private DiscoverMusicContainer discoverMusicContainer;
+    
     public HomePageContentContainer() {
         // 设置整体样式
         // 加载当前页面的对应css文件
@@ -77,11 +82,14 @@ public class HomePageContentContainer extends VBox {
         // 设置轮播图尺寸
         sceneryCarousel.setPrefHeight(138);
 
-        // 将顶部容器添加到VBox中
-        getChildren().add(topContainer);
+        // 创建发现音乐容器
+        discoverMusicContainer = new DiscoverMusicContainer();
+        
+        // 将顶部容器和发现音乐容器添加到VBox中
+        getChildren().addAll(topContainer, discoverMusicContainer);
 
         // 设置垂直布局优先级
-        setVgrow(new Region(), Priority.ALWAYS);
+        VBox.setVgrow(discoverMusicContainer, Priority.ALWAYS);
     }
 
     /**

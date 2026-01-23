@@ -280,7 +280,7 @@ public class SearchResultContainer extends VBox {
                 Type resultType = new TypeToken<Map<String, Object>>(){}.getType();
                 Map<String, Object> resultMap = GSON.fromJson(resultJson, resultType);
                 
-                if (resultMap.containsKey("code")) {
+                if (resultMap != null && resultMap.containsKey("code")) {
                     Object codeObj = resultMap.get("code");
                     int code = 0;
                     if (codeObj instanceof Integer) {

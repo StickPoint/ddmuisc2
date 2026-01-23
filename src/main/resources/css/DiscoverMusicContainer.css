@@ -1,0 +1,91 @@
+/* 发现音乐页面容器 */
+.discover-music-container {
+    -fx-background-color: white;
+}
+
+/* 音源切换容器 */
+.source-toggle-container {
+    -fx-background-color: transparent;
+    -fx-padding: 15px 0 10px 0;
+}
+
+/* 音源切换按钮 */
+.source-button {
+    -fx-background-color: #f5f5f5;
+    -fx-text-fill: #333;
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-padding: 8px 20px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+    -fx-border: none;
+    -fx-cursor: hand;
+    -fx-transition: all 0.3s ease;
+}
+
+/* 选中状态的音源按钮 */
+.source-button.active {
+    -fx-background-color: #D7000F;
+    -fx-text-fill: white;
+    -fx-effect: dropshadow(gaussian, rgba(215, 0, 15, 0.3), 5, 0, 0, 2);
+}
+
+/* 鼠标悬停时的音源按钮 */
+.source-button:hover {
+    -fx-background-color: #e8e8e8;
+    -fx-transform: translateY(-1px);
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 2);
+}
+
+/* 选中状态鼠标悬停时的音源按钮 */
+.source-button.active:hover {
+    -fx-background-color: #B8000C;
+    -fx-effect: dropshadow(gaussian, rgba(215, 0, 15, 0.4), 7, 0, 0, 3);
+}
+
+/* 滚动容器 */
+.playlist-scroll-pane {
+    -fx-background-color: transparent;
+    -fx-border: none;
+}
+
+/* 滚动容器内容 */
+.playlist-scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+
+/* 榜单列表容器 */
+.playlist-container {
+    -fx-background-color: transparent;
+}
+
+/* 榜单项 */
+.playlist-item {
+    -fx-background-color: white;
+    -fx-border-radius: 12px;
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.05), 5, 0, 0, 2);
+    -fx-transition: all 0.3s ease;
+    -fx-cursor: hand;
+}
+
+/* 鼠标悬停时的榜单项 */
+.playlist-item:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 5);
+    -fx-transform: translateY(-2px);
+}
+
+/* 榜单标题 */
+.playlist-title {
+    -fx-font-size: 14px;
+    -fx-font-weight: 500;
+    -fx-fill: #333;
+    -fx-text-alignment: center;
+}
+
+/* 榜单描述 */
+.playlist-description {
+    -fx-font-size: 12px;
+    -fx-fill: #999;
+    -fx-text-alignment: center;
+}

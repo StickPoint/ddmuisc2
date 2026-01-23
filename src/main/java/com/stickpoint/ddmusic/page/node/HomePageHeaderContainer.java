@@ -35,7 +35,7 @@ public class HomePageHeaderContainer extends HBox {
 
     public HomePageHeaderContainer() {
         // 设置整体样式
-        setStyle("-fx-background-color: #f5f5f5; -fx-padding: 10px;");
+        setStyle("-fx-background-color: white; -fx-padding: 10px;");
         setAlignment(Pos.CENTER_LEFT);
         setSpacing(20);
         // 设置固定高度

@@ -93,6 +93,9 @@ public class HomePage extends BorderPane {
                     if ("myMusic".equals(menuId)) {
                         // 显示本地下载页面
                         showLocalDownloadPage();
+                    } else if ("recommend".equals(menuId)) {
+                        // 显示发现音乐页面（首页）
+                        backToHome();
                     } else {
                         // 其他菜单项，返回主页
                         backToHome();
@@ -153,15 +156,12 @@ public class HomePage extends BorderPane {
         setLeft(homePageMenuPanel);
         
         // 恢复原来的布局结构
-        if (previousCenterContent != null) {
-            // 如果有保存的上一个页面，恢复到该页面
-            setCenter(previousCenterContent);
-        } else {
-            // 否则恢复到默认的主页
-            centerPanel.setTop(headerContainer);
-            centerPanel.setCenter(homePageContentContainer);
-            setCenter(centerPanel);
-        }
+        centerPanel.setTop(headerContainer);
+        centerPanel.setCenter(homePageContentContainer);
+        setCenter(centerPanel);
+        
+        // 重置previousCenterContent
+        previousCenterContent = null;
         
         // 隐藏音乐详情页面
         musicPlayDetailContainer.setVisible(false);
