@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+<!-- saved from url=(0034)https://api.tunefree.fun/#api-info -->
+<html lang="zh-CN" class="scroll-smooth"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TuneHub API Documentation</title>
+    <script src="./TuneHub API Documentation_files/saved_resource"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./TuneHub API Documentation_files/css2" rel="stylesheet">
+    <link rel="stylesheet" href="./TuneHub API Documentation_files/github.min.css">
+    <script src="./TuneHub API Documentation_files/highlight.min.js.download"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        slate: {
+                            50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1',
+                            400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155',
+                            800: '#1e293b', 900: '#0f172a',
+                        },
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { color: #334155; -webkit-font-smoothing: antialiased; }
+        h1, h2, h3, h4, h5, h6 { color: #0f172a; letter-spacing: -0.025em; }
+        a.nav-link { color: #64748b; font-size: 0.875rem; transition: all 0.2s; border-left: 2px solid transparent; }
+        a.nav-link:hover { color: #0f172a; }
+        a.nav-link.active { color: #0f172a; border-left-color: #0f172a; font-weight: 500; }
+        pre { background: #f8fafc !important; border: 1px solid #e2e8f0; border-radius: 0.5rem; position: relative; }
+        code { font-family: 'JetBrains Mono', monospace !important; font-size: 0.85rem; }
+        .hljs { background: transparent !important; padding: 1rem !important; }
+        
+        table { width: 100%; text-align: left; border-collapse: separate; border-spacing: 0; font-size: 0.875rem; margin-bottom: 1.5rem; }
+        th { border-bottom: 1px solid #e2e8f0; color: #64748b; font-weight: 600; padding: 0.75rem 0.5rem; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 0.05em; background-color: #f8fafc; }
+        td { border-bottom: 1px solid #f1f5f9; padding: 0.75rem 0.5rem; color: #334155; vertical-align: middle; }
+        th:first-child, td:first-child { padding-left: 1rem; }
+        th:last-child, td:last-child { padding-right: 1rem; }
+        
+        .badge-get { background: #f0fdf4; color: #15803d; border: 1px solid #dcfce7; padding: 2px 6px; border-radius: 4px; font-size: 0.75rem; font-weight: 600; font-family: 'JetBrains Mono'; }
+        .param-req { color: #dc2626; font-weight: 600; font-size: 0.75rem; }
+        .param-opt { color: #64748b; font-size: 0.75rem; }
+        
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        
+        .stat-card { transition: transform 0.2s; }
+        .stat-card:hover { transform: translateY(-2px); }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Inter, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:JetBrains Mono, monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.bottom-0{bottom:0px}.left-0{left:0px}.right-0{right:0px}.right-4{right:1rem}.top-4{top:1rem}.z-20{z-index:20}.z-30{z-index:30}.z-40{z-index:40}.z-50{z-index:50}.mx-2{margin-left:0.5rem;margin-right:0.5rem}.mx-auto{margin-left:auto;margin-right:auto}.mb-0{margin-bottom:0px}.mb-0\.5{margin-bottom:0.125rem}.mb-1{margin-bottom:0.25rem}.mb-12{margin-bottom:3rem}.mb-16{margin-bottom:4rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mr-2{margin-right:0.5rem}.mt-1{margin-top:0.25rem}.mt-2{margin-top:0.5rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.block{display:block}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-screen{height:100vh}.h-12{height:3rem}.h-2{height:0.5rem}.h-3{height:0.75rem}.h-5{height:1.25rem}.h-64{height:16rem}.h-full{height:100%}.w-1\/4{width:25%}.w-2{width:0.5rem}.w-3{width:0.75rem}.w-3\/4{width:75%}.w-5{width:1.25rem}.w-64{width:16rem}.w-full{width:100%}.max-w-5xl{max-width:64rem}.flex-1{flex:1 1 0%}.flex-shrink-0{flex-shrink:0}.translate-y-\[calc\(100\%-48px\)\]{--tw-translate-y:calc(100% - 48px);transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes ping{75%, 100%{transform:scale(2);opacity:0}}.animate-ping{animation:ping 1s cubic-bezier(0, 0, 0.2, 1) infinite}.cursor-pointer{cursor:pointer}.scroll-py-4{scroll-padding-top:1rem;scroll-padding-bottom:1rem}.list-inside{list-style-position:inside}.list-decimal{list-style-type:decimal}.list-disc{list-style-type:disc}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-center{align-items:center}.justify-between{justify-content:space-between}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-1 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.25rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.25rem * var(--tw-space-y-reverse))}.space-y-12 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(3rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(3rem * var(--tw-space-y-reverse))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.space-y-6 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.5rem * var(--tw-space-y-reverse))}.overflow-auto{overflow:auto}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.scroll-smooth{scroll-behavior:smooth}.rounded{border-radius:0.25rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-0{border-width:0px}.border-b{border-bottom-width:1px}.border-l-4{border-left-width:4px}.border-r{border-right-width:1px}.border-t{border-top-width:1px}.border-blue-100{--tw-border-opacity:1;border-color:rgb(219 234 254 / var(--tw-border-opacity, 1))}.border-blue-500{--tw-border-opacity:1;border-color:rgb(59 130 246 / var(--tw-border-opacity, 1))}.border-slate-100{--tw-border-opacity:1;border-color:rgb(241 245 249 / var(--tw-border-opacity, 1))}.border-slate-200{--tw-border-opacity:1;border-color:rgb(226 232 240 / var(--tw-border-opacity, 1))}.border-slate-50{--tw-border-opacity:1;border-color:rgb(248 250 252 / var(--tw-border-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-blue-50{--tw-bg-opacity:1;background-color:rgb(239 246 255 / var(--tw-bg-opacity, 1))}.bg-green-100{--tw-bg-opacity:1;background-color:rgb(220 252 231 / var(--tw-bg-opacity, 1))}.bg-green-400{--tw-bg-opacity:1;background-color:rgb(74 222 128 / var(--tw-bg-opacity, 1))}.bg-green-500{--tw-bg-opacity:1;background-color:rgb(34 197 94 / var(--tw-bg-opacity, 1))}.bg-slate-100{--tw-bg-opacity:1;background-color:rgb(241 245 249 / var(--tw-bg-opacity, 1))}.bg-slate-200{--tw-bg-opacity:1;background-color:rgb(226 232 240 / var(--tw-bg-opacity, 1))}.bg-slate-50{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.bg-slate-50\/50{background-color:rgb(248 250 252 / 0.5)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-900\/20{background-color:rgb(15 23 42 / 0.2)}.p-1{padding:0.25rem}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-1\.5{padding-left:0.375rem;padding-right:0.375rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0\.5{padding-top:0.125rem;padding-bottom:0.125rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-1\.5{padding-top:0.375rem;padding-bottom:0.375rem}.py-10{padding-top:2.5rem;padding-bottom:2.5rem}.py-12{padding-top:3rem;padding-bottom:3rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.pb-2{padding-bottom:0.5rem}.pb-20{padding-bottom:5rem}.pb-40{padding-bottom:10rem}.pt-10{padding-top:2.5rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.font-mono{font-family:JetBrains Mono, monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-\[10px\]{font-size:10px}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.leading-relaxed{line-height:1.625}.tracking-tight{letter-spacing:-0.025em}.tracking-wider{letter-spacing:0.05em}.text-blue-600{--tw-text-opacity:1;color:rgb(37 99 235 / var(--tw-text-opacity, 1))}.text-blue-800{--tw-text-opacity:1;color:rgb(30 64 175 / var(--tw-text-opacity, 1))}.text-green-800{--tw-text-opacity:1;color:rgb(22 101 52 / var(--tw-text-opacity, 1))}.text-orange-600{--tw-text-opacity:1;color:rgb(234 88 12 / var(--tw-text-opacity, 1))}.text-purple-600{--tw-text-opacity:1;color:rgb(147 51 234 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-slate-700{--tw-text-opacity:1;color:rgb(51 65 85 / var(--tw-text-opacity, 1))}.text-slate-800{--tw-text-opacity:1;color:rgb(30 41 59 / var(--tw-text-opacity, 1))}.text-slate-900{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.opacity-0{opacity:0}.opacity-75{opacity:0.75}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-\[0_-4px_20px_rgba\(0\2c 0\2c 0\2c 0\.05\)\]{--tw-shadow:0 -4px 20px rgba(0,0,0,0.05);--tw-shadow-colored:0 -4px 20px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.outline-none{outline:2px solid transparent;outline-offset:2px}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.hover\:bg-slate-50:hover{--tw-bg-opacity:1;background-color:rgb(248 250 252 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-800:hover{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.hover\:text-slate-900:hover{--tw-text-opacity:1;color:rgb(15 23 42 / var(--tw-text-opacity, 1))}.hover\:underline:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline}.focus\:border-slate-400:focus{--tw-border-opacity:1;border-color:rgb(148 163 184 / var(--tw-border-opacity, 1))}.group:hover .group-hover\:opacity-100{opacity:1}@media (min-width: 640px){.sm\:block{display:block}}@media (min-width: 768px){.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4, minmax(0, 1fr))}}@media (min-width: 1024px){.lg\:static{position:static}.lg\:flex{display:flex}.lg\:hidden{display:none}.lg\:h-full{height:100%}.lg\:w-\[400px\]{width:400px}.lg\:translate-y-0{--tw-translate-y:0px;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.lg\:cursor-default{cursor:default}.lg\:border-l{border-left-width:1px}.lg\:py-16{padding-top:4rem;padding-bottom:4rem}.lg\:text-4xl{font-size:2.25rem;line-height:2.5rem}.lg\:shadow-none{--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}}</style></head>
+<body class="flex h-screen overflow-hidden bg-white">
+
+    <aside class="hidden lg:flex flex-col w-64 border-r border-slate-200 h-full bg-slate-50/50 backdrop-blur-sm flex-shrink-0 z-20">
+        <div class="p-6 border-b border-slate-200 bg-white">
+            <div class="font-bold text-xl text-slate-900 tracking-tight">TuneHub API</div>
+            <div class="text-xs text-slate-500 mt-1 font-mono">v1.0.0</div>
+        </div>
+        <nav class="flex-1 overflow-y-auto py-4 px-4 space-y-6 scroll-py-4">
+            <div>
+                <div class="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-2 px-2">概览</div>
+                <div class="space-y-1">
+                    <a href="https://api.tunefree.fun/#intro" class="nav-link block py-1.5 px-2">服务介绍</a>
+                    <a href="https://api.tunefree.fun/#api-stats-dashboard" class="nav-link block py-1.5 px-2 text-blue-600 font-medium">✨ 实时看板 (Live)</a>
+                    <a href="https://api.tunefree.fun/#auth" class="nav-link block py-1.5 px-2">支持平台</a>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-2 px-2">核心 API</div>
+                <div class="space-y-1">
+                    <a href="https://api.tunefree.fun/#api-info" class="nav-link block py-1.5 px-2">1. 歌曲信息</a>
+                    <a href="https://api.tunefree.fun/#api-url" class="nav-link block py-1.5 px-2">2. 音乐链接 (文件)</a>
+                    <a href="https://api.tunefree.fun/#api-pic" class="nav-link block py-1.5 px-2">3. 专辑封面</a>
+                    <a href="https://api.tunefree.fun/#api-lrc" class="nav-link block py-1.5 px-2">4. 歌词获取</a>
+                    <a href="https://api.tunefree.fun/#api-search" class="nav-link block py-1.5 px-2">5. 歌曲搜索</a>
+                    <a href="https://api.tunefree.fun/#api-agg" class="nav-link block py-1.5 px-2">6. 聚合搜索</a>
+                    <a href="https://api.tunefree.fun/#api-playlist" class="nav-link block py-1.5 px-2">7. 歌单详情</a>
+                    <a href="https://api.tunefree.fun/#api-toplists" class="nav-link block py-1.5 px-2">8. 排行榜列表</a>
+                    <a href="https://api.tunefree.fun/#api-toplist" class="nav-link block py-1.5 px-2">9. 排行榜歌曲</a>
+                    <a href="https://api.tunefree.fun/#api-status" class="nav-link block py-1.5 px-2">10-11. 系统监控</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-2 px-2">统计 API</div>
+                <div class="space-y-1">
+                    <a href="https://api.tunefree.fun/#api-stats-main" class="nav-link block py-1.5 px-2">12. 获取统计数据</a>
+                    <a href="https://api.tunefree.fun/#api-stats-summary" class="nav-link block py-1.5 px-2">13. 统计摘要</a>
+                    <a href="https://api.tunefree.fun/#api-stats-platforms" class="nav-link block py-1.5 px-2">14. 平台统计概览</a>
+                    <a href="https://api.tunefree.fun/#api-stats-qps" class="nav-link block py-1.5 px-2">15. QPS 统计</a>
+                    <a href="https://api.tunefree.fun/#api-stats-trends" class="nav-link block py-1.5 px-2">16. 趋势数据</a>
+                    <a href="https://api.tunefree.fun/#api-stats-types" class="nav-link block py-1.5 px-2">17. 请求类型统计</a>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="flex-1 flex flex-col h-full overflow-hidden relative">
+        
+        <header class="lg:hidden flex items-center justify-between p-4 border-b border-slate-200 bg-white z-30">
+            <div class="font-bold text-lg">TuneHub API</div>
+            <button onclick="toggleMobileMenu()" class="text-slate-600 p-1 border border-slate-200 rounded hover:bg-slate-50">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </header>
+
+        <div id="mobile-menu" class="lg:hidden hidden fixed inset-0 bg-slate-900/20 backdrop-blur-sm z-40" onclick="toggleMobileMenu()">
+            <div class="w-64 h-full bg-white shadow-2xl overflow-y-auto" onclick="event.stopPropagation()">
+                <div class="p-4 border-b border-slate-100 font-bold">导航菜单</div>
+                <nav class="p-4" id="mobile-nav-content">
+            <div>
+                <div class="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-2 px-2">概览</div>
+                <div class="space-y-1">
+                    <a href="https://api.tunefree.fun/#intro" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">服务介绍</a>
+                    <a href="https://api.tunefree.fun/#api-stats-dashboard" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">✨ 实时看板 (Live)</a>
+                    <a href="https://api.tunefree.fun/#auth" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">支持平台</a>
+                </div>
+            </div>
+            
+            <div>
+                <div class="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-2 px-2">核心 API</div>
+                <div class="space-y-1">
+                    <a href="https://api.tunefree.fun/#api-info" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">1. 歌曲信息</a>
+                    <a href="https://api.tunefree.fun/#api-url" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">2. 音乐链接 (文件)</a>
+                    <a href="https://api.tunefree.fun/#api-pic" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">3. 专辑封面</a>
+                    <a href="https://api.tunefree.fun/#api-lrc" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">4. 歌词获取</a>
+                    <a href="https://api.tunefree.fun/#api-search" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">5. 歌曲搜索</a>
+                    <a href="https://api.tunefree.fun/#api-agg" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">6. 聚合搜索</a>
+                    <a href="https://api.tunefree.fun/#api-playlist" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">7. 歌单详情</a>
+                    <a href="https://api.tunefree.fun/#api-toplists" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">8. 排行榜列表</a>
+                    <a href="https://api.tunefree.fun/#api-toplist" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">9. 排行榜歌曲</a>
+                    <a href="https://api.tunefree.fun/#api-status" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">10-11. 系统监控</a>
+                </div>
+            </div>
+
+            <div>
+                <div class="text-xs font-semibold text-slate-900 uppercase tracking-wider mb-2 px-2">统计 API</div>
+                <div class="space-y-1">
+                    <a href="https://api.tunefree.fun/#api-stats-main" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">12. 获取统计数据</a>
+                    <a href="https://api.tunefree.fun/#api-stats-summary" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">13. 统计摘要</a>
+                    <a href="https://api.tunefree.fun/#api-stats-platforms" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">14. 平台统计概览</a>
+                    <a href="https://api.tunefree.fun/#api-stats-qps" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">15. QPS 统计</a>
+                    <a href="https://api.tunefree.fun/#api-stats-trends" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">16. 趋势数据</a>
+                    <a href="https://api.tunefree.fun/#api-stats-types" class="block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900">17. 请求类型统计</a>
+                </div>
+            </div>
+        </nav>
+            </div>
+        </div>
+
+        <div class="flex-1 overflow-y-auto scroll-smooth" id="main-scroll">
+            <div class="max-w-5xl mx-auto px-6 py-12 lg:py-16 pb-40">
+                
+                <section id="intro" class="mb-12">
+                    <h1 class="text-3xl lg:text-4xl font-bold mb-6 text-slate-900 tracking-tight">TuneHub API 接口文档</h1>
+                    <p class="text-lg text-slate-600 leading-relaxed mb-8">
+                        TuneHub 是一个统一的音乐信息解析服务。它打破了不同音乐平台之间的壁垒，提供了一套标准化的 API 接口。
+                    </p>
+                    <div class="flex flex-wrap gap-4 text-sm text-slate-500 font-mono bg-slate-50 p-4 rounded-lg border border-slate-100">
+                        <div><span class="text-slate-400">Base URL:</span> <span class="text-slate-900">https://music-dl.sayqz.com</span></div>
+                        <div class="hidden sm:block mx-2">|</div>
+                        <div><span class="text-slate-400">Version:</span> <span class="text-slate-900">1.0.0</span></div>
+                    </div>
+                </section>
+
+                <section id="api-stats-dashboard" class="mb-16 border-t border-slate-100 pt-10">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-semibold flex items-center gap-2">
+                            <span class="relative flex h-3 w-3 mr-2">
+                              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                              <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                            </span>
+                            实时统计看板
+                        </h2>
+                        <button onclick="refreshDashboard()" class="text-sm bg-white border border-slate-200 px-3 py-1.5 rounded hover:bg-slate-50 transition-colors">立即刷新</button>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                        <div class="stat-card bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                            <div class="text-xs text-slate-500 uppercase font-semibold mb-1">今日总调用</div>
+                            <div class="text-2xl font-bold text-slate-900 font-mono" id="dash-total">-</div>
+                        </div>
+                        <div class="stat-card bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                            <div class="text-xs text-slate-500 uppercase font-semibold mb-1">成功率</div>
+                            <div class="text-2xl font-bold text-slate-900 font-mono" id="dash-rate">-</div>
+                        </div>
+                        <div class="stat-card bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                            <div class="text-xs text-slate-500 uppercase font-semibold mb-1">平均耗时</div>
+                            <div class="text-2xl font-bold text-slate-900 font-mono" id="dash-duration">-</div>
+                            <div class="text-xs text-slate-400 mt-1">ms</div>
+                        </div>
+                        <div class="stat-card bg-slate-50 border border-slate-200 p-4 rounded-xl">
+                            <div class="text-xs text-slate-500 uppercase font-semibold mb-1">平均 QPS</div>
+                            <div class="text-2xl font-bold text-blue-600 font-mono" id="dash-qps">-</div>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="border border-slate-200 rounded-xl p-5">
+                            <h4 class="text-sm font-bold text-slate-900 mb-4">平台调用占比 (Today)</h4>
+                            <div class="space-y-4" id="dash-platforms"><div class="text-xs text-slate-400 text-center py-10">等待数据...</div></div>
+                        </div>
+                        <div class="border border-slate-200 rounded-xl p-5">
+                            <h4 class="text-sm font-bold text-slate-900 mb-4">Top 5 接口类型 (Today)</h4>
+                            <table class="w-full text-sm">
+                                <thead><tr><th class="pb-2 text-left bg-white border-0">接口</th><th class="pb-2 text-right bg-white border-0">调用量</th><th class="pb-2 text-right bg-white border-0">成功率</th></tr></thead>
+                                <tbody class="font-mono text-xs" id="dash-types"><tr><td colspan="3" class="text-center py-4 text-slate-400 border-0">...</td></tr></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="auth" class="mb-16 border-t border-slate-100 pt-10">
+                    <h2 class="text-2xl font-semibold mb-6">支持的平台</h2>
+                    <div class="overflow-hidden border border-slate-200 rounded-lg">
+                        <table class="mb-0">
+                            <thead><tr><th style="width: 150px">平台标识 (source)</th><th>平台名称</th><th>状态</th></tr></thead>
+                            <tbody>
+                                <tr><td><code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded">netease</code></td><td>网易云音乐</td><td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">✅ 已启用</span></td></tr>
+                                <tr><td><code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded">kuwo</code></td><td>酷我音乐</td><td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">✅ 已启用</span></td></tr>
+                                <tr><td><code class="text-xs bg-slate-100 px-1.5 py-0.5 rounded">qq</code></td><td>QQ音乐</td><td><span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-green-100 text-green-800">✅ 已启用</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="api-info" class="mb-16 border-t border-slate-100 pt-10 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-semibold flex items-center gap-3">1. 获取歌曲基本信息 <span class="badge-get">GET</span></h2>
+                        <button onclick="fillDebug(&#39;info&#39;, &#39;netease&#39;, &#39;123456&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试此接口</button>
+                    </div>
+                    <div class="bg-slate-50 rounded-lg p-4 border border-slate-200 mb-6 font-mono text-sm">
+                        <span class="text-blue-600">GET</span> /api/?source=<span class="text-orange-600">{source}</span>&amp;id=<span class="text-orange-600">{id}</span>&amp;type=<span class="text-purple-600">info</span>
+                    </div>
+                    <p class="text-slate-600 mb-4">获取歌曲的名称、歌手、专辑等基本元数据信息。</p>
+                    
+                    <div class="mt-4">
+                        <div class="text-xs font-semibold text-slate-500 uppercase mb-2">Response Example</div>
+                        <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"success"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"歌曲名称"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"artist"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"歌手名称"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"album"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"专辑名称"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"https://music-dl.sayqz.com/api/?source=netease&amp;id=123456&amp;type=url"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"pic"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"https://music-dl.sayqz.com/api/?source=netease&amp;id=123456&amp;type=pic"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"lrc"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"https://music-dl.sayqz.com/api/?source=netease&amp;id=123456&amp;type=lrc"</span>
+  <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"timestamp"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2025-11-23T12:00:00.000+08:00"</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                    </div>
+                </section>
+
+                <section id="api-url" class="mb-16 border-t border-slate-100 pt-10 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-semibold flex items-center gap-3">2. 获取音乐文件链接 <span class="badge-get">GET</span></h2>
+                        <button onclick="fillDebug(&#39;url&#39;, &#39;netease&#39;, &#39;123456&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试此接口</button>
+                    </div>
+                    <div class="bg-slate-50 rounded-lg p-4 border border-slate-200 mb-6 font-mono text-sm">
+                        <span class="text-blue-600">GET</span> /api/?source=<span class="text-orange-600">{source}</span>&amp;id=<span class="text-orange-600">{id}</span>&amp;type=<span class="text-purple-600">url</span>&amp;br=<span class="text-slate-400">[320k]</span>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <h4 class="font-semibold text-sm text-slate-900 mb-2">音质参数 (br) 对照表</h4>
+                        <div class="overflow-hidden border border-slate-200 rounded-lg">
+                            <table class="mb-0">
+                                <thead><tr><th>值</th><th>说明</th><th>比特率</th></tr></thead>
+                                <tbody>
+                                    <tr><td><code>128k</code></td><td>标准音质</td><td>128kbps</td></tr>
+                                    <tr><td><code>320k</code></td><td>高品质</td><td>320kbps</td></tr>
+                                    <tr><td><code>flac</code></td><td>无损音质</td><td>~1000kbps</td></tr>
+                                    <tr><td><code>flac24bit</code></td><td>Hi-Res 音质</td><td>~1400kbps</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-blue-50 border border-blue-100 rounded p-4 text-sm text-blue-800">
+                        <div class="font-bold mb-1">💡 响应说明 (Response)</div>
+                        <ul class="list-disc list-inside space-y-1">
+                            <li>成功时返回 <strong>302 Redirect</strong> 到实际的音乐文件 URL。</li>
+                            <li><strong>自动换源</strong>：当请求的原平台失败时，系统会自动尝试其他平台。此时响应头会包含 <code>X-Source-Switch</code> 字段（例如：<code>netease -&gt; kuwo</code>）。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section id="api-pic" class="mb-16 border-t border-slate-100 pt-10 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-semibold flex items-center gap-3">3. 获取专辑封面 <span class="badge-get">GET</span></h2>
+                        <button onclick="fillDebug(&#39;pic&#39;, &#39;netease&#39;, &#39;123456&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试此接口</button>
+                    </div>
+                    <p class="text-slate-600 mb-2">获取歌曲的专辑封面图片。</p>
+                    <div class="bg-slate-50 rounded-lg p-4 border border-slate-200 mb-4 font-mono text-sm">
+                        <span class="text-blue-600">GET</span> /api/?source=<span class="text-orange-600">{source}</span>&amp;id=<span class="text-orange-600">{id}</span>&amp;type=<span class="text-purple-600">pic</span>
+                    </div>
+                    <div class="text-sm text-slate-500">Response: 302 Redirect to image URL.</div>
+                </section>
+
+                <section id="api-lrc" class="mb-16 border-t border-slate-100 pt-10 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-semibold flex items-center gap-3">4. 获取歌词 <span class="badge-get">GET</span></h2>
+                        <button onclick="fillDebug(&#39;lrc&#39;, &#39;netease&#39;, &#39;123456&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试此接口</button>
+                    </div>
+                    <p class="text-slate-600 mb-2">获取歌曲的 LRC 格式歌词。</p>
+                    <div class="bg-slate-50 rounded-lg p-4 border border-slate-200 mb-4 font-mono text-sm">
+                        <span class="text-blue-600">GET</span> /api/?source=<span class="text-orange-600">{source}</span>&amp;id=<span class="text-orange-600">{id}</span>&amp;type=<span class="text-purple-600">lrc</span>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <div class="text-xs font-semibold text-slate-500 uppercase mb-2">Response Example (Text/Plain)</div>
+                        <pre><code class="language-text hljs language-plaintext">[00:00.00]歌词第一行
+[00:05.50]歌词第二行
+[00:10.20]歌词第三行</code></pre>
+                    </div>
+                </section>
+
+                <section id="api-search" class="mb-16 border-t border-slate-100 pt-10 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-semibold flex items-center gap-3">5. 搜索歌曲 <span class="badge-get">GET</span></h2>
+                        <button onclick="fillDebug(&#39;search&#39;, &#39;netease&#39;, &#39;&#39;, &#39;周杰伦&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试此接口</button>
+                    </div>
+                    <div class="bg-slate-50 rounded-lg p-4 border border-slate-200 mb-6 font-mono text-sm">
+                        <span class="text-blue-600">GET</span> /api/?source=<span class="text-orange-600">{source}</span>&amp;type=<span class="text-purple-600">search</span>&amp;keyword=<span class="text-orange-600">{keyword}</span>&amp;limit=<span class="text-slate-400">[20]</span>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <div class="text-xs font-semibold text-slate-500 uppercase mb-2">Response Example</div>
+                        <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"success"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"keyword"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"周杰伦"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"total"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">10</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"results"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"123456"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"歌曲名称"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"artist"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"周杰伦"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"album"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"专辑名称"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"https://music-dl.sayqz.com/api/?..."</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"platform"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"netease"</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                    </div>
+                </section>
+
+                <section id="api-agg" class="mb-16 border-t border-slate-100 pt-10 group">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-2xl font-semibold flex items-center gap-3">6. 聚合搜索 <span class="badge-get">GET</span></h2>
+                        <button onclick="fillDebug(&#39;aggregateSearch&#39;, &#39;&#39;, &#39;&#39;, &#39;周杰伦&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试此接口</button>
+                    </div>
+                    <div class="bg-slate-50 rounded-lg p-4 border border-slate-200 mb-6 font-mono text-sm">
+                        <span class="text-blue-600">GET</span> /api/?type=<span class="text-purple-600">aggregateSearch</span>&amp;keyword=<span class="text-orange-600">{keyword}</span>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <div class="text-xs font-semibold text-slate-500 uppercase mb-2">Response Example</div>
+                        <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"message"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"success"</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"keyword"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"周杰伦"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"results"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"123456"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"歌曲名称"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"artist"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"周杰伦"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"platform"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"netease"</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"789012"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"另一首歌"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"artist"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"周杰伦"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"platform"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"kuwo"</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                    </div>
+                </section>
+
+                <section id="api-playlist" class="mb-16 border-t border-slate-100 pt-10 group">
+                    <h2 class="text-2xl font-semibold mb-6">7-9. 歌单与排行榜</h2>
+                    
+                    <div class="space-y-12">
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-lg font-medium text-slate-900">7. 获取歌单详情</h3>
+                                <button onclick="fillDebug(&#39;playlist&#39;, &#39;netease&#39;, &#39;2037067301&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs text-blue-600 hover:underline">调试</button>
+                            </div>
+                            <div class="bg-slate-50 rounded p-3 border border-slate-200 font-mono text-sm mb-4">
+                                GET /api/?source={source}&amp;id={id}&amp;type=<span class="text-purple-600">playlist</span>
+                            </div>
+                            <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"list"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"123456"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"歌曲名称"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"types"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span><span class="hljs-string">"flac"</span><span class="hljs-punctuation">,</span> <span class="hljs-string">"320k"</span><span class="hljs-punctuation">,</span> <span class="hljs-string">"128k"</span><span class="hljs-punctuation">]</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"info"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"歌单名称"</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"author"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"创建者"</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-lg font-medium text-slate-900">8. 获取排行榜列表</h3>
+                                <button onclick="fillDebug(&#39;toplists&#39;, &#39;netease&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs text-blue-600 hover:underline">调试</button>
+                            </div>
+                            <div class="bg-slate-50 rounded p-3 border border-slate-200 font-mono text-sm mb-4">
+                                GET /api/?source={source}&amp;type=<span class="text-purple-600">toplists</span>
+                            </div>
+                            <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"list"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"19723756"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"飙升榜"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"updateFrequency"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"每天更新"</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                        </div>
+
+                        <div>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-lg font-medium text-slate-900">9. 获取排行榜歌曲</h3>
+                                <button onclick="fillDebug(&#39;toplist&#39;, &#39;netease&#39;, &#39;19723756&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs text-blue-600 hover:underline">调试</button>
+                            </div>
+                            <div class="bg-slate-50 rounded p-3 border border-slate-200 font-mono text-sm mb-4">
+                                GET /api/?source={source}&amp;id={id}&amp;type=<span class="text-purple-600">toplist</span>
+                            </div>
+                            <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"list"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"id"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"123456"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"name"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"歌曲名称"</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"source"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"netease"</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="api-status" class="mb-16 border-t border-slate-100 pt-10">
+                    <h2 class="text-2xl font-semibold mb-6">10-11. 系统监控</h2>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="border border-slate-200 rounded p-4 relative group">
+                            <button onclick="fillDebug(&#39;/status&#39;)" class="absolute top-4 right-4 text-xs text-blue-600 hover:underline opacity-0 group-hover:opacity-100 transition-opacity">调试 /status</button>
+                            <div class="font-mono text-sm font-bold mb-2">GET /status</div>
+                            <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"running"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"platforms"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">"netease"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">"enabled"</span><span class="hljs-punctuation">:</span> <span class="hljs-literal"><span class="hljs-keyword">true</span></span> <span class="hljs-punctuation">}</span> <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                        </div>
+                        <div class="border border-slate-200 rounded p-4 relative group">
+                            <button onclick="fillDebug(&#39;/health&#39;)" class="absolute top-4 right-4 text-xs text-blue-600 hover:underline opacity-0 group-hover:opacity-100 transition-opacity">调试 /health</button>
+                            <div class="font-mono text-sm font-bold mb-2">GET /health</div>
+                            <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span> <span class="hljs-attr">"status"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"healthy"</span> <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="api-stats-docs" class="mb-12 border-t border-slate-100 pt-10">
+                    <h2 class="text-2xl font-semibold mb-6">统计分析 API 详解</h2>
+                    <p class="text-slate-600 mb-8 bg-slate-50 p-4 rounded border-l-4 border-blue-500">
+                        TuneHub 提供完整的 API 调用统计分析功能。所有数据均使用 <strong class="text-slate-900">UTC+8（北京时间）</strong> 时区。
+                    </p>
+
+                    <div id="api-stats-main" class="mb-12 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-semibold flex items-center gap-2">12. 获取统计数据 <span class="badge-get">GET</span></h3>
+                            <button onclick="fillDebug(&#39;/stats&#39;, &#39;&#39;, &#39;&#39;, &#39;&#39;, &#39;period=today&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试 /stats</button>
+                        </div>
+                        <div class="bg-slate-50 rounded p-4 border border-slate-200 mb-4 font-mono text-sm">
+                            GET /stats?period=<span class="text-orange-600">[today]</span>&amp;groupBy=<span class="text-slate-400">[platform]</span>
+                        </div>
+                        
+                        <div class="mt-4">
+                            <div class="text-xs font-semibold text-slate-500 uppercase mb-2">Response Example</div>
+                            <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"period"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"today"</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"overall"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">15420</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"success_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">14856</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"success_rate"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">96.34</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"avg_duration"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">245.67</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"breakdown"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"group_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"netease"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8234</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"success_rate"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">97.13</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"qps"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"avg_qps"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.1785</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"peak_qps"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2.4567</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                        </div>
+                    </div>
+
+                    <div id="api-stats-summary" class="mb-12 group">
+                         <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-semibold flex items-center gap-2">13. 获取统计摘要 <span class="badge-get">GET</span></h3>
+                            <button onclick="fillDebug(&#39;/stats/summary&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试 /stats/summary</button>
+                        </div>
+                        <div class="bg-slate-50 rounded p-3 border border-slate-200 mb-4 font-mono text-sm">
+                            GET /stats/summary
+                        </div>
+                        <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"today"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">15420</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"success_rate"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">96.34</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"week"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">98765</span>
+    <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+    <span class="hljs-attr">"top_platforms_today"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span> <span class="hljs-attr">"group_key"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"netease"</span><span class="hljs-punctuation">,</span> <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8234</span> <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                    </div>
+
+                    <div id="api-stats-platforms" class="mb-12 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-semibold flex items-center gap-2">14. 平台统计概览 <span class="badge-get">GET</span></h3>
+                            <button onclick="fillDebug(&#39;/stats/platforms&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试 /stats/platforms</button>
+                        </div>
+                        <div class="bg-slate-50 rounded p-3 border border-slate-200 mb-4 font-mono text-sm">
+                            GET /stats/platforms?period=<span class="text-orange-600">[today]</span>
+                        </div>
+                        <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"platforms"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"netease"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8234</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"success_rate"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">97.13</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"kuwo"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4521</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"success_rate"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">97.08</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                    </div>
+
+                    <div id="api-stats-qps" class="mb-12 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-semibold flex items-center gap-2">15. QPS 统计 <span class="badge-get">GET</span></h3>
+                            <button onclick="fillDebug(&#39;/stats/qps&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试 /stats/qps</button>
+                        </div>
+                        <div class="bg-slate-50 rounded p-3 border border-slate-200 mb-4 font-mono text-sm">
+                            GET /stats/qps?period=<span class="text-orange-600">[today]</span>
+                        </div>
+                        <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"qps"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"avg_qps"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">0.1785</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"peak_qps"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">2.4567</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"hourly_data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+        <span class="hljs-punctuation">{</span>
+          <span class="hljs-attr">"date"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2025-11-24"</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">"hour"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">14</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">"calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">8845</span><span class="hljs-punctuation">,</span>
+          <span class="hljs-attr">"qps"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2.4569"</span>
+        <span class="hljs-punctuation">}</span>
+      <span class="hljs-punctuation">]</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                    </div>
+
+                    <div id="api-stats-trends" class="mb-12 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-semibold flex items-center gap-2">16. 趋势数据 <span class="badge-get">GET</span></h3>
+                            <button onclick="fillDebug(&#39;/stats/trends&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试 /stats/trends</button>
+                        </div>
+                        <div class="bg-slate-50 rounded p-3 border border-slate-200 mb-4 font-mono text-sm">
+                            GET /stats/trends?period=<span class="text-orange-600">[week]</span>
+                        </div>
+                        <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"trends"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">[</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"date"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2025-11-17"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">12345</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"success_rate"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">96.20</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"date"</span><span class="hljs-punctuation">:</span> <span class="hljs-string">"2025-11-18"</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">13567</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"success_rate"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">96.48</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">]</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                    </div>
+
+                    <div id="api-stats-types" class="mb-12 group">
+                        <div class="flex items-center justify-between mb-3">
+                            <h3 class="text-xl font-semibold flex items-center gap-2">17. 请求类型统计 <span class="badge-get">GET</span></h3>
+                            <button onclick="fillDebug(&#39;/stats/types&#39;)" class="opacity-0 group-hover:opacity-100 transition-opacity text-xs bg-slate-900 text-white px-3 py-1 rounded hover:bg-slate-700">调试 /stats/types</button>
+                        </div>
+                        <div class="bg-slate-50 rounded p-3 border border-slate-200 mb-4 font-mono text-sm">
+                            GET /stats/types?period=<span class="text-orange-600">[today]</span>
+                        </div>
+                        <pre><code class="language-json hljs"><span class="hljs-punctuation">{</span>
+  <span class="hljs-attr">"code"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">200</span><span class="hljs-punctuation">,</span>
+  <span class="hljs-attr">"data"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+    <span class="hljs-attr">"requestTypes"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+      <span class="hljs-attr">"url"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">6234</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"success_rate"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">96.21</span>
+      <span class="hljs-punctuation">}</span><span class="hljs-punctuation">,</span>
+      <span class="hljs-attr">"info"</span><span class="hljs-punctuation">:</span> <span class="hljs-punctuation">{</span>
+        <span class="hljs-attr">"total_calls"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">4521</span><span class="hljs-punctuation">,</span>
+        <span class="hljs-attr">"success_rate"</span><span class="hljs-punctuation">:</span> <span class="hljs-number">98.56</span>
+      <span class="hljs-punctuation">}</span>
+    <span class="hljs-punctuation">}</span>
+  <span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">}</span></code></pre>
+                    </div>
+                </section>
+
+                <section id="advanced" class="mb-16 border-t border-slate-100 pt-10">
+                    <h2 class="text-2xl font-semibold mb-6">高级特性</h2>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                🔄 自动换源 (Auto-Switch)
+                            </h3>
+                            <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                                当请求 <code>type=url</code> 时，如果原平台获取失败，系统会自动按配置优先级尝试其他平台。
+                            </p>
+                            <div class="bg-slate-50 p-4 rounded border border-slate-200 text-sm">
+                                <div class="font-semibold text-slate-700 mb-2">换源优先级:</div>
+                                <ol class="list-decimal list-inside font-mono text-slate-600 space-y-1">
+                                    <li>kuwo (酷我音乐)</li>
+                                    <li>netease (网易云音乐)</li>
+                                    <li>qq (QQ音乐)</li>
+                                </ol>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="font-bold text-slate-900 mb-3 flex items-center gap-2">
+                                🔍 聚合搜索 (Aggregate Search)
+                            </h3>
+                            <p class="text-slate-600 text-sm mb-4 leading-relaxed">
+                                使用 <code>aggregateSearch</code> 可以一次性并发请求所有启用的平台，并对结果进行智能混合排列。
+                            </p>
+                            <div class="bg-slate-50 p-4 rounded border border-slate-200 text-sm">
+                                <div class="font-semibold text-slate-700 mb-2">特性:</div>
+                                <ul class="list-disc list-inside text-slate-600 space-y-1">
+                                    <li>并发请求，速度快</li>
+                                    <li>自动去重</li>
+                                    <li>支持统一分页</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <footer class="text-center text-slate-400 text-sm pt-10 border-t border-slate-100 pb-20">
+                    © 2025 TuneHub API Documentation.
+                </footer>
+
+            </div>
+        </div>
+    </main>
+
+    <div id="debug-panel" class="fixed bottom-0 left-0 right-0 lg:static lg:w-[400px] lg:h-full bg-white lg:border-l border-t border-slate-200 shadow-[0_-4px_20px_rgba(0,0,0,0.05)] lg:shadow-none z-50 transition-transform transform translate-y-[calc(100%-48px)] lg:translate-y-0 flex flex-col">
+        <div class="h-12 flex items-center justify-between px-4 border-b border-slate-100 bg-white cursor-pointer lg:cursor-default" onclick="toggleMobileDebugger()">
+            <div class="font-bold text-sm text-slate-800 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-green-500"></span>API Console</div>
+            <div class="lg:hidden text-xs text-slate-400">点击展开/收起</div>
+        </div>
+        <div class="flex-1 overflow-y-auto p-5 bg-slate-50">
+            <form id="debug-form" onsubmit="handleDebug(event)" class="space-y-4">
+                <div class="flex gap-2">
+                    <div class="w-1/4">
+                        <label class="block text-xs font-medium text-slate-500 mb-1">Method</label>
+                        <input type="text" value="GET" disabled="" class="w-full bg-white border border-slate-200 rounded px-2 py-1.5 text-sm text-slate-500">
+                    </div>
+                    <div class="w-3/4">
+                        <label class="block text-xs font-medium text-slate-500 mb-1">Type / Endpoint</label>
+                        <select id="d-type" class="w-full bg-white border border-slate-200 rounded px-2 py-1.5 text-sm outline-none focus:border-slate-400" onchange="updateDebugUI()">
+                            <optgroup label="Basic">
+                                <option value="info">info (歌曲信息)</option>
+                                <option value="url">url (文件链接)</option>
+                                <option value="pic">pic (封面图片)</option>
+                                <option value="lrc">lrc (歌词)</option>
+                            </optgroup>
+                            <optgroup label="Search">
+                                <option value="search">search (搜索)</option>
+                                <option value="aggregateSearch">aggregateSearch (聚合)</option>
+                            </optgroup>
+                            <optgroup label="List">
+                                <option value="playlist">playlist (歌单)</option>
+                                <option value="toplists">toplists (榜单列表)</option>
+                                <option value="toplist">toplist (榜单详情)</option>
+                            </optgroup>
+                            <optgroup label="Statistics">
+                                <option value="/stats">/stats</option>
+                                <option value="/stats/summary">/stats/summary</option>
+                                <option value="/stats/platforms">/stats/platforms</option>
+                                <option value="/stats/qps">/stats/qps</option>
+                                <option value="/stats/trends">/stats/trends</option>
+                                <option value="/stats/types">/stats/types</option>
+                            </optgroup>
+                            <optgroup label="System">
+                                <option value="/status">/status</option>
+                                <option value="/health">/health</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                </div>
+                <div id="params-container" class="space-y-3 p-3 bg-white border border-slate-200 rounded-lg">
+                    <div class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">Query Params</div>
+                    <div id="group-source">
+                        <label class="block text-[10px] font-medium text-slate-500 uppercase mb-0.5">Source</label>
+                        <select id="d-source" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-sm outline-none focus:border-slate-400">
+                            <option value="netease">netease</option>
+                            <option value="kuwo">kuwo</option>
+                            <option value="qq">qq</option>
+                        </select>
+                    </div>
+                    <div id="group-id">
+                        <label class="block text-[10px] font-medium text-slate-500 uppercase mb-0.5">ID</label>
+                        <input type="text" id="d-id" value="123456" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-sm outline-none focus:border-slate-400 font-mono">
+                    </div>
+                    <div id="group-keyword" class="hidden">
+                        <label class="block text-[10px] font-medium text-slate-500 uppercase mb-0.5">Keyword</label>
+                        <input type="text" id="d-keyword" placeholder="e.g. 周杰伦" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-sm outline-none focus:border-slate-400">
+                    </div>
+                    <div id="group-br" class="hidden">
+                        <label class="block text-[10px] font-medium text-slate-500 uppercase mb-0.5">Bitrate</label>
+                        <select id="d-br" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-sm outline-none focus:border-slate-400">
+                            <option value="320k">320k</option>
+                            <option value="128k">128k</option>
+                            <option value="flac">flac</option>
+                        </select>
+                    </div>
+                    <div id="group-custom" class="hidden">
+                        <label class="block text-[10px] font-medium text-slate-500 uppercase mb-0.5">Custom Query</label>
+                        <input type="text" id="d-custom" placeholder="e.g. period=today" class="w-full bg-slate-50 border border-slate-200 rounded px-2 py-1.5 text-sm outline-none focus:border-slate-400 font-mono">
+                    </div>
+                </div>
+                <button type="submit" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-medium py-2 rounded text-sm transition-colors shadow-sm">Send Request</button>
+            </form>
+            <div class="mt-6">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="text-xs font-bold text-slate-500 uppercase">Response</span>
+                    <span id="status-badge" class="text-[10px] px-1.5 py-0.5 rounded bg-slate-200 text-slate-600 font-mono hidden"></span>
+                </div>
+                <div class="relative">
+                    <pre id="debug-output" class="h-64 overflow-auto text-xs p-3 bg-white border border-slate-200 rounded-lg font-mono text-slate-600">Ready to send request...</pre>
+                    <div id="preview-box" class="hidden mt-2 p-3 bg-slate-100 border border-slate-200 rounded-lg text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        hljs.highlightAll();
+
+        const mobileMenu = document.getElementById('mobile-menu');
+        const sidebarNav = document.querySelector('aside nav');
+        const mobileNavContent = document.getElementById('mobile-nav-content');
+        
+        mobileNavContent.innerHTML = sidebarNav.innerHTML;
+        const mobileLinks = mobileNavContent.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.className = "block py-3 border-b border-slate-50 text-slate-600 hover:text-slate-900";
+            link.addEventListener('click', toggleMobileMenu);
+        });
+
+        function toggleMobileMenu() { mobileMenu.classList.toggle('hidden'); }
+
+        function toggleMobileDebugger() {
+            if (window.innerWidth < 1024) {
+                const panel = document.getElementById('debug-panel');
+                panel.style.transform = panel.style.transform === 'translateY(0px)' ? '' : 'translateY(0px)';
+            }
+        }
+
+        function updateDebugUI() {
+            const type = document.getElementById('d-type').value;
+            const gSource = document.getElementById('group-source');
+            const gId = document.getElementById('group-id');
+            const gKeyword = document.getElementById('group-keyword');
+            const gBr = document.getElementById('group-br');
+            const gCustom = document.getElementById('group-custom');
+
+            gSource.classList.remove('hidden');
+            gId.classList.remove('hidden');
+            gKeyword.classList.add('hidden');
+            gBr.classList.add('hidden');
+            gCustom.classList.add('hidden');
+
+            if (type.startsWith('/stats') || ['/status', '/health', 'toplists'].includes(type)) {
+                gId.classList.add('hidden');
+                if(type !== 'toplists') gSource.classList.add('hidden');
+                if(type.startsWith('/stats')) gCustom.classList.remove('hidden');
+            } else if (['search', 'aggregateSearch'].includes(type)) {
+                gId.classList.add('hidden');
+                gKeyword.classList.remove('hidden');
+                if(type === 'aggregateSearch') gSource.classList.add('hidden');
+            } else if (type === 'url') {
+                gBr.classList.remove('hidden');
+            }
+        }
+
+        function fillDebug(type, source, id, keyword, custom) {
+            document.getElementById('d-type').value = type;
+            if(source) document.getElementById('d-source').value = source;
+            if(id) document.getElementById('d-id').value = id;
+            if(keyword) document.getElementById('d-keyword').value = keyword;
+            if(custom) document.getElementById('d-custom').value = custom;
+            updateDebugUI();
+            const panel = document.getElementById('debug-panel');
+            panel.classList.add('ring-2', 'ring-blue-500');
+            setTimeout(() => panel.classList.remove('ring-2', 'ring-blue-500'), 500);
+            if (window.innerWidth < 1024) toggleMobileDebugger();
+        }
+
+        async function handleDebug(e) {
+            e.preventDefault();
+            const output = document.getElementById('debug-output');
+            const badge = document.getElementById('status-badge');
+            const preview = document.getElementById('preview-box');
+            
+            badge.className = 'text-[10px] px-1.5 py-0.5 rounded bg-yellow-100 text-yellow-800 font-mono inline-block';
+            badge.textContent = 'Sending...';
+            badge.classList.remove('hidden');
+            output.textContent = 'Fetching data...';
+            preview.classList.add('hidden');
+            preview.innerHTML = '';
+
+            const type = document.getElementById('d-type').value;
+            const source = document.getElementById('d-source').value;
+            const id = document.getElementById('d-id').value;
+            const keyword = document.getElementById('d-keyword').value;
+            const br = document.getElementById('d-br').value;
+            const custom = document.getElementById('d-custom').value;
+
+            let url = 'https://music-dl.sayqz.com';
+            
+            if (type.startsWith('/')) {
+                url += type;
+                if (custom) url += `?${custom}`;
+            } else {
+                url += `/api/?type=${type}`;
+                if (type !== 'aggregateSearch' && !type.startsWith('/')) url += `&source=${source}`;
+                if (['info', 'url', 'pic', 'lrc', 'playlist', 'toplist'].includes(type)) url += `&id=${id}`;
+                if (['search', 'aggregateSearch'].includes(type)) url += `&keyword=${encodeURIComponent(keyword)}`;
+                if (type === 'url') url += `&br=${br}`;
+            }
+
+            if (type === 'url' || type === 'pic') {
+                output.textContent = `// Redirecting to:\n${url}`;
+                badge.textContent = 'Generated';
+                badge.className = 'text-[10px] px-1.5 py-0.5 rounded bg-blue-100 text-blue-800 font-mono inline-block';
+                preview.classList.remove('hidden');
+                if(type === 'pic') {
+                    preview.innerHTML = `<img src="${url}" class="max-w-full h-auto rounded shadow-sm" alt="Preview">`;
+                } else {
+                    preview.innerHTML = `<a href="${url}" target="_blank" class="text-blue-600 hover:underline text-sm">点击打开链接</a>`;
+                }
+                return;
+            }
+
+            try {
+                const res = await fetch(url);
+                const contentType = res.headers.get("content-type");
+                let data = (contentType && contentType.includes("application/json")) ? await res.json() : await res.text();
+                output.textContent = typeof data === 'object' ? JSON.stringify(data, null, 2) : data;
+                badge.textContent = `${res.status} ${res.statusText}`;
+                badge.className = res.ok ? 'text-[10px] px-1.5 py-0.5 rounded bg-green-100 text-green-800 font-mono inline-block' : 'text-[10px] px-1.5 py-0.5 rounded bg-red-100 text-red-800 font-mono inline-block';
+            } catch (err) {
+                output.textContent = `Request Failed:\n${err.message}`;
+                badge.textContent = 'Error';
+                badge.className = 'text-[10px] px-1.5 py-0.5 rounded bg-red-100 text-red-800 font-mono inline-block';
+            }
+        }
+
+        async function refreshDashboard() {
+            const totalEl = document.getElementById('dash-total');
+            const rateEl = document.getElementById('dash-rate');
+            const durEl = document.getElementById('dash-duration');
+            const qpsEl = document.getElementById('dash-qps');
+            const platformsEl = document.getElementById('dash-platforms');
+            const typesEl = document.getElementById('dash-types');
+
+            try {
+                const [summaryRes, typesRes] = await Promise.all([
+                    fetch('https://music-dl.sayqz.com/stats/summary'),
+                    fetch('https://music-dl.sayqz.com/stats/types?period=today')
+                ]);
+                const summaryJson = await summaryRes.json();
+                const typesJson = await typesRes.json();
+
+                if (summaryJson.code === 200 && summaryJson.data && summaryJson.data.today) {
+                    const t = summaryJson.data.today;
+                    totalEl.innerText = (t.total_calls || 0).toLocaleString();
+                    rateEl.innerText = (t.success_rate || 0) + '%';
+                    durEl.innerText = (t.avg_duration || 0).toFixed(0);
+                    qpsEl.innerText = (t.avg_qps || 0);
+
+                    const platforms = summaryJson.data.top_platforms_today || [];
+                    const total = t.total_calls || 1; 
+                    if (platforms.length > 0) {
+                        platformsEl.innerHTML = platforms.map(p => {
+                            const percent = ((p.total_calls / total) * 100).toFixed(1);
+                            let color = p.group_key.includes('netease') ? 'bg-red-500' : p.group_key.includes('qq') ? 'bg-green-500' : p.group_key.includes('kuwo') ? 'bg-yellow-400' : 'bg-purple-500';
+                            return `<div><div class="flex justify-between text-xs mb-1"><span class="font-medium text-slate-700 uppercase">${p.group_key}</span><span class="text-slate-500">${p.total_calls} (${percent}%)</span></div><div class="w-full bg-slate-100 rounded-full h-2"><div class="${color} h-2 rounded-full" style="width: ${percent}%"></div></div></div>`;
+                        }).join('');
+                    }
+                }
+
+                if (typesJson.code === 200 && typesJson.data && typesJson.data.requestTypes) {
+                    const typeArr = Object.entries(typesJson.data.requestTypes).map(([key, val]) => ({ name: key, count: val.total_calls, rate: val.success_rate })).sort((a, b) => b.count - a.count).slice(0, 5);
+                    typesEl.innerHTML = typeArr.map(t => `<tr class="border-b border-slate-50 last:border-0 hover:bg-slate-50"><td class="py-2 text-slate-700 font-medium">${t.name}</td><td class="py-2 text-right text-slate-500">${t.count}</td><td class="py-2 text-right text-green-600">${t.rate}%</td></tr>`).join('');
+                }
+            } catch (e) {
+                totalEl.innerText = 'Err';
+            }
+        }
+        updateDebugUI();
+        refreshDashboard();
+    </script>
+
+</body></html>

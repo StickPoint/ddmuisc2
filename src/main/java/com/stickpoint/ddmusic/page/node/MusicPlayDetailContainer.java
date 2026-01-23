@@ -2,8 +2,12 @@ package com.stickpoint.ddmusic.page.node;
 
 import com.leewyatt.rxcontrols.controls.RXLrcView;
 import com.leewyatt.rxcontrols.pojo.LrcDoc;
+import com.stickpoint.ddmusic.common.utils.ConfigUtils;
 import com.stickpoint.ddmusic.common.utils.EncodingDetectUtil;
+import com.stickpoint.ddmusic.common.utils.HttpUtils;
+import com.stickpoint.ddmusic.common.utils.TuneHubApiUtils;
 import com.stickpoint.ddmusic.page.state.MusicState;
+import java.io.IOException;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -16,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.MediaPlayer;
@@ -96,15 +101,19 @@ public class MusicPlayDetailContainer extends VBox {
         songTitle.setFont(Font.font("Arial", FontWeight.BOLD, 24));
         songTitle.setStyle("-fx-text-fill: #141313;");
 
-        songTags = new Label("VIP MV");
-        songTags.setStyle("-fx-text-fill: #ffffff; -fx-font-size: 12px; -fx-padding: 2 6 2 6; -fx-background-color: rgba(0,0,0,0.48); -fx-background-radius: 4; -fx-font-weight: bold;");
+        // 显示默认音乐品质
+        String defaultQuality = ConfigUtils.getDefaultQuality().getValue();
+        songTags = new Label(defaultQuality);
+        // 中国红打底，鱼肚白文字颜色
+        songTags.setStyle("-fx-text-fill: #f0f0f0; -fx-font-size: 12px; -fx-padding: 2 6 2 6; -fx-background-color: #d81e06; -fx-background-radius: 4; -fx-font-weight: bold;");
 
         albumInfo = new Label("专辑: Bloom");
-        albumInfo.setStyle("-fx-text-fill: #262626;");
+        // 现代化样式，参考网易云APP
+        albumInfo.setStyle("-fx-text-fill: #666666; -fx-font-size: 14px; -fx-font-weight: 500;");
         artistInfo = new Label("歌手: Troye Sivan");
-        artistInfo.setStyle("-fx-text-fill: #262626;");
+        artistInfo.setStyle("-fx-text-fill: #666666; -fx-font-size: 14px; -fx-font-weight: 500;");
         sourceInfo = new Label("来源: Wild");
-        sourceInfo.setStyle("-fx-text-fill: #262626;");
+        sourceInfo.setStyle("-fx-text-fill: #666666; -fx-font-size: 14px; -fx-font-weight: 500;");
 
         // 操作按钮
         infoBar = new HBox(10);
@@ -112,7 +121,9 @@ public class MusicPlayDetailContainer extends VBox {
 
         // 歌词组件
         lrcView = new RXLrcView();
-        lrcView.setPrefHeight(350);
+        lrcView.setPrefHeight(400);
+        lrcView.setMaxHeight(Double.MAX_VALUE);
+        lrcView.setPrefWidth(500);
         lrcView.getStyleClass().add("rx-lrc-view");
     }
 
@@ -141,13 +152,18 @@ public class MusicPlayDetailContainer extends VBox {
 
         // 右侧信息区域
         VBox rightPane = new VBox();
-        rightPane.setSpacing(15);
-        rightPane.setAlignment(Pos.CENTER_LEFT);
+        // 减小区域1与区域2之间的间距
+        rightPane.setSpacing(10);
+        rightPane.setAlignment(Pos.CENTER);
         rightPane.setPrefWidth(400);
+        // 允许右侧面板垂直扩展
+        VBox.setVgrow(rightPane, Priority.ALWAYS);
 
-        // 歌曲信息部分
+        // 歌曲信息部分（区域1）- 向下挪动
         VBox songInfoPane = new VBox(8);
         songInfoPane.setAlignment(Pos.CENTER_LEFT);
+        // 添加上边距，将歌曲信息区域向下挪动
+        VBox.setMargin(songInfoPane, new javafx.geometry.Insets(50, 0, 0, 0));
         songInfoPane.getChildren().addAll(
                 songTitle,
                 songTags,
@@ -157,18 +173,22 @@ public class MusicPlayDetailContainer extends VBox {
                 infoBar
         );
 
-        // 歌词区域
+        // 歌词区域（区域2）- 拉伸高度
         VBox lrcContainer = new VBox();
         lrcContainer.setAlignment(Pos.CENTER);
         lrcContainer.getChildren().add(lrcView);
-        lrcContainer.setPrefHeight(200);
+        // 增加歌词区域高度
+        lrcContainer.setPrefHeight(500);
+        lrcContainer.setMaxHeight(Double.MAX_VALUE);
+        // 允许歌词容器在VBox中自动扩展
+        VBox.setVgrow(lrcContainer, Priority.ALWAYS);
 
         rightPane.getChildren().addAll(songInfoPane, lrcContainer);
         mainContent.getChildren().addAll(leftPane, rightPane);
 
         // 添加到主容器
         getChildren().addAll(mainContent);
-        mainContent.setMaxHeight(javafx.scene.layout.Region.USE_PREF_SIZE);
+        mainContent.setMaxHeight(javafx.scene.layout.Region.USE_COMPUTED_SIZE);
         setMaxHeight(javafx.scene.layout.Region.USE_COMPUTED_SIZE);
         // 绑定宽度自适应
         bindWidthProperties();
@@ -203,7 +223,8 @@ public class MusicPlayDetailContainer extends VBox {
             albumView = new ImageView();
             albumView.setFitWidth(167);
             albumView.setFitHeight(167);
-            albumView.setPreserveRatio(true);
+            albumView.setPreserveRatio(false); // 不保持比例，确保图片填充整个区域
+            albumView.setSmooth(true); // 开启平滑缩放
 
             // 创建圆形裁剪区域
             Circle clip = new Circle(83.5);
@@ -336,29 +357,81 @@ public class MusicPlayDetailContainer extends VBox {
      */
     private void loadAlbumCover(String imageUrl) {
         // 检查缓存
+        log.info("加载专辑封面: {}", imageUrl);
         Image cachedImage = imageCache.get(imageUrl);
         if (cachedImage != null) {
+            log.info("使用缓存的专辑封面");
             albumView.setImage(cachedImage);
             return;
         }
-
-        // 创建新图片
-        Image newImage = new Image(imageUrl, true);
-        newImage.progressProperty().addListener((obs, oldVal, newVal) -> {
-            if (newVal.doubleValue() >= 1.0) {
-                // 图片加载完成，加入缓存
-                imageCache.put(imageUrl, newImage);
-            }
-        });
-
-        // 释放旧图片
-        if (currentAlbumImage != null) {
-            currentAlbumImage = null;
+        
+        // 处理空URL或本地播放的情况，使用本地默认图片
+        if (imageUrl == null || imageUrl.isEmpty()) {
+            log.info("本地播放，使用本地默认唱片中心图片");
+            // 使用存在的本地默认图片ddgy.jpg
+            Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/img/ddgy.jpg")));
+            albumView.setImage(defaultImage);
+            imageCache.put(imageUrl, defaultImage);
+            return;
         }
 
-        // 设置新图片
-        albumView.setImage(newImage);
-        currentAlbumImage = newImage;
+        // 在后台线程处理URL重定向
+        new Thread(() -> {
+            try {
+                // 获取实际的图片URL
+                String actualUrl = HttpUtils.getRedirectUrl(imageUrl);
+                log.info("实际专辑封面URL: {}", actualUrl);
+                
+                // 回到JavaFX应用线程加载图片
+                Platform.runLater(() -> {
+                    // 创建新图片
+                    Image newImage = new Image(actualUrl, true);
+                    
+                    // 添加错误监听器
+                    newImage.errorProperty().addListener((obs, oldVal, newVal) -> {
+                        if (newVal) {
+                            log.error("专辑封面加载失败: {}", actualUrl);
+                            // 加载失败时使用本地默认封面
+                            Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/img/ddgy.jpg")));
+                            albumView.setImage(defaultImage);
+                            imageCache.put(imageUrl, defaultImage);
+                        }
+                    });
+                    
+                    newImage.progressProperty().addListener((obs, oldVal, newVal) -> {
+                        log.info("图片加载进度: {}%", (int)(newVal.doubleValue() * 100));
+                        if (newVal.doubleValue() >= 1.0) {
+                            // 图片加载完成，加入缓存
+                            log.info("图片加载完成，加入缓存");
+                            // 检查缓存大小，如果超过限制，移除最旧的缓存项
+                            if (imageCache.size() >= 10) {
+                                // 移除最旧的缓存项（使用迭代器移除第一个元素）
+                                String oldestKey = imageCache.keySet().iterator().next();
+                                imageCache.remove(oldestKey);
+                            }
+                            imageCache.put(imageUrl, newImage);
+                        }
+                    });
+
+                    // 释放旧图片
+                    if (currentAlbumImage != null) {
+                        currentAlbumImage = null;
+                    }
+
+                    // 设置新图片
+                    albumView.setImage(newImage);
+                    currentAlbumImage = newImage;
+                });
+            } catch (IOException e) {
+                log.error("获取实际图片URL失败: {}", e.getMessage());
+                // 发生异常时使用本地默认封面
+                Platform.runLater(() -> {
+                    Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/img/ddgy.jpg")));
+                    albumView.setImage(defaultImage);
+                    imageCache.put(imageUrl, defaultImage);
+                });
+            }
+        }).start();
     }
 
     /**

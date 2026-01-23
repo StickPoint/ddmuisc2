@@ -2,6 +2,9 @@ package com.stickpoint.ddmusic.page.node;
 
 import com.stickpoint.ddmusic.page.state.MusicState;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.shape.Rectangle;
 
@@ -17,11 +20,17 @@ public class HomePage extends BorderPane {
     private final HomePageContentContainer homePageContentContainer;
     private final BottomMusicContainer bottomMusicContainer;
     private final MusicPlayDetailContainer musicPlayDetailContainer;
+    private LocalDownloadPage localDownloadPage;
     private final MusicState musicState;
-
+    
     // 保存右侧内容容器的引用
     private final BorderPane centerPanel;
-
+    private SearchResultContainer searchResultContainer;
+    private boolean isSearching = false;
+    
+    // 保存上一个页面的引用，用于从详情页面返回时回到正确的页面
+    private Node previousCenterContent;
+    
     public HomePage() {
         musicState = new MusicState();
         bottomMusicContainer = new BottomMusicContainer(musicState);
@@ -30,6 +39,10 @@ public class HomePage extends BorderPane {
         homePageContentContainer = new HomePageContentContainer();
         musicPlayDetailContainer = new MusicPlayDetailContainer(musicState);
         musicPlayDetailContainer.setVisible(false);
+        localDownloadPage = new LocalDownloadPage(musicState, bottomMusicContainer);
+        localDownloadPage.setVisible(false);
+        searchResultContainer = new SearchResultContainer(musicState, bottomMusicContainer);
+        searchResultContainer.setVisible(false);
 
         // 设置左侧菜单栏
         homePageMenuPanel.setPrefWidth(200);
@@ -57,6 +70,37 @@ public class HomePage extends BorderPane {
         clip.heightProperty().bind(heightProperty());
         setClip(clip);
 
+        // 为搜索框添加回车键事件
+        headerContainer.getSearchField().setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                String keyword = headerContainer.getSearchField().getText().trim();
+                if (!keyword.isEmpty()) {
+                    performSearch(keyword);
+                }
+            }
+        });
+
+        // 添加菜单点击事件处理
+        // 直接从HomePageMenuPanel获取ToggleGroup
+        ToggleGroup menuToggleGroup = homePageMenuPanel.getToggleGroup();
+        
+        // 监听菜单选中事件
+        if (menuToggleGroup != null) {
+            menuToggleGroup.selectedToggleProperty().addListener((obs, oldToggle, newToggle) -> {
+                if (newToggle instanceof HomePageMenuItem) {
+                    HomePageMenuItem selectedMenuItem = (HomePageMenuItem) newToggle;
+                    String menuId = selectedMenuItem.getId();
+                    if ("myMusic".equals(menuId)) {
+                        // 显示本地下载页面
+                        showLocalDownloadPage();
+                    } else {
+                        // 其他菜单项，返回主页
+                        backToHome();
+                    }
+                }
+            });
+        }
+
         // 在构造函数末尾添加专辑封面点击监听
         bottomMusicContainer.setAlbumImageClickHandler(event -> {
             if (getCenter() == musicPlayDetailContainer) {
@@ -76,6 +120,8 @@ public class HomePage extends BorderPane {
         System.out.println("调用了显示音乐播放器详情页面");
         // 隐藏原有的中心内容
         if (getCenter() != musicPlayDetailContainer) {
+            // 保存当前的中心内容作为上一个页面
+            previousCenterContent = getCenter();
             // 隐藏左侧菜单栏实现全屏效果
             setLeft(null);
             // 显示音乐详情页面
@@ -86,16 +132,57 @@ public class HomePage extends BorderPane {
     }
 
     /**
-     * 返回主页
+     * 执行搜索
+     * @param keyword 搜索关键词
+     */
+    private void performSearch(String keyword) {
+        isSearching = true;
+        // 设置搜索结果页面
+        searchResultContainer.setVisible(true);
+        centerPanel.setCenter(searchResultContainer);
+        // 执行搜索
+        searchResultContainer.search(keyword);
+    }
+
+    /**
+     * 返回主页或上一个页面
      */
     public void backToHome() {
         System.out.println("调用了返回主页");
         // 恢复左侧菜单栏
         setLeft(homePageMenuPanel);
+        
         // 恢复原来的布局结构
-        setCenter(centerPanel);
+        if (previousCenterContent != null) {
+            // 如果有保存的上一个页面，恢复到该页面
+            setCenter(previousCenterContent);
+        } else {
+            // 否则恢复到默认的主页
+            centerPanel.setTop(headerContainer);
+            centerPanel.setCenter(homePageContentContainer);
+            setCenter(centerPanel);
+        }
+        
         // 隐藏音乐详情页面
         musicPlayDetailContainer.setVisible(false);
+        
+        // 清理搜索结果数据
+        searchResultContainer.clear();
+    }
+    
+    /**
+     * 显示本地下载页面
+     */
+    public void showLocalDownloadPage() {
+        System.out.println("调用了显示本地下载页面");
+        // 显示本地下载页面
+        localDownloadPage.setVisible(true);
+        // 切换中心内容到本地下载页面
+        centerPanel.setCenter(localDownloadPage);
+        // 更新previousCenterContent为当前中心内容
+        if (getCenter() == centerPanel) {
+            previousCenterContent = centerPanel;
+        }
     }
 
     public HomePageMenuPanel getMenuPanel() {

@@ -3,5 +3,6 @@
     "maven.executable.path": "D:\\software\\developer\\maven\\bin\\mvn.cmd",
     "maven.settingsFile": "D:\\software\\developer\\maven\\conf\\settings.xml",
     "java.home": "D:\\software\\developer\\jdk\\jdk21",
-    "java.configuration.maven.userSettings": "D:\\software\\developer\\maven\\conf\\settings.xml"
+    "java.configuration.maven.userSettings": "D:\\software\\developer\\maven\\conf\\settings.xml",
+    "java.debug.settings.onBuildFailureProceed": true
 }

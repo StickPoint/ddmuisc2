@@ -97,4 +97,12 @@ public class HomePageMenuItemPanel extends VBox {
         // 添加所有菜单项
         getChildren().addAll(recommend, jingxuan, podcast, roam, myMusic, recent, myPlaylist);
     }
+    
+    /**
+     * 获取菜单的ToggleGroup
+     * @return ToggleGroup对象
+     */
+    public ToggleGroup getToggleGroup() {
+        return genderGroup;
+    }
 }

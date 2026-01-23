@@ -3,6 +3,7 @@ package com.stickpoint.ddmusic.page.node;
 import com.stickpoint.ddmusic.common.utils.FontUtil;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -16,6 +17,8 @@ import javafx.scene.text.Text;
  * @author fntp
  */
 public class HomePageMenuPanel extends VBox {
+    
+    private HomePageMenuItemPanel homePageMenuItemPanel;
 
     public HomePageMenuPanel() {
         setMinWidth(180);
@@ -47,12 +50,23 @@ public class HomePageMenuPanel extends VBox {
         getChildren().add(headerPane);
 
         // 添加菜单项面板
-        HomePageMenuItemPanel homePageMenuItemPanel = new HomePageMenuItemPanel();
+        homePageMenuItemPanel = new HomePageMenuItemPanel();
         homePageMenuItemPanel.setPadding(new Insets(35, 0, 0, 30));
         getChildren().add(homePageMenuItemPanel);
 
         // 设置背景
         setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, null)));
+    }
+    
+    /**
+     * 获取菜单的ToggleGroup
+     * @return ToggleGroup对象
+     */
+    public ToggleGroup getToggleGroup() {
+        if (homePageMenuItemPanel != null) {
+            return homePageMenuItemPanel.getToggleGroup();
+        }
+        return null;
     }
 
     private static SvgIcon getSvgIcon() {

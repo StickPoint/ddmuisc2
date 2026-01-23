@@ -92,6 +92,36 @@ public class HttpUtils {
      */
     private static final HttpClient HTTP_CLIENT = HttpClient.newBuilder().build();
 
+    /**
+     * TuneFree API 基础URL
+     */
+    private static final String TUNE_FREE_API_BASE_URL = "https://api.tunefree.fun";
+
+    /**
+     * TuneFree API 搜索接口
+     */
+    private static final String TUNE_FREE_API_SEARCH = TUNE_FREE_API_BASE_URL + "/search";
+
+    /**
+     * TuneFree API 详情接口
+     */
+    private static final String TUNE_FREE_API_DETAIL = TUNE_FREE_API_BASE_URL + "/detail";
+
+    /**
+     * TuneFree API 播放接口
+     */
+    private static final String TUNE_FREE_API_PLAY = TUNE_FREE_API_BASE_URL + "/play";
+
+    /**
+     * TuneFree API 推荐接口
+     */
+    private static final String TUNE_FREE_API_RECOMMEND = TUNE_FREE_API_BASE_URL + "/recommend";
+
+    /**
+     * TuneFree API 榜单接口
+     */
+    private static final String TUNE_FREE_API_RANK = TUNE_FREE_API_BASE_URL + "/rank";
+
     public static String doAbsoluteGet(String requestUrl){
         Map<String,String> headerMap = new LinkedHashMap<>();
         headerMap.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36");
@@ -105,6 +135,119 @@ public class HttpUtils {
             log.error(e.getMessage());
         }
         return null;
+    }
+
+    /**
+     * 执行TuneFree API的GET请求
+     * @param requestUrl 请求地址
+     * @return 返回请求结果
+     */
+    public static String doTuneFreeGet(String requestUrl){
+        Map<String,String> headerMap = new LinkedHashMap<>();
+        headerMap.put("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36");
+        headerMap.put("Accept", "*/*");
+        headerMap.put("Accept-Encoding", "gzip, deflate, br");
+        headerMap.put("Connection", "keep-alive");
+        try {
+            return doGet(requestUrl,headerMap);
+        } catch (Exception e) {
+            log.error("TuneFree API请求失败: {}", e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * 执行TuneFree API的GET请求，携带参数
+     * @param requestUrl 请求地址
+     * @param paramMap 参数映射
+     * @return 返回请求结果
+     */
+    public static String doTuneFreeGetWithParams(String requestUrl, Map<String,Object> paramMap) {
+        StringBuilder builder = new StringBuilder(requestUrl);
+        if (!paramMap.isEmpty()) {
+            builder.append("?");
+            Iterator<Entry<String, Object>> iterator = paramMap.entrySet().iterator();
+            while (iterator.hasNext()) {
+                Entry<String, Object> entry = iterator.next();
+                Object value = entry.getValue();
+                if (value instanceof String){
+                    value = URLEncoder.encode((String) value, StandardCharsets.UTF_8);
+                }
+                builder.append(entry.getKey()).append("=").append(value);
+                if (iterator.hasNext()) {
+                    builder.append("&");
+                }
+            }
+            String finalRequestUrl = builder.toString();
+            log.debug("最终请求URL: {}", finalRequestUrl);
+            return doTuneFreeGet(finalRequestUrl);
+        }
+        log.debug("最终请求URL: {}", requestUrl);
+        return doTuneFreeGet(requestUrl);
+    }
+
+    /**
+     * 搜索音乐
+     * @param keyword 搜索关键词
+     * @return 搜索结果
+     */
+    public static String searchMusic(String keyword) {
+        log.info("搜索音乐关键词: {}", keyword);
+        Map<String, Object> params = new HashMap<>();
+        params.put("keyword", keyword);
+        String result = doTuneFreeGetWithParams(TUNE_FREE_API_SEARCH, params);
+        log.debug("搜索音乐结果: {}", result);
+        return result;
+    }
+
+    /**
+     * 获取音乐详情
+     * @param id 音乐ID
+     * @return 音乐详情
+     */
+    public static String getMusicDetail(String id) {
+        log.info("获取音乐详情，ID: {}", id);
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        String result = doTuneFreeGetWithParams(TUNE_FREE_API_DETAIL, params);
+        log.debug("音乐详情结果: {}", result);
+        return result;
+    }
+
+    /**
+     * 获取音乐播放链接
+     * @param id 音乐ID
+     * @return 播放链接
+     */
+    public static String getMusicPlayUrl(String id) {
+        log.info("获取音乐播放链接，ID: {}", id);
+        Map<String, Object> params = new HashMap<>();
+        params.put("id", id);
+        String result = doTuneFreeGetWithParams(TUNE_FREE_API_PLAY, params);
+        log.debug("音乐播放链接结果: {}", result);
+        return result;
+    }
+
+    /**
+     * 获取推荐音乐
+     * @return 推荐音乐列表
+     */
+    public static String getRecommendMusic() {
+        log.info("获取推荐音乐");
+        String result = doTuneFreeGet(TUNE_FREE_API_RECOMMEND);
+        log.debug("推荐音乐结果: {}", result);
+        return result;
+    }
+
+    /**
+     * 获取音乐榜单
+     * @return 音乐榜单
+     */
+    public static String getMusicRank() {
+        log.info("获取音乐榜单");
+        String result = doTuneFreeGet(TUNE_FREE_API_RANK);
+        log.debug("音乐榜单结果: {}", result);
+        return result;
     }
 
     /**
@@ -171,6 +314,52 @@ public class HttpUtils {
         return connection;
     }
 
+
+    /**
+     * 获取重定向后的实际URL
+     * @param url 可能包含重定向的URL
+     * @return 实际的URL
+     * @throws IOException 抛出异常
+     */
+    public static String getRedirectUrl(String url) throws IOException {
+        // 如果是本地文件URL，直接返回
+        if (url.startsWith("file:")) {
+            return url;
+        }
+        
+        HttpURLConnection conn = null;
+        try {
+            URL urlObj = new URL(url);
+            // 只处理HTTP/HTTPS URL
+            if (!"http".equals(urlObj.getProtocol()) && !"https".equals(urlObj.getProtocol())) {
+                return url;
+            }
+            
+            conn = (HttpURLConnection) urlObj.openConnection();
+            conn.setRequestMethod("GET");
+            conn.setInstanceFollowRedirects(false);
+            conn.setConnectTimeout(5000);
+            conn.setReadTimeout(5000);
+            conn.addRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36");
+            
+            int responseCode = conn.getResponseCode();
+            if (responseCode == HttpURLConnection.HTTP_MOVED_TEMP || responseCode == HttpURLConnection.HTTP_MOVED_PERM || responseCode == HttpURLConnection.HTTP_SEE_OTHER) {
+                String location = conn.getHeaderField("Location");
+                // 如果重定向的URL是相对路径，将其转换为绝对路径
+                if (location != null && !location.startsWith("http")) {
+                    URL baseUrl = new URL(url);
+                    URL absoluteUrl = new URL(baseUrl, location);
+                    return absoluteUrl.toString();
+                }
+                return location;
+            }
+            return url;
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
+    }
 
     /**
      * 发送 HTTP GET 请求
