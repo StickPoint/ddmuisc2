@@ -1,0 +1,173 @@
+21:00:02.557 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:00:02.559 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+21:00:02.559 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:00:02.559 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+21:00:02.559 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:00:03.313 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+21:00:03.313 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+21:00:03.340 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+21:00:03.341 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+21:00:03.341 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+21:00:03.342 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+21:00:03.342 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/G:/codeData/java/javafxProjects/bendy2025/ddmusic/target/classes/img/logo.svg
+21:00:03.343 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+21:00:03.344 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+21:00:03.535 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+21:00:03.536 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+21:00:03.536 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+22:46:13.071 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+22:46:13.073 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+22:46:13.073 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+22:46:13.073 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+22:46:13.074 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+22:46:13.668 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+22:46:13.669 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+22:46:13.686 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+22:46:13.687 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+22:46:13.688 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+22:46:13.688 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+22:46:13.688 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/G:/codeData/java/javafxProjects/bendy2025/ddmusic/target/classes/img/logo.svg
+22:46:13.689 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+22:46:13.689 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+22:46:13.881 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+22:46:13.881 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+22:46:13.882 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+22:47:37.412 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+22:47:37.413 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: null
+22:47:37.413 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: jingxuan
+22:47:37.413 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：jingxuan
+22:47:37.413 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+22:47:37.706 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+22:47:37.706 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: jingxuan
+22:47:37.708 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: podcast
+22:47:37.708 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：podcast
+22:47:37.708 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：jingxuan
+22:47:37.708 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+22:48:07.252 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+22:48:07.252 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: podcast
+22:48:07.252 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: myPlaylist
+22:48:07.252 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：myPlaylist
+22:48:07.252 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：podcast
+22:48:07.253 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+22:48:08.011 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+22:48:08.011 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: myPlaylist
+22:48:08.011 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: myMusic
+22:48:08.012 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：myMusic
+22:48:08.012 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：myPlaylist
+22:48:08.012 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+22:48:08.371 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+22:48:08.371 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: myMusic
+22:48:08.371 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recent
+22:48:08.372 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recent
+22:48:08.372 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：myMusic
+22:48:08.372 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+22:48:08.883 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+22:48:08.883 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: recent
+22:48:08.884 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: roam
+22:48:08.884 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：roam
+22:48:08.884 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：recent
+22:48:08.884 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+22:48:09.154 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+22:48:09.155 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: roam
+22:48:09.155 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: podcast
+22:48:09.155 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：podcast
+22:48:09.155 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：roam
+22:48:09.155 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+22:48:09.435 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+22:48:09.435 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: podcast
+22:48:09.435 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+22:48:09.435 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+22:48:09.435 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：podcast
+22:48:09.435 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+23:14:30.025 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+23:14:30.027 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+23:14:30.027 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+23:14:30.027 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+23:14:30.027 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+23:16:30.128 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+23:16:30.130 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+23:16:30.130 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+23:16:30.130 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+23:16:30.130 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+23:17:01.389 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+23:17:01.390 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+23:17:01.390 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+23:17:01.391 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+23:17:01.391 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+23:17:01.894 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+23:17:01.895 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+23:17:01.919 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+23:17:01.919 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+23:17:01.919 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+23:17:01.920 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+23:17:01.920 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/G:/codeData/java/javafxProjects/bendy2025/ddmusic/target/classes/img/logo.svg
+23:17:01.921 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+23:17:01.921 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+23:17:02.092 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+23:17:02.093 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+23:17:02.094 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+23:22:38.669 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+23:22:38.670 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+23:22:38.670 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+23:22:38.670 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+23:22:38.670 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+23:22:39.167 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+23:22:39.168 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+23:22:39.191 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+23:22:39.191 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+23:22:39.192 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+23:22:39.192 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+23:22:39.192 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/G:/codeData/java/javafxProjects/bendy2025/ddmusic/target/classes/img/logo.svg
+23:22:39.193 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+23:22:39.193 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+23:22:39.401 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+23:22:39.402 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+23:22:39.402 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+23:29:38.117 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+23:29:38.119 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+23:29:38.119 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+23:29:38.119 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+23:29:38.119 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+23:29:38.619 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+23:29:38.619 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+23:29:38.645 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+23:29:38.645 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+23:29:38.646 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+23:29:38.646 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+23:29:38.646 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/G:/codeData/java/javafxProjects/bendy2025/ddmusic/target/classes/img/logo.svg
+23:29:38.647 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+23:29:38.647 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+23:30:31.920 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+23:30:31.922 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+23:30:31.922 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+23:30:31.923 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+23:30:31.923 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+23:30:32.435 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+23:30:32.435 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+23:30:32.465 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+23:30:32.465 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+23:30:32.466 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+23:30:32.467 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+23:30:32.467 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/G:/codeData/java/javafxProjects/bendy2025/ddmusic/target/classes/img/logo.svg
+23:30:32.468 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+23:30:32.469 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+23:30:32.673 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+23:30:32.673 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+23:30:32.674 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+23:32:26.615 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+23:32:26.617 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+23:32:26.617 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+23:32:26.617 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+23:32:26.617 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+23:32:27.110 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+23:32:27.110 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+23:32:27.130 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+23:32:27.130 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+23:32:27.130 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+23:32:27.130 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+23:32:27.131 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/G:/codeData/java/javafxProjects/bendy2025/ddmusic/target/classes/img/logo.svg
+23:32:27.131 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+23:32:27.135 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+23:32:27.344 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+23:32:27.345 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+23:32:27.345 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成

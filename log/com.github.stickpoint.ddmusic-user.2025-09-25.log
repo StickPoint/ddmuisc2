@@ -1,0 +1,38 @@
+21:00:47.973 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:00:47.974 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+21:00:47.974 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:00:47.974 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+21:00:47.974 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:00:48.639 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:00:48.642 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+21:00:48.643 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+21:00:48.660 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+21:00:48.660 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+21:00:48.661 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+21:00:48.661 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+21:00:48.661 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/G:/codeData/java/javafxProjects/bendy2025/ddmusic/target/classes/img/logo.svg
+21:00:48.662 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+21:00:48.662 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+21:00:48.880 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+21:00:48.882 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+21:00:48.882 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+21:00:51.940 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+21:00:54.601 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+21:00:54.601 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
+21:00:54.602 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+21:00:55.729 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+21:01:00.088 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+21:01:00.088 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
+21:01:00.089 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+21:01:01.097 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+21:01:02.984 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+21:01:02.985 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
+21:01:02.986 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+21:01:04.081 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+21:03:20.401 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+21:03:20.401 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
+21:03:20.403 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+21:04:05.217 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+21:05:33.635 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+21:05:33.635 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
+21:05:33.636 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0

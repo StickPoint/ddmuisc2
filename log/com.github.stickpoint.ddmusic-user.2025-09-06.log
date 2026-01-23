@@ -1,0 +1,40 @@
+21:39:02.843 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:39:02.845 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.7
+21:39:02.845 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:39:02.845 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: G:\codeData\java\javafxProjects\bendy2025\ddmusic
+21:39:02.845 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:39:03.432 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+21:39:03.432 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+21:39:03.452 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+21:39:03.452 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+21:39:03.453 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+21:39:03.453 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+21:39:03.453 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/G:/codeData/java/javafxProjects/bendy2025/ddmusic/target/classes/img/logo.svg
+21:39:03.454 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+21:39:03.454 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+21:39:03.674 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+21:39:03.675 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+21:39:03.675 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+21:39:38.077 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:39:38.077 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: null
+21:39:38.078 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: jingxuan
+21:39:38.078 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：jingxuan
+21:39:38.078 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+21:39:38.503 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:39:38.503 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: jingxuan
+21:39:38.503 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: podcast
+21:39:38.503 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：podcast
+21:39:38.503 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：jingxuan
+21:39:38.504 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+21:39:38.973 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:39:38.974 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: podcast
+21:39:38.974 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: jingxuan
+21:39:38.974 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：jingxuan
+21:39:38.974 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：podcast
+21:39:38.974 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+21:39:40.203 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:39:40.205 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: jingxuan
+21:39:40.205 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+21:39:40.205 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+21:39:40.205 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：jingxuan
+21:39:40.205 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================

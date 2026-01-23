@@ -1,0 +1,22 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.configuration.maven.userSettings": null,
+    "java.maven.downloadSources": true,
+    "java.maven.downloadJavadoc": true,
+    "java.debug.settings.onBuildFailureProceed": true,
+    "java.completion.enabled": true,
+    "java.format.enabled": true,
+    "java.signatureHelp.enabled": true,
+    "java.contentProvider.preferred": "fernflower",
+    "java.import.maven.enabled": true,
+    "java.maven.offline": false,
+    "maven.executable.path": "mvn",
+    "maven.terminal.useJavaHome": false,
+    "maven.terminal.customEnv": [
+        {
+            "environmentVariable": "JAVA_HOME",
+            "value": "${env:JAVA_HOME}"
+        }
+    ]
+}

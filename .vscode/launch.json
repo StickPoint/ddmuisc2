@@ -1,0 +1,96 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch DDMusic (Module Mode)",
+            "request": "launch",
+            "mainClass": "com.stickpoint.ddmusic/com.stickpoint.ddmusic.App",
+            "projectName": "ddmusic-fx",
+            "modulePaths": [
+                "${workspaceFolder}/target/classes",
+                "G:/dependencyData/mavenResource/com/github/leewyatt/rxcontrols/11.0.3/rxcontrols-11.0.3.jar",
+                "G:/dependencyData/mavenResource/ch/qos/logback/logback-classic/1.5.13/logback-classic-1.5.13.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-controls/21.0.7/javafx-controls-21.0.7-win.jar",
+                "G:/dependencyData/mavenResource/org/slf4j/slf4j-api/2.0.3/slf4j-api-2.0.3.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-fxml/21.0.7/javafx-fxml-21.0.7-win.jar",
+                "G:/dependencyData/mavenResource/io/github/typhon0/AnimateFX/1.2.4/AnimateFX-1.2.4.jar",
+                "G:/dependencyData/mavenResource/com/google/code/gson/gson/2.10/gson-2.10.jar",
+                "G:/dependencyData/mavenResource/ch/qos/logback/logback-core/1.5.13/logback-core-1.5.13.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-base/21.0.7/javafx-base-21.0.7-win.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-swing/21.0.7/javafx-swing-21.0.7-win.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-media/21.0.7/javafx-media-21.0.7-win.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-graphics/21.0.7/javafx-graphics-21.0.7-win.jar"
+            ],
+            "classPaths": [
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-controls/21.0.7/javafx-controls-21.0.7.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-graphics/21.0.7/javafx-graphics-21.0.7.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-base/21.0.7/javafx-base-21.0.7.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-fxml/21.0.7/javafx-fxml-21.0.7.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-media/21.0.7/javafx-media-21.0.7.jar",
+                "G:/dependencyData/mavenResource/org/openjfx/javafx-swing/21.0.7/javafx-swing-21.0.7.jar"
+            ],
+            "vmArgs": [
+                "-Dfile.encoding=UTF-8",
+                "-Dsun.stdout.encoding=UTF-8",
+                "-Dsun.stderr.encoding=UTF-8"
+            ],
+            "args": "",
+            "console": "internalConsole",
+            "encoding": "UTF-8",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "JAVA_HOME": "D:/develop/jdk/jdk-21.0.7"
+            }
+        },
+        {
+            "type": "java",
+            "name": "Launch DDMusic (Legacy)",
+            "request": "launch",
+            "mainClass": "com.stickpoint.ddmusic.App",
+            "projectName": "ddmusic-fx",
+            "vmArgs": [
+                "--module-path", "${workspaceFolder}/target/classes",
+                "--add-modules", "javafx.controls,javafx.fxml,javafx.media,javafx.swing",
+                "--add-exports", "javafx.base/com.sun.javafx.runtime=ALL-UNNAMED",
+                "--add-exports", "javafx.controls/com.sun.javafx.scene.control.behavior=ALL-UNNAMED",
+                "--add-exports", "javafx.controls/com.sun.javafx.scene.control=ALL-UNNAMED",
+                "--add-exports", "javafx.base/com.sun.javafx.binding=ALL-UNNAMED",
+                "--add-exports", "javafx.graphics/com.sun.javafx.stage=ALL-UNNAMED",
+                "--add-exports", "javafx.base/com.sun.javafx.event=ALL-UNNAMED",
+                "-Dfile.encoding=UTF-8",
+                "-Dsun.stdout.encoding=UTF-8",
+                "-Dsun.stderr.encoding=UTF-8"
+            ],
+            "args": "",
+            "console": "internalConsole",
+            "encoding": "UTF-8",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "JAVA_HOME": "D:/develop/jdk/jdk-21.0.7"
+            }
+        },
+        {
+            "type": "java",
+            "name": "Launch DDMusic (Maven)",
+            "request": "launch",
+            "mainClass": "com.stickpoint.ddmusic.App",
+            "projectName": "ddmusic-fx",
+            "preLaunchTask": "maven: compile",
+            "vmArgs": [
+                "--module-path", "${workspaceFolder}/target/dependency",
+                "--add-modules", "javafx.controls,javafx.fxml,javafx.media,javafx.swing",
+                "-Dfile.encoding=UTF-8",
+                "-Dsun.stdout.encoding=UTF-8",
+                "-Dsun.stderr.encoding=UTF-8"
+            ],
+            "args": "",
+            "console": "internalConsole",
+            "encoding": "UTF-8",
+            "cwd": "${workspaceFolder}",
+            "env": {
+                "JAVA_HOME": "D:/develop/jdk/jdk-21.0.7"
+            }
+        }
+    ]
+}

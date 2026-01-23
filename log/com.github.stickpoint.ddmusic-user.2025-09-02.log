@@ -1,0 +1,29 @@
+21:59:13.944 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:59:13.945 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: null
+21:59:13.945 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+21:59:13.946 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+21:59:13.946 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+21:59:14.527 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:59:14.528 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: recommend
+21:59:14.528 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: podcast
+21:59:14.528 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：podcast
+21:59:14.528 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：recommend
+21:59:14.528 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+21:59:14.847 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:59:14.847 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: podcast
+21:59:14.847 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: jingxuan
+21:59:14.847 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：jingxuan
+21:59:14.847 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：podcast
+21:59:14.847 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+21:59:15.782 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:59:15.783 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: jingxuan
+21:59:15.783 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+21:59:15.783 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+21:59:15.783 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：jingxuan
+21:59:15.783 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+21:59:16.862 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:59:16.862 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: recommend
+21:59:16.862 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: myPlaylist
+21:59:16.862 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：myPlaylist
+21:59:16.863 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：recommend
+21:59:16.863 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================

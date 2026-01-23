@@ -1,0 +1,12 @@
+19:22:08.151 [JavaFX-Launcher] INFO  com.stickpoint.ddmusic.App - 开始加载本地系统核心配置参数数据
+19:22:08.153 [JavaFX-Launcher] INFO  c.s.d.c.utils.SystemPropertiesUtil - 正在加载系统核心参数数据
+19:22:08.154 [JavaFX-Launcher] INFO  c.s.d.c.utils.SystemPropertiesUtil - 系统核心参数数据加载成功
+19:22:09.017 [JavaFX-Launcher] INFO  com.stickpoint.ddmusic.App - 开始加载加载远程系统配置
+19:40:24.278 [JavaFX-Launcher] INFO  com.stickpoint.ddmusic.App - 开始加载本地系统核心配置参数数据
+19:40:24.280 [JavaFX-Launcher] INFO  c.s.d.c.utils.SystemPropertiesUtil - 正在加载系统核心参数数据
+19:40:24.281 [JavaFX-Launcher] INFO  c.s.d.c.utils.SystemPropertiesUtil - 系统核心参数数据加载成功
+19:40:25.058 [JavaFX-Launcher] INFO  com.stickpoint.ddmusic.App - 开始加载加载远程系统配置
+19:40:58.537 [JavaFX-Launcher] INFO  com.stickpoint.ddmusic.App - 开始加载本地系统核心配置参数数据
+19:40:58.539 [JavaFX-Launcher] INFO  c.s.d.c.utils.SystemPropertiesUtil - 正在加载系统核心参数数据
+19:40:58.539 [JavaFX-Launcher] INFO  c.s.d.c.utils.SystemPropertiesUtil - 系统核心参数数据加载成功
+19:40:58.956 [JavaFX-Launcher] INFO  com.stickpoint.ddmusic.App - 开始加载加载远程系统配置
