@@ -1,0 +1,358 @@
+/* 统一音乐表格样式 */
+
+/* 表格容器 */
+.unified-music-table {
+    -fx-background-color: #ffffff;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-effect: none;
+}
+
+/* 表格 */
+.unified-music-table .table-view {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+    -fx-control-inner-background: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-padding: 0;
+}
+
+/* 表格列标题 */
+.unified-music-table .column-header-background {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #f0f0f0;
+}
+
+.unified-music-table .column-header {
+    -fx-background-color: transparent;
+    -fx-padding: 12px 0;
+    -fx-border-width: 0;
+}
+
+.unified-music-table .column-header .label {
+    -fx-font-size: 13px;
+    -fx-font-weight: 600;
+    -fx-text-fill: #666666;
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 0 16px;
+}
+
+/* 表格行 */
+.unified-music-table .table-row-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 16px 0;
+    -fx-border-width: 0 0 1px 0;
+    -fx-border-color: #f5f5f5;
+    -fx-transition: all 0.2s ease;
+}
+
+.unified-music-table .table-row-cell:selected {
+    -fx-background-color: #fafafa; /* 鱼肚白 */
+    -fx-background-radius: 4px;
+}
+
+.unified-music-table .table-row-cell:selected .table-cell {
+    -fx-text-fill: #e53e3e; /* 中国红 */
+}
+
+.unified-music-table .table-row-cell:selected .table-cell.song-name {
+    -fx-text-fill: #e53e3e; /* 中国红 */
+    -fx-font-weight: 600;
+}
+
+.unified-music-table .table-row-cell:selected .table-cell.artist-name {
+    -fx-text-fill: #e53e3e;
+}
+
+.unified-music-table .table-row-cell:selected .table-cell.album-name {
+    -fx-text-fill: #e53e3e;
+}
+
+.unified-music-table .table-row-cell:selected .table-cell.source-name {
+    -fx-text-fill: #e53e3e;
+}
+
+.unified-music-table .table-row-cell:hover {
+    -fx-background-color: #fafafa;
+    -fx-background-radius: 4px;
+}
+
+/* 表格单元格 */
+.unified-music-table .table-cell {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-padding: 0 16px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-alignment: CENTER_LEFT;
+    -fx-transition: all 0.2s ease;
+}
+
+/* 表格单元格内容 */
+.unified-music-table .table-cell.song-name {
+    -fx-font-weight: 500;
+    -fx-text-fill: #1a1a1a;
+}
+
+.unified-music-table .table-cell.artist-name {
+    -fx-text-fill: #666666;
+}
+
+.unified-music-table .table-cell.album-name {
+    -fx-text-fill: #999999;
+}
+
+.unified-music-table .table-cell.source-name {
+    -fx-text-fill: #999999;
+    -fx-alignment: CENTER;
+    -fx-font-size: 12px;
+}
+
+/* 操作列按钮 */
+.unified-music-table .action-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: #999999;
+    -fx-font-size: 18px;
+    -fx-padding: 8px;
+    -fx-min-width: 40px;
+    -fx-min-height: 40px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
+    -fx-background-radius: 50%;
+}
+
+.unified-music-table .action-button:hover {
+    -fx-background-color: #fffcfc;
+    -fx-text-fill: #920707;
+}
+
+/* 上下文菜单 */
+.unified-music-table .context-menu {
+    -fx-background-color: white !important;
+    -fx-border-color: #e0e0e0 !important;
+    -fx-border-radius: 8px !important;
+    -fx-background-radius: 8px !important;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 5) !important;
+    -fx-padding: 8px 0 !important;
+    -fx-min-width: 120px !important;
+}
+
+.unified-music-table .menu-item {
+    -fx-background-color: transparent !important;
+    -fx-padding: 8px 16px !important;
+    -fx-cursor: hand !important;
+    -fx-font-size: 14px !important;
+    -fx-text-fill: #333333 !important;
+    -fx-transition: all 0.2s ease !important;
+}
+
+.unified-music-table .menu-item:hover {
+    -fx-background-color: #fafafa !important; /* 鱼肚白 */
+    -fx-text-fill: #e53e3e !important; /* 中国红 */
+    -fx-font-weight: 500 !important;
+}
+
+.unified-music-table .menu-item:focused {
+    -fx-background-color: #fafafa !important; /* 鱼肚白 */
+    -fx-text-fill: #e53e3e !important; /* 中国红 */
+    -fx-font-weight: 500 !important;
+}
+
+/* 确保菜单项内容使用正确的样式 */
+.unified-music-table .menu-item .label {
+    -fx-text-fill: #333333 !important;
+}
+
+.unified-music-table .menu-item:hover .label {
+    -fx-text-fill: #e53e3e !important;
+}
+
+.unified-music-table .menu-item:focused .label {
+    -fx-text-fill: #e53e3e !important;
+}
+
+/* 直接为ContextMenu和MenuItem添加样式，不依赖父组件 */
+ContextMenu {
+    -fx-background-color: white !important;
+    -fx-border-color: #e0e0e0 !important;
+    -fx-border-radius: 8px !important;
+    -fx-background-radius: 8px !important;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 5) !important;
+    -fx-padding: 8px 0 !important;
+    -fx-min-width: 120px !important;
+}
+
+MenuItem {
+    -fx-background-color: transparent !important;
+    -fx-padding: 8px 16px !important;
+    -fx-cursor: hand !important;
+    -fx-font-size: 14px !important;
+    -fx-text-fill: #333333 !important;
+    -fx-transition: all 0.2s ease !important;
+}
+
+MenuItem:hover {
+    -fx-background-color: #fafafa !important; /* 鱼肚白 */
+    -fx-text-fill: #e53e3e !important; /* 中国红 */
+    -fx-font-weight: 500 !important;
+}
+
+MenuItem:focused {
+    -fx-background-color: #fafafa !important; /* 鱼肚白 */
+    -fx-text-fill: #e53e3e !important; /* 中国红 */
+    -fx-font-weight: 500 !important;
+}
+
+MenuItem .label {
+    -fx-text-fill: #333333 !important;
+}
+
+MenuItem:hover .label {
+    -fx-text-fill: #e53e3e !important;
+}
+
+MenuItem:focused .label {
+    -fx-text-fill: #e53e3e !important;
+}
+
+/* 自定义菜单样式 */
+.custom-context-menu {
+    -fx-background-color: white !important;
+    -fx-border-color: #e0e0e0 !important;
+    -fx-border-radius: 8px !important;
+    -fx-background-radius: 8px !important;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 10, 0, 0, 5) !important;
+    -fx-padding: 8px 0 !important;
+    -fx-min-width: 120px !important;
+}
+
+.custom-menu-item {
+    -fx-background-color: transparent !important;
+    -fx-padding: 8px 16px !important;
+    -fx-cursor: hand !important;
+    -fx-font-size: 14px !important;
+    -fx-text-fill: #333333 !important;
+    -fx-transition: all 0.2s ease !important;
+}
+
+.custom-menu-item:hover {
+    -fx-background-color: #fafafa !important; /* 鱼肚白 */
+    -fx-text-fill: #e53e3e !important; /* 中国红 */
+    -fx-font-weight: 500 !important;
+}
+
+.custom-menu-item:focused {
+    -fx-background-color: #fafafa !important; /* 鱼肚白 */
+    -fx-text-fill: #e53e3e !important; /* 中国红 */
+    -fx-font-weight: 500 !important;
+}
+
+.custom-menu-item .label {
+    -fx-text-fill: #333333 !important;
+}
+
+.custom-menu-item:hover .label {
+    -fx-text-fill: #e53e3e !important;
+}
+
+.custom-menu-item:focused .label {
+    -fx-text-fill: #e53e3e !important;
+}
+
+/* 分页控件 */
+.unified-music-table .pagination-box {
+    -fx-alignment: CENTER;
+    -fx-spacing: 16px;
+    -fx-padding: 16px 0;
+    -fx-border-width: 1px 0 0 0;
+    -fx-border-color: #f5f5f5;
+}
+
+.unified-music-table .page-button {
+    -fx-background-color: #ffffff;
+    -fx-text-fill: #666666;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 6px;
+    -fx-background-radius: 6px;
+    -fx-padding: 8px 16px;
+    -fx-font-size: 14px;
+    -fx-cursor: hand;
+    -fx-transition: all 0.2s ease;
+    -fx-min-width: 80px;
+}
+
+.unified-music-table .page-button:hover {
+    -fx-background-color: #fafafa;
+    -fx-border-color: #d0d0d0;
+    -fx-text-fill: #333333;
+}
+
+.unified-music-table .page-button:disabled {
+    -fx-background-color: #f5f5f5;
+    -fx-text-fill: #cccccc;
+    -fx-border-color: #e0e0e0;
+    -fx-cursor: default;
+}
+
+.unified-music-table .page-info {
+    -fx-font-size: 14px;
+    -fx-text-fill: #666666;
+    -fx-padding: 8px 0;
+}
+
+/* 隐藏所有滚动条 */
+.unified-music-table .scroll-bar {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+.unified-music-table .scroll-bar .track,
+.unified-music-table .scroll-bar .thumb,
+.unified-music-table .scroll-bar .increment-button,
+.unified-music-table .scroll-bar .decrement-button {
+    -fx-background-color: transparent;
+    -fx-opacity: 0;
+    -fx-padding: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+/* 确保滚动条不显示 */
+.unified-music-table .table-view .virtual-flow .scroll-bar,
+.unified-music-table .table-view .virtual-flow .scroll-bar:horizontal,
+.unified-music-table .table-view .virtual-flow .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+}
+
+/* 动画效果 */
+.unified-music-table .table-row-cell {
+    -fx-scale-x: 1;
+    -fx-scale-y: 1;
+    -fx-opacity: 1;
+    -fx-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.unified-music-table .table-row-cell:empty {
+    -fx-opacity: 0;
+    -fx-padding: 0;
+}
+
+/* 表头样式 */
+.unified-music-table .table-view .column-header-background {
+    -fx-background-color: white;
+    -fx-background-insets: 0 0 1px 0;
+}
+
+/* 移除表格默认样式 */
+.unified-music-table .table-view {
+    -fx-table-header-border-color: transparent;
+    -fx-table-cell-border-color: transparent;
+}

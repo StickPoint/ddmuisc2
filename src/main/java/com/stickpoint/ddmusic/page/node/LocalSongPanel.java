@@ -9,17 +9,15 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.MenuButton;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 本地歌曲面板
@@ -28,7 +26,7 @@ import javafx.stage.Stage;
  */
 public class LocalSongPanel extends BorderPane {
 
-    private TableView<LocalSong> songTable;
+    private UnifiedMusicTable songTable;
     private ComboBox<String> folderComboBox;
     private Button scanButton;
     private Label statusLabel;
@@ -43,25 +41,8 @@ public class LocalSongPanel extends BorderPane {
     }
 
     private void initialize() {
-        // 创建表格
-        songTable = new TableView<>();
-        songTable.setStyle("-fx-background-color: white;");
-        
-        // 创建列
-        TableColumn<LocalSong, String> nameColumn = new TableColumn<>("歌曲名");
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        nameColumn.setPrefWidth(250);
-        
-        TableColumn<LocalSong, String> artistColumn = new TableColumn<>("歌手");
-        artistColumn.setCellValueFactory(new PropertyValueFactory<>("artist"));
-        artistColumn.setPrefWidth(200);
-        
-        TableColumn<LocalSong, MenuButton> actionColumn = new TableColumn<>("操作");
-        actionColumn.setCellValueFactory(new PropertyValueFactory<>("actionMenu"));
-        actionColumn.setPrefWidth(150);
-        
-        // 添加列到表格
-        songTable.getColumns().addAll(nameColumn, artistColumn, actionColumn);
+        // 创建统一音乐表格
+        songTable = new UnifiedMusicTable(musicState, bottomMusicContainer);
         
         // 创建文件夹选择器
         folderComboBox = new ComboBox<>();
@@ -108,37 +89,6 @@ public class LocalSongPanel extends BorderPane {
         statusLabel = new Label("无数据");
         statusLabel.setFont(FontUtil.loadFont("/font/Y-B008YeZiGongChangDanDanHei-2.ttf", 16));
         statusLabel.setTextFill(Color.RED);
-        
-        // 初始化表格数据
-        ObservableList<LocalSong> data = FXCollections.observableArrayList();
-        // 这里先留空，实际实现时扫描文件夹获取数据
-        songTable.setItems(data);
-        
-        // 添加双击播放功能
-        songTable.setOnMouseClicked(event -> {
-            if (event.getClickCount() == 2) {
-                LocalSong selectedSong = songTable.getSelectionModel().getSelectedItem();
-                if (selectedSong != null) {
-                    System.out.println("双击播放歌曲: " + selectedSong.getName());
-                    // 使用本地文件路径创建URL，进行URL编码处理
-                    String filePath = selectedSong.getFilePath().replace("\\", "/");
-                    String fileUrl = "file:///" + filePath.replace(" ", "%20");
-                    // 更新音乐状态
-                    musicState.playMusic(
-                            selectedSong.getName(),
-                            selectedSong.getArtist(),
-                            "本地专辑",
-                            "",
-                            "本地",
-                            fileUrl,
-                            "",
-                            javafx.util.Duration.ZERO
-                    );
-                    // 播放音乐
-                    bottomMusicContainer.loadAndPlayMedia(fileUrl);
-                }
-            }
-        });
     }
 
     private void setupLayout() {
@@ -179,14 +129,15 @@ public class LocalSongPanel extends BorderPane {
         statusLabel.setText("正在扫描文件夹: " + selectedFolder);
         
         // 真实的文件夹扫描
-        ObservableList<LocalSong> data = FXCollections.observableArrayList();
+        List<UnifiedMusicTable.MusicItem> musicItems = new ArrayList<>();
         java.io.File folder = new java.io.File(selectedFolder);
         
         // 查找音乐文件
-        scanMusicFiles(folder, data);
+        scanMusicFiles(folder, musicItems);
         
-        songTable.setItems(data);
-        statusLabel.setText("扫描完成，找到 " + data.size() + " 首歌曲");
+        // 设置表格数据（本地歌曲）
+        songTable.setData(musicItems, true);
+        statusLabel.setText("扫描完成，找到 " + musicItems.size() + " 首歌曲");
     }
     
     /**
@@ -194,7 +145,7 @@ public class LocalSongPanel extends BorderPane {
      * @param folder 要扫描的文件夹
      * @param data 存储扫描结果的列表
      */
-    private void scanMusicFiles(java.io.File folder, ObservableList<LocalSong> data) {
+    private void scanMusicFiles(java.io.File folder, List<UnifiedMusicTable.MusicItem> data) {
         if (folder.isDirectory()) {
             java.io.File[] files = folder.listFiles();
             if (files != null) {
@@ -218,84 +169,28 @@ public class LocalSongPanel extends BorderPane {
                                 artist = songName.substring(0, separatorIndex);
                                 name = songName.substring(separatorIndex + 3);
                             }
-                            data.add(new LocalSong(name, artist, file.getAbsolutePath()));
+                            
+                            // 使用本地文件路径创建URL，进行URL编码处理
+                            String filePath = file.getAbsolutePath();
+                            String encodedFilePath = filePath.replace("\\", "/").replace(" ", "%20");
+                            String fileUrl = "file:///" + encodedFilePath;
+                            
+                            // 添加到统一音乐项列表
+                            data.add(new UnifiedMusicTable.MusicItem(
+                                    "local-" + file.hashCode(),
+                                    name,
+                                    artist,
+                                    "本地专辑",
+                                    "本地",
+                                    fileUrl,
+                                    "",
+                                    "",
+                                    filePath
+                            ));
                         }
                     }
                 }
             }
         }
-    }
-
-    /**
-     * 本地歌曲实体类
-     */
-    public class LocalSong {
-        private final String name;
-        private final String artist;
-        private final String filePath;
-        private final MenuButton actionMenu;
-        
-        public LocalSong(String name, String artist, String filePath) {
-            this.name = name;
-            this.artist = artist;
-            this.filePath = filePath;
-            this.actionMenu = createActionMenu();
-        }
-        
-        private MenuButton createActionMenu() {
-            MenuButton menuButton = new MenuButton("操作");
-            menuButton.setStyle("-fx-background-color: transparent; -fx-border-color: #ddd; -fx-border-width: 1;");
-            
-            MenuItem playItem = new MenuItem("播放");
-            playItem.setOnAction(e -> {
-                System.out.println("播放歌曲: " + name);
-                // 使用本地文件路径创建URL，进行URL编码处理
-                String encodedFilePath = filePath.replace("\\", "/").replace(" ", "%20");
-                String fileUrl = "file:///" + encodedFilePath;
-                // 更新音乐状态
-                musicState.playMusic(
-                        name,
-                        artist,
-                        "本地专辑",
-                        "",
-                        "本地",
-                        fileUrl,
-                        "",
-                        javafx.util.Duration.ZERO
-                );
-                // 播放音乐
-                bottomMusicContainer.loadAndPlayMedia(fileUrl);
-            });
-            
-            MenuItem deleteItem = new MenuItem("删除");
-            deleteItem.setOnAction(e -> System.out.println("删除歌曲: " + name));
-            
-            MenuItem removeItem = new MenuItem("移除");
-            removeItem.setOnAction(e -> System.out.println("移除歌曲: " + name));
-            
-            MenuItem collectItem = new MenuItem("收藏");
-            collectItem.setOnAction(e -> System.out.println("收藏歌曲: " + name));
-            
-            MenuItem likeItem = new MenuItem("喜欢");
-            likeItem.setOnAction(e -> System.out.println("喜欢歌曲: " + name));
-            
-            MenuItem shareItem = new MenuItem("分享");
-            shareItem.setOnAction(e -> System.out.println("分享歌曲: " + name));
-            
-            MenuItem openFolderItem = new MenuItem("打开文件夹");
-            openFolderItem.setOnAction(e -> System.out.println("打开文件夹: " + name));
-            
-            menuButton.getItems().addAll(
-                playItem, deleteItem, removeItem, collectItem, likeItem, shareItem, openFolderItem
-            );
-            
-            return menuButton;
-        }
-        
-        // getter方法
-        public String getName() { return name; }
-        public String getArtist() { return artist; }
-        public String getFilePath() { return filePath; }
-        public MenuButton getActionMenu() { return actionMenu; }
     }
 }

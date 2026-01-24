@@ -2200,3 +2200,168 @@ java.lang.NullPointerException: Cannot invoke "java.util.Map.containsKey(Object)
 21:18:52.019 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
 21:18:52.019 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
 21:18:52.020 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+21:21:22.583 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:21:22.586 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:21:22.587 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:21:22.587 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:21:22.588 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:21:24.263 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:21:24.277 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:21:24.409 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+21:21:24.410 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+21:21:24.487 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+21:21:24.488 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+21:21:24.490 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+21:21:24.491 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+21:21:24.492 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+21:21:24.493 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+21:21:24.494 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+21:21:25.025 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+21:21:25.027 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+21:21:25.027 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+21:22:25.866 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:22:25.867 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: null
+21:22:25.868 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+21:22:25.868 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+21:22:25.868 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+21:23:14.554 [Thread-183] INFO  c.s.d.p.node.SearchResultContainer - 开始搜索关键词: 关机又关机
+21:23:14.591 [Thread-183] INFO  c.s.d.common.utils.TuneHubApiUtils - 聚合搜索歌曲: 关键词=关机又关机
+21:23:15.608 [Thread-183] INFO  c.s.d.p.node.SearchResultContainer - 搜索结果JSON: {"code":200,"message":"success","data":{"keyword":"关机又关机","limit":10,"page":1,"platforms":["netease","qq","kuwo"],"platformStats":{"netease":{"success":true,"count":10,"duration":380,"error":null},"qq":{"success":false,"count":0,"duration":567,"error":"搜索重试次数过多"},"kuwo":{"success":true,"count":10,"duration":192,"error":null}},"total":20,"results":[{"id":"1811408619","name":"关机又关机","artist":"YangYang","album":"关机又关机","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=1811408619&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=1811408619&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=1811408619&type=lrc"},{"id":"161989241","name":"关机又关机","artist":"YangYang","album":"关机又关机","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=161989241&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=161989241&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=161989241&type=lrc"},{"id":"2143695205","name":"关机又关机","artist":"丸子","album":"关机又关机","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2143695205&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2143695205&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2143695205&type=lrc"},{"id":"163308104","name":"关机又关机（女声版）","artist":"念慈","album":"关机又关机","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=163308104&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=163308104&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=163308104&type=lrc"},{"id":"2641398715","name":"关机又关机 (0.8x)","artist":"Tafzero","album":"关机","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2641398715&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2641398715&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2641398715&type=lrc"},{"id":"171577449","name":"关机又关机 (太空版) (cover: 陆鳐LuLu)","artist":"陆鳐LuLu","album":"Melodic","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=171577449&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=171577449&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=171577449&type=lrc"},{"id":"2106836013","name":"关机又关机","artist":"不高兴","album":"2023","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2106836013&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2106836013&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2106836013&type=lrc"},{"id":"162137810","name":"关机又关机","artist":"洛天依","album":"关机又关机","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=162137810&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=162137810&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=162137810&type=lrc"},{"id":"2637136123","name":"关机又关机","artist":"墨明初雪","album":"初雪","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2637136123&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2637136123&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2637136123&type=lrc"},{"id":"163429591","name":"关机又关机 (片段)","artist":"旺仔小乔","album":"","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=163429591&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=163429591&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=163429591&type=lrc"},{"id":"1811408621","name":"关机又关机（伴奏 和声版）","artist":"YangYang","album":"关机又关机","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=1811408621&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=1811408621&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=1811408621&type=lrc"},{"id":"162957523","name":"关机又关机 (片段)","artist":"皮卡丘多多","album":"","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=162957523&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=162957523&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=162957523&type=lrc"},{"id":"1486763122","name":"哎呦喂","artist":"YangYang","album":"哎呦喂","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=1486763122&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=1486763122&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=1486763122&type=lrc"},{"id":"168452592","name":"关机又关机","artist":"呆呆破","album":"","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=168452592&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=168452592&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=168452592&type=lrc"},{"id":"2714372725","name":"关机又关机","artist":"旺仔小乔","album":"","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2714372725&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2714372725&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2714372725&type=lrc"},{"id":"163831814","name":"关机又关机 (片段)","artist":"七叔（叶泽浩）","album":"","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=163831814&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=163831814&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=163831814&type=lrc"},{"id":"2154589108","name":"关机又关机","artist":"小咪咪","album":"孤单北半球 (Live)","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2154589108&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2154589108&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2154589108&type=lrc"},{"id":"372082823","name":"关机又关机","artist":"麦小兜","album":"","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=372082823&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=372082823&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=372082823&type=lrc"},{"id":"2099939962","name":"疤痕体质","artist":"YangYang","album":"疤痕体质","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2099939962&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2099939962&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2099939962&type=lrc"},{"id":"445181162","name":"关机又关机 (奥特曼版片段)","artist":"二次元空间","album":"奥特曼版歌曲集合·","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=445181162&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=445181162&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=445181162&type=lrc"}]},"timestamp":"2026-01-23T21:23:15.207+08:00"}
+21:23:15.722 [Thread-183] INFO  c.s.d.p.node.SearchResultContainer - 搜索结果数量: 20
+21:27:34.568 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:27:34.570 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:27:34.571 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:27:34.571 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:27:34.572 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:27:40.256 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:27:40.263 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:27:58.501 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:27:58.504 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:27:58.504 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:27:58.506 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:27:58.507 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:28:00.544 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:28:00.554 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:30:03.164 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:30:03.168 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:30:03.169 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:30:03.169 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:30:03.169 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:30:04.617 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:30:04.631 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:30:49.483 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:30:49.485 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:30:49.486 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:30:49.487 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:30:49.487 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:30:50.639 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:30:50.646 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:31:23.510 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:31:23.513 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:31:23.514 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:31:23.514 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:31:23.514 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:31:24.948 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:31:24.956 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:34:13.919 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:34:13.959 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:34:13.988 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:34:14.027 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:34:14.038 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:34:15.216 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:34:15.236 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:35:11.283 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:35:11.285 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:35:11.286 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:35:11.286 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:35:11.287 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:35:12.511 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:35:12.522 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:38:25.939 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:38:25.941 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:38:25.941 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:38:25.941 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:38:27.491 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:38:27.501 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:41:05.839 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:41:05.841 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:41:05.842 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:41:05.842 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:41:07.303 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:41:07.314 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:42:18.443 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:42:18.445 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:42:18.446 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:42:18.446 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:44:10.088 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:44:10.090 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:44:10.090 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:44:10.090 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:45:29.713 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:45:29.714 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:45:29.716 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:45:29.716 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:46:59.530 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:46:59.532 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:46:59.532 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:46:59.532 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:48:10.363 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:48:10.365 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:48:10.365 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:48:10.366 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:48:58.178 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:48:58.180 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:48:58.181 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:48:58.182 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:50:37.414 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:50:37.415 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:50:37.415 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:50:37.416 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:51:32.333 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:51:32.335 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:51:32.336 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:51:32.336 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:52:27.050 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:52:27.052 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:52:27.052 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:52:27.053 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:54:22.714 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:54:22.716 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:54:22.716 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:54:22.716 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:54:23.490 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:54:23.498 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:58:26.057 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:58:26.060 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:58:26.061 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:58:26.061 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:58:27.273 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:58:27.289 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:58:32.970 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+21:58:32.971 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: null
+21:58:32.971 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+21:58:32.971 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+21:58:32.972 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+21:59:52.175 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:59:52.177 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:59:52.177 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:59:52.179 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:59:52.179 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:59:53.530 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:59:53.536 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:59:53.617 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+21:59:53.618 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+21:59:53.733 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+21:59:53.734 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+21:59:53.735 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+21:59:53.736 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+21:59:53.737 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+21:59:53.738 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+21:59:53.738 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+21:59:54.092 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+21:59:54.093 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+21:59:54.094 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+22:01:39.793 [Thread-76] INFO  c.s.d.p.node.SearchResultContainer - 开始搜索关键词: 关机又关机
+22:01:39.795 [Thread-76] INFO  c.s.d.common.utils.TuneHubApiUtils - 聚合搜索歌曲: 关键词=关机又关机
+22:01:40.825 [Thread-76] INFO  c.s.d.p.node.SearchResultContainer - 搜索结果JSON: {"code":200,"message":"success","data":{"keyword":"关机又关机","limit":10,"page":1,"platforms":["netease","qq","kuwo"],"platformStats":{"netease":{"success":true,"count":10,"duration":543,"error":null},"qq":{"success":false,"count":0,"duration":581,"error":"搜索重试次数过多"},"kuwo":{"success":true,"count":10,"duration":150,"error":null}},"total":20,"results":[{"id":"1811408619","name":"关机又关机","artist":"YangYang","album":"关机又关机","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=1811408619&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=1811408619&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=1811408619&type=lrc"},{"id":"161989241","name":"关机又关机","artist":"YangYang","album":"关机又关机","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=161989241&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=161989241&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=161989241&type=lrc"},{"id":"2143695205","name":"关机又关机","artist":"丸子","album":"关机又关机","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2143695205&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2143695205&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2143695205&type=lrc"},{"id":"163308104","name":"关机又关机（女声版）","artist":"念慈","album":"关机又关机","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=163308104&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=163308104&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=163308104&type=lrc"},{"id":"2641398715","name":"关机又关机 (0.8x)","artist":"Tafzero","album":"关机","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2641398715&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2641398715&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2641398715&type=lrc"},{"id":"171577449","name":"关机又关机 (太空版) (cover: 陆鳐LuLu)","artist":"陆鳐LuLu","album":"Melodic","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=171577449&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=171577449&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=171577449&type=lrc"},{"id":"2637136123","name":"关机又关机","artist":"墨明初雪","album":"初雪","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2637136123&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2637136123&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2637136123&type=lrc"},{"id":"162137810","name":"关机又关机","artist":"洛天依","album":"关机又关机","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=162137810&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=162137810&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=162137810&type=lrc"},{"id":"2106836013","name":"关机又关机","artist":"不高兴","album":"2023","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2106836013&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2106836013&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2106836013&type=lrc"},{"id":"163429591","name":"关机又关机 (片段)","artist":"旺仔小乔","album":"","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=163429591&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=163429591&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=163429591&type=lrc"},{"id":"2154589108","name":"关机又关机","artist":"小咪咪","album":"孤单北半球 (Live)","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2154589108&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2154589108&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2154589108&type=lrc"},{"id":"162957523","name":"关机又关机 (片段)","artist":"皮卡丘多多","album":"","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=162957523&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=162957523&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=162957523&type=lrc"},{"id":"1486763122","name":"哎呦喂","artist":"YangYang","album":"哎呦喂","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=1486763122&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=1486763122&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=1486763122&type=lrc"},{"id":"168452592","name":"关机又关机","artist":"呆呆破","album":"","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=168452592&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=168452592&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=168452592&type=lrc"},{"id":"2714372725","name":"关机又关机","artist":"旺仔小乔","album":"","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2714372725&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2714372725&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2714372725&type=lrc"},{"id":"163831814","name":"关机又关机 (片段)","artist":"七叔（叶泽浩）","album":"","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=163831814&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=163831814&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=163831814&type=lrc"},{"id":"1811408621","name":"关机又关机（伴奏 和声版）","artist":"YangYang","album":"关机又关机","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=1811408621&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=1811408621&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=1811408621&type=lrc"},{"id":"372082823","name":"关机又关机","artist":"麦小兜","album":"","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=372082823&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=372082823&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=372082823&type=lrc"},{"id":"2099939962","name":"疤痕体质","artist":"YangYang","album":"疤痕体质","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2099939962&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2099939962&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2099939962&type=lrc"},{"id":"445181162","name":"关机又关机 (奥特曼版片段)","artist":"二次元空间","album":"奥特曼版歌曲集合·","platform":"kuwo","url":"https://music-dl.sayqz.com/api/?source=kuwo&id=445181162&type=url","pic":"https://music-dl.sayqz.com/api/?source=kuwo&id=445181162&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=kuwo&id=445181162&type=lrc"}]},"timestamp":"2026-01-23T22:01:40.431+08:00"}
+22:01:40.833 [Thread-76] INFO  c.s.d.p.node.SearchResultContainer - 搜索结果数量: 20
