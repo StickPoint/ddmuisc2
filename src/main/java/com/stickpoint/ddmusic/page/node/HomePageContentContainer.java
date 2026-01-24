@@ -43,6 +43,14 @@ public class HomePageContentContainer extends VBox {
      */
     private DiscoverMusicContainer discoverMusicContainer;
     
+    /**
+     * 获取发现音乐容器实例
+     * @return 发现音乐容器
+     */
+    public DiscoverMusicContainer getDiscoverMusicContainer() {
+        return discoverMusicContainer;
+    }
+    
     public HomePageContentContainer() {
         // 设置整体样式
         // 加载当前页面的对应css文件

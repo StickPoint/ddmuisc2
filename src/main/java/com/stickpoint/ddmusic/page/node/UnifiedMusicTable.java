@@ -72,8 +72,8 @@ public class UnifiedMusicTable extends VBox {
         
         // 设置样式
         setStyle("-fx-background-color: white;");
-        setPadding(new Insets(20));
-        setSpacing(15);
+        setPadding(new Insets(0));
+        setSpacing(10);
         
         // 添加CSS类
         getStyleClass().add("unified-music-table");

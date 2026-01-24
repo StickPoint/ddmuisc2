@@ -213,17 +213,20 @@ public class DiscoverMusicContainer extends VBox {
             for (int i = 0; i < rankList.size(); i++) {
                 com.google.gson.JsonObject rankItem = rankList.get(i).getAsJsonObject();
                 
+                // 获取榜单ID（id字段）
+                String id = rankItem.has("id") ? rankItem.get("id").getAsString() : "";
+                
                 // 获取榜单封面图（pic字段）
                 String picUrl = rankItem.has("pic") ? rankItem.get("pic").getAsString() : "";
                 
                 // 获取榜单标题（name字段）
                 String title = rankItem.has("name") ? rankItem.get("name").getAsString() : "未知榜单";
                 
-                System.out.println("解析到榜单: " + title + "，封面: " + picUrl);
+                System.out.println("解析到榜单: " + title + "，封面: " + picUrl + "，ID: " + id);
                 
                 // 只添加有封面图的榜单
-                if (!picUrl.isEmpty()) {
-                    playlistItems.add(new PlaylistItem(picUrl, title));
+                if (!picUrl.isEmpty() && !id.isEmpty()) {
+                    playlistItems.add(new PlaylistItem(id, picUrl, title, currentSource));
                 }
             }
             
@@ -251,6 +254,9 @@ public class DiscoverMusicContainer extends VBox {
         playlistItem.setPadding(new Insets(10));
         playlistItem.getStyleClass().add("playlist-item");
         
+        // 设置鼠标样式为手型，表示可点击
+        playlistItem.setCursor(javafx.scene.Cursor.HAND);
+        
         // 创建封面图片
         AsyncImageView coverImage = new AsyncImageView(item.getCoverUrl(), 160, 160);
         Rectangle clip = new Rectangle(160, 160);
@@ -266,19 +272,64 @@ public class DiscoverMusicContainer extends VBox {
         
         playlistItem.getChildren().addAll(coverImage, title);
         
+        // 添加点击事件
+        playlistItem.setOnMouseClicked(event -> {
+            System.out.println("点击了歌单: " + item.getTitle() + "，ID: " + item.getId() + "，音源: " + item.getSource());
+            
+            // 触发歌单点击事件
+            if (playlistClickListener != null) {
+                playlistClickListener.onPlaylistClick(item.getId(), item.getTitle(), item.getCoverUrl(), item.getSource());
+            }
+        });
+        
         return playlistItem;
+    }
+    
+    /**
+     * 歌单点击监听器接口
+     */
+    public interface PlaylistClickListener {
+        /**
+         * 歌单点击事件
+         * @param playlistId 歌单ID
+         * @param playlistName 歌单名称
+         * @param coverUrl 封面URL
+         * @param source 音源
+         */
+        void onPlaylistClick(String playlistId, String playlistName, String coverUrl, String source);
+    }
+    
+    /**
+     * 歌单点击监听器
+     */
+    private PlaylistClickListener playlistClickListener;
+    
+    /**
+     * 设置歌单点击监听器
+     * @param playlistClickListener 监听器
+     */
+    public void setPlaylistClickListener(PlaylistClickListener playlistClickListener) {
+        this.playlistClickListener = playlistClickListener;
     }
     
     /**
      * 榜单项数据类
      */
     private static class PlaylistItem {
+        private final String id;
         private final String coverUrl;
         private final String title;
+        private final String source;
         
-        public PlaylistItem(String coverUrl, String title) {
+        public PlaylistItem(String id, String coverUrl, String title, String source) {
+            this.id = id;
             this.coverUrl = coverUrl;
             this.title = title;
+            this.source = source;
+        }
+        
+        public String getId() {
+            return id;
         }
         
         public String getCoverUrl() {
@@ -287,6 +338,10 @@ public class DiscoverMusicContainer extends VBox {
         
         public String getTitle() {
             return title;
+        }
+        
+        public String getSource() {
+            return source;
         }
     }
 }

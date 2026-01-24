@@ -28,6 +28,9 @@ public class HomePage extends BorderPane {
     private SearchResultContainer searchResultContainer;
     private boolean isSearching = false;
     
+    // 歌单详情页面
+    private PlaylistDetailContainer playlistDetailContainer;
+    
     // 保存上一个页面的引用，用于从详情页面返回时回到正确的页面
     private Node previousCenterContent;
     
@@ -43,6 +46,10 @@ public class HomePage extends BorderPane {
         localDownloadPage.setVisible(false);
         searchResultContainer = new SearchResultContainer(musicState, bottomMusicContainer);
         searchResultContainer.setVisible(false);
+        
+        // 初始化歌单详情页面
+        playlistDetailContainer = new PlaylistDetailContainer(musicState, bottomMusicContainer);
+        playlistDetailContainer.setVisible(false);
 
         // 设置左侧菜单栏
         homePageMenuPanel.setPrefWidth(200);
@@ -114,6 +121,21 @@ public class HomePage extends BorderPane {
                 showMusicDetail();
             }
         });
+        
+        // 设置发现音乐容器的歌单点击监听器
+        homePageContentContainer.getDiscoverMusicContainer().setPlaylistClickListener(
+            (playlistId, playlistName, coverUrl, source) -> {
+                // 保存当前页面
+                previousCenterContent = centerPanel.getCenter();
+                
+                // 设置歌单详情数据
+                playlistDetailContainer.setPlaylistData(playlistId, playlistName, coverUrl, source);
+                
+                // 显示歌单详情页面
+                playlistDetailContainer.setVisible(true);
+                centerPanel.setCenter(playlistDetailContainer);
+            }
+        );
     }
 
     /**

@@ -574,3 +574,365 @@
 16:59:43.141 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
 16:59:43.141 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：myPlaylist
 16:59:43.141 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+17:02:05.737 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+17:02:05.739 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+17:02:05.740 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+17:02:05.740 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+17:02:05.741 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+17:02:07.827 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+17:02:07.836 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+17:02:07.923 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+17:02:07.925 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+17:02:07.976 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+17:02:07.977 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+17:02:07.978 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+17:02:07.979 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+17:02:07.980 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+17:02:07.981 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+17:02:07.982 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+17:02:08.343 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+17:02:08.345 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+17:02:08.345 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+18:34:39.876 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+18:34:39.892 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+18:34:39.892 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+18:34:39.892 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+18:34:39.892 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+18:34:47.180 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+18:34:47.188 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+18:34:47.418 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+18:34:47.418 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+18:34:47.588 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+18:34:47.588 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+18:34:47.589 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+18:34:47.590 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+18:34:47.592 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+18:34:47.605 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+18:34:47.607 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+18:34:48.238 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+18:34:48.244 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+18:34:48.245 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+18:35:30.735 [Thread-78] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=19723756
+18:45:36.787 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+18:45:36.791 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+18:45:36.792 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+18:45:36.792 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+18:45:36.793 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+18:45:38.242 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+18:45:38.251 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+18:45:38.378 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+18:45:38.379 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+18:45:38.432 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+18:45:38.435 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+18:45:38.435 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+18:45:38.437 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+18:45:38.439 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+18:45:38.443 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+18:45:38.444 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+18:45:38.785 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+18:45:38.787 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+18:45:38.787 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+18:45:42.656 [Thread-77] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=19723756
+18:46:52.246 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+18:46:52.249 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+18:46:52.250 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+18:46:52.251 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+18:46:52.251 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+18:46:54.695 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+18:46:54.703 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+18:46:54.829 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+18:46:54.829 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+18:46:54.899 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+18:46:54.899 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+18:46:54.900 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+18:46:54.900 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+18:46:54.901 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+18:46:54.903 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+18:46:54.903 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+18:46:55.454 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+18:46:55.457 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+18:46:55.458 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+18:48:19.113 [Thread-77] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=19723756
+18:49:21.667 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+18:49:21.669 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+18:49:21.670 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+18:49:21.671 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+18:49:21.671 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+18:49:23.099 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+18:49:23.109 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+18:49:23.238 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+18:49:23.238 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+18:49:23.305 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+18:49:23.306 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+18:49:23.308 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+18:49:23.308 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+18:49:23.309 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+18:49:23.310 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+18:49:23.311 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+18:49:23.820 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+18:49:23.823 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+18:49:23.824 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+18:50:47.392 [Thread-79] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=19723756
+18:51:44.341 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+18:51:44.344 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+18:51:44.344 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+18:51:44.345 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+18:51:44.346 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+18:51:46.135 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+18:51:46.142 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+18:51:46.225 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+18:51:46.225 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+18:51:46.270 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+18:51:46.271 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+18:51:46.271 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+18:51:46.272 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+18:51:46.273 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+18:51:46.275 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+18:51:46.275 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+18:51:46.698 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+18:51:46.699 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+18:51:46.700 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+18:51:48.873 [Thread-77] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=19723756
+18:53:26.538 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+18:53:26.542 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+18:53:26.543 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+18:53:26.543 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+18:53:26.543 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+18:53:29.015 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+18:53:29.025 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+18:53:29.145 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+18:53:29.146 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+18:53:29.209 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+18:53:29.209 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+18:53:29.210 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+18:53:29.210 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+18:53:29.211 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+18:53:29.213 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+18:53:29.213 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+18:53:29.757 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+18:53:29.759 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+18:53:29.760 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+18:54:57.455 [Thread-77] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=19723756
+18:55:40.093 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 加载专辑封面: https://music-dl.sayqz.com/api/?source=netease&id=2600493765&type=pic
+18:55:40.093 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+18:55:41.420 [Thread-80] INFO  c.s.d.p.n.MusicPlayDetailContainer - 实际专辑封面URL: https://p2.music.126.net/0bk3Iqe2OZGBH2Iuyx7RzA==/109951170045577565.jpg
+18:55:41.475 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 10%
+18:55:41.513 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 20%
+18:55:41.526 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 31%
+18:55:41.536 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 42%
+18:55:41.572 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 52%
+18:55:41.581 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 62%
+18:55:41.594 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 73%
+18:55:41.605 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 83%
+18:55:41.615 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 94%
+18:55:41.628 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 100%
+18:55:41.628 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载完成，加入缓存
+18:55:53.340 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+18:55:53.341 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: null
+18:55:53.341 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: myMusic
+18:55:53.341 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：myMusic
+18:55:53.342 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+18:55:54.469 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+18:55:54.470 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: myMusic
+18:55:54.470 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+18:55:54.470 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+18:55:54.470 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：myMusic
+18:55:54.471 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+18:56:29.597 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+18:56:29.597 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
+18:56:29.600 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+19:19:54.173 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+19:20:00.198 [Thread-2589] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=3779629
+19:20:27.284 [Thread-2591] INFO  c.s.d.p.node.SearchResultContainer - 开始搜索关键词: 山楂树之恋
+19:20:27.285 [Thread-2591] INFO  c.s.d.common.utils.TuneHubApiUtils - 聚合搜索歌曲: 关键词=山楂树之恋
+19:20:28.517 [Thread-2591] INFO  c.s.d.p.node.SearchResultContainer - 搜索结果JSON: {"code":200,"message":"success","data":{"keyword":"山楂树之恋","limit":10,"page":1,"platforms":["netease","qq","kuwo"],"platformStats":{"netease":{"success":true,"count":10,"duration":413,"error":null},"qq":{"success":true,"count":10,"duration":158,"error":null},"kuwo":{"success":true,"count":0,"duration":25,"error":null}},"total":20,"results":[{"id":"1381755293","name":"山楂树之恋","artist":"程佳佳","album":"山楂树之恋 (完整版)","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=1381755293&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=1381755293&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=1381755293&type=lrc"},{"id":"0021uyhB2um654","name":"山楂树の恋 (山楂树之恋)","artist":"程佳佳","album":"山楂树の恋","platform":"qq","url":"https://music-dl.sayqz.com/api/?source=qq&id=0021uyhB2um654&type=url","pic":"https://music-dl.sayqz.com/api/?source=qq&id=0021uyhB2um654&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=qq&id=0021uyhB2um654&type=lrc"},{"id":"2737771303","name":"山楂树の恋 (山楂树之恋DJ阿能版)","artist":"祝酒","album":"山楂树の恋(山楂树之恋DJ阿能版)","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2737771303&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2737771303&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2737771303&type=lrc"},{"id":"0042CEgq3sutiv","name":"山楂树の恋 (山楂树之恋) (DJ版)","artist":"想早睡","album":"山楂树の恋","platform":"qq","url":"https://music-dl.sayqz.com/api/?source=qq&id=0042CEgq3sutiv&type=url","pic":"https://music-dl.sayqz.com/api/?source=qq&id=0042CEgq3sutiv&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=qq&id=0042CEgq3sutiv&type=lrc"},{"id":"446557635","name":"山楂树之恋","artist":"雷智皓","album":"十五岁记录","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=446557635&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=446557635&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=446557635&type=lrc"},{"id":"001h77P44MP1q9","name":"山楂树之恋","artist":"雷智皓","album":"二零一六（2016）","platform":"qq","url":"https://music-dl.sayqz.com/api/?source=qq&id=001h77P44MP1q9&type=url","pic":"https://music-dl.sayqz.com/api/?source=qq&id=001h77P44MP1q9&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=qq&id=001h77P44MP1q9&type=lrc"},{"id":"3325246178","name":"山楂树之恋DJ版","artist":"彩彩","album":"霓虹半衰期","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=3325246178&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=3325246178&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=3325246178&type=lrc"},{"id":"003WZUUd1El9Jr","name":"山楂树之恋","artist":"胖虎（董欣怡）","album":"山楂树之恋","platform":"qq","url":"https://music-dl.sayqz.com/api/?source=qq&id=003WZUUd1El9Jr&type=url","pic":"https://music-dl.sayqz.com/api/?source=qq&id=003WZUUd1El9Jr&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=qq&id=003WZUUd1El9Jr&type=lrc"},{"id":"2698390641","name":"山楂树之恋 (永远站在你的身边)","artist":"陈雪凝","album":"山楂树之恋","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2698390641&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2698390641&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2698390641&type=lrc"},{"id":"0023wFlR1StN35","name":"山楂树之恋","artist":"蓝心羽","album":"山楂树の恋","platform":"qq","url":"https://music-dl.sayqz.com/api/?source=qq&id=0023wFlR1StN35&type=url","pic":"https://music-dl.sayqz.com/api/?source=qq&id=0023wFlR1StN35&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=qq&id=0023wFlR1StN35&type=lrc"},{"id":"77043","name":"山楂树之恋 (Demo)","artist":"东来东往","album":"山楂树之恋","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=77043&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=77043&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=77043&type=lrc"},{"id":"0011WQHe49rmLw","name":"山楂树之恋","artist":"夏婉安","album":"山楂树之恋","platform":"qq","url":"https://music-dl.sayqz.com/api/?source=qq&id=0011WQHe49rmLw&type=url","pic":"https://music-dl.sayqz.com/api/?source=qq&id=0011WQHe49rmLw&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=qq&id=0011WQHe49rmLw&type=lrc"},{"id":"1879183186","name":"山楂树之恋","artist":"午睡了","album":"山楂树之恋","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=1879183186&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=1879183186&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=1879183186&type=lrc"},{"id":"003cKT1S1LkmIq","name":"山楂树の恋 (山楂树之恋)","artist":"想早睡","album":"山楂树の恋","platform":"qq","url":"https://music-dl.sayqz.com/api/?source=qq&id=003cKT1S1LkmIq&type=url","pic":"https://music-dl.sayqz.com/api/?source=qq&id=003cKT1S1LkmIq&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=qq&id=003cKT1S1LkmIq&type=lrc"},{"id":"2735938285","name":"山楂树之恋 (DJ锋仔版)","artist":"cici_","album":"山楂树之恋","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=2735938285&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=2735938285&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=2735938285&type=lrc"},{"id":"003e867X2P1yjX","name":"山楂树之恋","artist":"李少白","album":"山楂树之恋","platform":"qq","url":"https://music-dl.sayqz.com/api/?source=qq&id=003e867X2P1yjX&type=url","pic":"https://music-dl.sayqz.com/api/?source=qq&id=003e867X2P1yjX&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=qq&id=003e867X2P1yjX&type=lrc"},{"id":"5233569","name":"山楂树之恋","artist":"群星","album":"网络最红Ⅱ","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=5233569&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=5233569&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=5233569&type=lrc"},{"id":"004DQIGF3iCarC","name":"山楂树之恋","artist":"常石磊","album":"山楂树之恋 电影原声带","platform":"qq","url":"https://music-dl.sayqz.com/api/?source=qq&id=004DQIGF3iCarC&type=url","pic":"https://music-dl.sayqz.com/api/?source=qq&id=004DQIGF3iCarC&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=qq&id=004DQIGF3iCarC&type=lrc"},{"id":"549321258","name":"山楂树の恋(Part.2)","artist":"雷智皓、Sndnjrjcncmdlki","album":"山楂树の恋(Part.2)","platform":"netease","url":"https://music-dl.sayqz.com/api/?source=netease&id=549321258&type=url","pic":"https://music-dl.sayqz.com/api/?source=netease&id=549321258&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=netease&id=549321258&type=lrc"},{"id":"004cJaXX1nnZJM","name":"山楂树之恋","artist":"戴羽彤","album":"戴羽彤","platform":"qq","url":"https://music-dl.sayqz.com/api/?source=qq&id=004cJaXX1nnZJM&type=url","pic":"https://music-dl.sayqz.com/api/?source=qq&id=004cJaXX1nnZJM&type=pic","lrc":"https://music-dl.sayqz.com/api/?source=qq&id=004cJaXX1nnZJM&type=lrc"}]},"timestamp":"2026-01-24T19:20:28.591+08:00"}
+19:20:28.525 [Thread-2591] INFO  c.s.d.p.node.SearchResultContainer - 搜索结果数量: 20
+19:20:43.856 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 加载专辑封面: https://music-dl.sayqz.com/api/?source=netease&id=1381755293&type=pic
+19:20:43.856 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+19:20:43.857 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: STOPPED
+19:20:43.861 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+19:20:43.942 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+19:20:44.499 [Thread-2597] INFO  c.s.d.p.n.MusicPlayDetailContainer - 实际专辑封面URL: https://p1.music.126.net/G00sAe86sPi5gFQyuJHU7A==/109951164260611202.jpg
+19:20:44.561 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 10%
+19:20:44.577 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 20%
+19:20:44.585 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 30%
+19:20:44.594 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 41%
+19:20:44.609 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 51%
+19:20:44.635 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 62%
+19:20:44.683 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 72%
+19:20:44.696 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 82%
+19:20:44.731 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 93%
+19:20:44.763 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 100%
+19:20:44.763 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载完成，加入缓存
+19:21:15.868 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:21:15.868 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: recommend
+19:21:15.868 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: myMusic
+19:21:15.868 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：myMusic
+19:21:15.868 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：recommend
+19:21:15.868 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:22:22.757 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:22:22.757 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: myMusic
+19:22:22.758 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: roam
+19:22:22.758 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：roam
+19:22:22.758 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：myMusic
+19:22:22.758 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:22:23.236 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:22:23.236 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: roam
+19:22:23.236 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: myMusic
+19:22:23.236 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：myMusic
+19:22:23.237 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：roam
+19:22:23.237 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:22:43.837 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 加载专辑封面: https://qnm.hunliji.com/o_1j4afpm441o4vceo1eilush18pj9.jpeg
+19:22:43.854 [Thread-5184] INFO  c.s.d.p.n.MusicPlayDetailContainer - 实际专辑封面URL: https://qnm.hunliji.com/o_1j4afpm441o4vceo1eilush18pj9.jpeg
+19:22:43.915 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 14%
+19:22:43.916 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 24%
+19:22:43.917 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 34%
+19:22:43.918 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 44%
+19:22:43.919 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 54%
+19:22:43.919 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 64%
+19:22:43.920 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 75%
+19:22:43.920 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 85%
+19:22:43.921 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 95%
+19:22:43.922 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 100%
+19:22:43.922 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载完成，加入缓存
+19:44:19.984 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+19:44:19.988 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+19:44:19.992 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+19:44:19.994 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+19:44:19.995 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+19:44:23.428 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+19:44:23.447 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+19:44:23.643 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+19:44:23.644 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+19:44:23.749 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+19:44:23.750 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+19:44:23.752 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+19:44:23.753 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+19:44:23.754 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+19:44:23.759 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+19:44:23.760 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+19:44:24.404 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+19:44:24.412 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+19:44:24.414 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+19:44:28.242 [Thread-78] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=19723756
+19:46:54.336 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+19:46:54.339 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+19:46:54.340 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+19:46:54.341 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+19:46:54.341 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+19:46:56.040 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+19:46:56.050 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+19:46:56.183 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+19:46:56.183 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+19:46:56.265 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+19:46:56.266 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+19:46:56.266 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+19:46:56.267 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+19:46:56.268 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+19:46:56.269 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+19:46:56.270 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+19:46:56.873 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+19:46:56.876 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+19:46:56.877 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+19:47:41.646 [Thread-77] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=19723756
+19:47:54.315 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:47:54.316 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: null
+19:47:54.316 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+19:47:54.316 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+19:47:54.317 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:47:55.428 [Thread-79] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=19723756
+19:48:17.372 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:48:17.372 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: recommend
+19:48:17.372 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: jingxuan
+19:48:17.372 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：jingxuan
+19:48:17.373 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：recommend
+19:48:17.373 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:48:17.812 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:48:17.812 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: jingxuan
+19:48:17.812 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+19:48:17.812 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+19:48:17.812 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：jingxuan
+19:48:17.813 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:48:18.948 [Thread-82] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=netease, 排行榜ID=3778678
+19:48:24.697 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 加载专辑封面: https://music-dl.sayqz.com/api/?source=netease&id=1456890009&type=pic
+19:48:24.698 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+19:48:25.740 [Thread-86] INFO  c.s.d.p.n.MusicPlayDetailContainer - 实际专辑封面URL: https://p1.music.126.net/yN1ke1xYMJ718FiHaDWtYQ==/109951165076380471.jpg
+19:48:25.768 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 12%
+19:48:25.768 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 25%
+19:48:25.772 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 38%
+19:48:25.773 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 52%
+19:48:25.777 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 65%
+19:48:25.778 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 78%
+19:48:25.779 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 92%
+19:48:25.780 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 100%
+19:48:25.780 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载完成，加入缓存
+19:50:11.165 [Thread-3306] INFO  c.s.d.common.utils.TuneHubApiUtils - 获取排行榜歌曲: 平台=kuwo, 排行榜ID=16
+19:50:31.589 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:50:31.590 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: recommend
+19:50:31.590 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: jingxuan
+19:50:31.590 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：jingxuan
+19:50:31.590 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：recommend
+19:50:31.590 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:50:32.956 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:50:32.956 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: jingxuan
+19:50:32.956 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: podcast
+19:50:32.956 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：podcast
+19:50:32.956 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：jingxuan
+19:50:32.956 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:50:33.444 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:50:33.444 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: podcast
+19:50:33.444 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: roam
+19:50:33.445 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：roam
+19:50:33.445 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：podcast
+19:50:33.445 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:50:34.156 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:50:34.156 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: roam
+19:50:34.156 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recent
+19:50:34.156 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recent
+19:50:34.156 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：roam
+19:50:34.156 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:50:35.284 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:50:35.284 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: recent
+19:50:35.285 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+19:50:35.285 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+19:50:35.285 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：recent
+19:50:35.285 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:50:36.292 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:50:36.292 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: recommend
+19:50:36.293 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: myMusic
+19:50:36.293 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：myMusic
+19:50:36.293 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：recommend
+19:50:36.293 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:50:57.459 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:50:57.460 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: myMusic
+19:50:57.460 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+19:50:57.460 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+19:50:57.460 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：myMusic
+19:50:57.461 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:52:29.276 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+19:52:29.277 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: STOPPED
+19:52:29.280 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+19:52:49.747 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:52:49.747 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: recommend
+19:52:49.748 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: jingxuan
+19:52:49.748 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：jingxuan
+19:52:49.748 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：recommend
+19:52:49.748 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:52:50.572 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:52:50.572 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: jingxuan
+19:52:50.573 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: podcast
+19:52:50.573 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：podcast
+19:52:50.573 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：jingxuan
+19:52:50.573 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:52:51.684 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:52:51.684 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: podcast
+19:52:51.685 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: jingxuan
+19:52:51.685 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：jingxuan
+19:52:51.685 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：podcast
+19:52:51.685 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
+19:52:52.173 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - === ToggleGroup 监听器被触发 ===
+19:52:52.174 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - oldToggle: jingxuan
+19:52:52.174 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - newToggle: recommend
+19:52:52.174 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 当前选中的菜单项：recommend
+19:52:52.174 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - 上一个被选中的菜单项：jingxuan
+19:52:52.174 [JavaFX Application Thread] INFO  c.s.d.p.node.HomePageMenuItemPanel - ================================
