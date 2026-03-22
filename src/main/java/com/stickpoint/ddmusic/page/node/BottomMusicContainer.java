@@ -77,10 +77,6 @@ public class BottomMusicContainer extends HBox {
      */
     private Media currentMedia;
     /**
-     * Media对象缓存
-     */
-    private final java.util.Map<String, Media> mediaCache = new java.util.concurrent.ConcurrentHashMap<>();
-    /**
      * 播放/暂停按钮
      */
     private SvgIcon playPauseButton;
@@ -138,14 +134,20 @@ public class BottomMusicContainer extends HBox {
      * 播放器状态监听器，用于移除监听器
      */
     private ChangeListener<MediaPlayer.Status> statusChangeListener;
-    /**
-     * Media缓存最大数量
-     */
-    private static final int MAX_MEDIA_CACHE_SIZE = 5;
-    /**
-     * 图片缓存最大数量
-     */
-    private static final int MAX_IMAGE_CACHE_SIZE = 10;
+    private ChangeListener<MediaPlayer.Status> playerStatusSyncListener;
+    private ChangeListener<MediaPlayer.Status> statePlayerStatusListener;
+    private ChangeListener<String> songTitleListener;
+    private ChangeListener<String> artistListener;
+    private ChangeListener<String> albumCoverListener;
+    private boolean musicStateBound = false;
+    private final java.util.concurrent.ExecutorService coverLoadExecutor = java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "Bottom-Cover-Loader");
+        t.setDaemon(true);
+        return t;
+    });
+    private final java.util.concurrent.atomic.AtomicLong coverLoadVersion = new java.util.concurrent.atomic.AtomicLong(0);
+    private final Tooltip songNameTooltip = new Tooltip();
+    private final Tooltip artistNameTooltip = new Tooltip();
 
 
     public BottomMusicContainer(MusicState musicState) {
@@ -239,9 +241,7 @@ public class BottomMusicContainer extends HBox {
                 }
             }
         });
-
-        // 绑定音乐状态到 MusicState（延迟到loadMedia之后）
-        // bindToMusicState() 将在loadMedia()中调用
+        bindToMusicState();
     }
 
     /**
@@ -270,7 +270,7 @@ public class BottomMusicContainer extends HBox {
         songNameLabel.setStyle("-fx-text-fill: #212529;");
         songNameLabel.setEllipsisString("...");
 
-        Tooltip songNameTooltip = new Tooltip("歌曲名称");
+        songNameTooltip.setText(songNameLabel.getText());
         Tooltip.install(songNameLabel, songNameTooltip);
 
         artistNameLabel = new Label("艺术家");
@@ -280,7 +280,7 @@ public class BottomMusicContainer extends HBox {
         artistNameLabel.setStyle("-fx-text-fill: #6c757d;");
         artistNameLabel.setEllipsisString("...");
 
-        Tooltip artistNameTooltip = new Tooltip("艺术家");
+        artistNameTooltip.setText(artistNameLabel.getText());
         Tooltip.install(artistNameLabel, artistNameTooltip);
 
         songInfoBox.getChildren().addAll(songNameLabel, artistNameLabel);
@@ -475,6 +475,10 @@ public class BottomMusicContainer extends HBox {
                     musicPlayer.statusProperty().removeListener(statusChangeListener);
                     statusChangeListener = null;
                 }
+                if (playerStatusSyncListener != null) {
+                    musicPlayer.statusProperty().removeListener(playerStatusSyncListener);
+                    playerStatusSyncListener = null;
+                }
                 musicPlayer.currentTimeProperty().removeListener(durationChangeListener);
                 musicPlayer.setOnEndOfMedia(null);
                 musicPlayer.setOnError(null);
@@ -485,7 +489,9 @@ public class BottomMusicContainer extends HBox {
             musicPlayer.dispose();
             musicPlayer = null;
         }
-        // 不释放Media对象，因为可能被缓存重用
+        if (playerProgressBar != null && playerProgressBar.durationProperty().isBound()) {
+            playerProgressBar.durationProperty().unbind();
+        }
         currentMedia = null;
     }
 
@@ -494,8 +500,23 @@ public class BottomMusicContainer extends HBox {
      */
     public void disposeAll() {
         disposeMediaPlayer();
-        // 清理Media缓存
-        mediaCache.clear();
+        if (musicState != null && musicStateBound) {
+            if (statePlayerStatusListener != null) {
+                musicState.playerStatusPropertyProperty().removeListener(statePlayerStatusListener);
+            }
+            if (songTitleListener != null) {
+                musicState.songTitlePropertyProperty().removeListener(songTitleListener);
+            }
+            if (artistListener != null) {
+                musicState.singerPropertyProperty().removeListener(artistListener);
+            }
+            if (albumCoverListener != null) {
+                musicState.albumCoverPropertyProperty().removeListener(albumCoverListener);
+            }
+            musicStateBound = false;
+        }
+        coverLoadVersion.incrementAndGet();
+        coverLoadExecutor.shutdownNow();
     }
 
     /**
@@ -511,35 +532,24 @@ public class BottomMusicContainer extends HBox {
             String actualUrl = HttpUtils.getRedirectUrl(mediaUrl);
             System.out.println("实际媒体URL: " + actualUrl);
             
-            // 检查Media缓存
-            Media cachedMedia = mediaCache.get(actualUrl);
-            if (cachedMedia != null) {
-                currentMedia = cachedMedia;
-            } else {
-                // 创建新的Media对象
-                currentMedia = new Media(actualUrl);
-                // 检查缓存大小，如果超过限制，移除最旧的缓存项
-                if (mediaCache.size() >= MAX_MEDIA_CACHE_SIZE) {
-                    // 移除最旧的缓存项（使用迭代器移除第一个元素）
-                    String oldestKey = mediaCache.keySet().iterator().next();
-                    mediaCache.remove(oldestKey);
-                }
-                // 加入缓存
-                mediaCache.put(actualUrl, currentMedia);
-            }
+            // 不缓存 Media 实例，避免重型解码对象持续占用内存
+            currentMedia = new Media(actualUrl);
             
             // 创建新的MediaPlayer
             musicPlayer = new MediaPlayer(currentMedia);
             
             // 重新绑定进度条
+            if (playerProgressBar.durationProperty().isBound()) {
+                playerProgressBar.durationProperty().unbind();
+            }
             playerProgressBar.durationProperty().bind(musicPlayer.getMedia().durationProperty());
             musicPlayer.currentTimeProperty().addListener(durationChangeListener);
+            if (soundSlider != null) {
+                musicPlayer.setVolume(soundSlider.getValue() / 100.0);
+            }
             
             // 重新设置监听器
             setupPlayerListeners();
-            
-            // 绑定音乐状态到 MusicState
-            bindToMusicState();
             
         } catch (Exception e) {
             System.err.println("加载媒体失败: " + e.getMessage());
@@ -577,6 +587,12 @@ public class BottomMusicContainer extends HBox {
             }
         };
         musicPlayer.statusProperty().addListener(statusChangeListener);
+        playerStatusSyncListener = (observable, oldValue, newValue) -> {
+            if (musicState != null && newValue != null && !Objects.equals(musicState.getPlayerStatusProperty(), newValue)) {
+                musicState.setPlayerStatusProperty(newValue);
+            }
+        };
+        musicPlayer.statusProperty().addListener(playerStatusSyncListener);
 
         // 监听播放完成事件，释放资源
         musicPlayer.setOnEndOfMedia(() -> {
@@ -649,134 +665,87 @@ public class BottomMusicContainer extends HBox {
     }
 
     private void bindToMusicState() {
-        if (musicState == null) {
+        if (musicState == null || musicStateBound) {
             return;
         }
+        musicStateBound = true;
 
-        // 监听 MediaPlayer 状态变化并同步到 MusicState
-        if (musicPlayer != null) {
-            musicPlayer.statusProperty().addListener((obs, oldStatus, newStatus) -> {
-                if (newStatus == MediaPlayer.Status.PLAYING) {
-                    musicState.setPlayerStatusProperty(MediaPlayer.Status.PLAYING);
-                } else if (newStatus == MediaPlayer.Status.PAUSED) {
-                    musicState.setPlayerStatusProperty(MediaPlayer.Status.PAUSED);
-                } else if (newStatus == MediaPlayer.Status.STOPPED) {
-                    musicState.setPlayerStatusProperty(MediaPlayer.Status.STOPPED);
-                }
-            });
-        }
-
-        // 监听 MusicState 的播放状态变化并控制 MediaPlayer
-        musicState.playerStatusPropertyProperty().addListener((obs, oldVal, newVal) -> {
+        // 监听 MusicState 的播放状态变化并控制 MediaPlayer（仅绑定一次）
+        statePlayerStatusListener = (obs, oldVal, newVal) -> {
             if (musicPlayer != null) {
-                if (Objects.equals(newVal, MediaPlayer.Status.PLAYING) && !Objects.equals(musicPlayer.getStatus(), MediaPlayer.Status.PLAYING)) {
+                MediaPlayer.Status playerStatus = musicPlayer.getStatus();
+                if (Objects.equals(newVal, MediaPlayer.Status.PLAYING) && !Objects.equals(playerStatus, MediaPlayer.Status.PLAYING)) {
                     musicPlayer.play();
-                } else if (Objects.equals(newVal, MediaPlayer.Status.PAUSED) && !Objects.equals(musicPlayer.getStatus(), MediaPlayer.Status.PAUSED)) {
+                } else if (Objects.equals(newVal, MediaPlayer.Status.PAUSED) && !Objects.equals(playerStatus, MediaPlayer.Status.PAUSED)) {
                     musicPlayer.pause();
+                } else if (Objects.equals(newVal, MediaPlayer.Status.STOPPED) && !Objects.equals(playerStatus, MediaPlayer.Status.STOPPED)) {
+                    musicPlayer.stop();
                 }
             }
-        });
-
-        // 监听歌曲标题变化并更新UI
-        ChangeListener<String> songTitleListener = (obs, oldVal, newVal) -> {
-            Platform.runLater(() -> {
-                songNameLabel.setText(newVal);
-                Tooltip songNameTooltip = new Tooltip(newVal);
-                Tooltip.install(songNameLabel, songNameTooltip);
-            });
         };
+        musicState.playerStatusPropertyProperty().addListener(statePlayerStatusListener);
+
+        // UI 字段监听（仅绑定一次）
+        songTitleListener = (obs, oldVal, newVal) -> Platform.runLater(() -> updateSongTitle(newVal));
+        artistListener = (obs, oldVal, newVal) -> Platform.runLater(() -> updateArtistName(newVal));
+        albumCoverListener = (obs, oldVal, newVal) -> updateAlbumCoverAsync(newVal);
+
         musicState.songTitlePropertyProperty().addListener(songTitleListener);
-        // 手动更新一次UI
-        Platform.runLater(() -> {
-            String title = musicState.getSongTitleProperty();
-            songNameLabel.setText(title);
-            Tooltip songNameTooltip = new Tooltip(title);
-            Tooltip.install(songNameLabel, songNameTooltip);
-        });
-
-        // 监听艺术家信息变化并更新UI
-        ChangeListener<String> artistListener = (obs, oldVal, newVal) -> {
-            Platform.runLater(() -> {
-                artistNameLabel.setText(newVal);
-                Tooltip artistNameTooltip = new Tooltip(newVal);
-                Tooltip.install(artistNameLabel, artistNameTooltip);
-            });
-        };
         musicState.singerPropertyProperty().addListener(artistListener);
-        // 手动更新一次UI
-        Platform.runLater(() -> {
-            String artist = musicState.getSingerProperty();
-            artistNameLabel.setText(artist);
-            Tooltip artistNameTooltip = new Tooltip(artist);
-            Tooltip.install(artistNameLabel, artistNameTooltip);
-        });
-
-        // 监听专辑封面变化并更新UI
-        ChangeListener<String> albumCoverListener = (obs, oldVal, newVal) -> {
-            if (newVal != null && !newVal.isEmpty()) {
-                // 在后台线程处理URL重定向
-                new Thread(() -> {
-                    try {
-                        // 获取实际的图片URL
-                        String actualUrl = HttpUtils.getRedirectUrl(newVal);
-                        System.out.println("实际底部播放器专辑封面URL: " + actualUrl);
-                        
-                        // 回到JavaFX应用线程加载图片
-                        Platform.runLater(() -> {
-                            try {
-                                Image albumImage = new Image(actualUrl, true);
-                                albumImage.errorProperty().addListener((imgObs, imgOldVal, imgNewVal) -> {
-                                    if (imgNewVal) {
-                                        System.err.println("底部播放器专辑封面加载失败: " + actualUrl);
-                                    }
-                                });
-                                albumImageView.setImage(albumImage);
-                            } catch (Exception e) {
-                                System.err.println("底部播放器加载专辑封面失败: " + e.getMessage());
-                                e.printStackTrace();
-                            }
-                        });
-                    } catch (IOException e) {
-                        System.err.println("底部播放器获取实际图片URL失败: " + e.getMessage());
-                        e.printStackTrace();
-                    }
-                }).start();
-            }
-        };
         musicState.albumCoverPropertyProperty().addListener(albumCoverListener);
-        // 手动更新一次UI
+
+        // 初始渲染
         Platform.runLater(() -> {
-            String coverUrl = musicState.getAlbumCoverProperty();
-            if (coverUrl != null && !coverUrl.isEmpty()) {
-                // 在后台线程处理URL重定向
-                new Thread(() -> {
-                    try {
-                        // 获取实际的图片URL
-                        String actualUrl = HttpUtils.getRedirectUrl(coverUrl);
-                        System.out.println("实际底部播放器专辑封面URL(手动更新): " + actualUrl);
-                        
-                        // 回到JavaFX应用线程加载图片
-                        Platform.runLater(() -> {
-                            try {
-                                Image albumImage = new Image(actualUrl, true);
-                                albumImage.errorProperty().addListener((imgObs, imgOldVal, imgNewVal) -> {
-                                    if (imgNewVal) {
-                                        System.err.println("底部播放器专辑封面手动更新失败: " + actualUrl);
-                                    }
-                                });
-                                albumImageView.setImage(albumImage);
-                            } catch (Exception e) {
-                                System.err.println("底部播放器手动加载专辑封面失败: " + e.getMessage());
-                                e.printStackTrace();
-                            }
-                        });
-                    } catch (IOException e) {
-                        System.err.println("底部播放器手动获取实际图片URL失败: " + e.getMessage());
-                        e.printStackTrace();
-                    }
-                }).start();
-            }
+            updateSongTitle(musicState.getSongTitleProperty());
+            updateArtistName(musicState.getSingerProperty());
         });
+        updateAlbumCoverAsync(musicState.getAlbumCoverProperty());
+    }
+
+    private void updateSongTitle(String newTitle) {
+        String safeTitle = (newTitle == null || newTitle.isBlank()) ? "Unknown Song" : newTitle;
+        songNameLabel.setText(safeTitle);
+        songNameTooltip.setText(safeTitle);
+    }
+
+    private void updateArtistName(String newArtist) {
+        String safeArtist = (newArtist == null || newArtist.isBlank()) ? "Unknown Artist" : newArtist;
+        artistNameLabel.setText(safeArtist);
+        artistNameTooltip.setText(safeArtist);
+    }
+
+    private void updateAlbumCoverAsync(String coverUrl) {
+        if (coverUrl == null || coverUrl.isBlank() || coverLoadExecutor.isShutdown()) {
+            return;
+        }
+        long requestId = coverLoadVersion.incrementAndGet();
+        try {
+            coverLoadExecutor.submit(() -> {
+                try {
+                    String actualUrl = HttpUtils.getRedirectUrl(coverUrl);
+                    Platform.runLater(() -> {
+                        if (requestId != coverLoadVersion.get()) {
+                            return;
+                        }
+                        try {
+                            Image albumImage = new Image(actualUrl, true);
+                            albumImage.errorProperty().addListener((imgObs, imgOldVal, imgNewVal) -> {
+                                if (imgNewVal) {
+                                    System.err.println("底部播放器专辑封面加载失败: " + actualUrl);
+                                }
+                            });
+                            albumImageView.setImage(albumImage);
+                        } catch (Exception e) {
+                            System.err.println("底部播放器加载专辑封面失败: " + e.getMessage());
+                        }
+                    });
+                } catch (IOException e) {
+                    System.err.println("底部播放器获取实际图片URL失败: " + e.getMessage());
+                }
+            });
+        } catch (java.util.concurrent.RejectedExecutionException ignored) {
+            // 容器销毁后任务可能被拒绝
+        }
     }
 
 
