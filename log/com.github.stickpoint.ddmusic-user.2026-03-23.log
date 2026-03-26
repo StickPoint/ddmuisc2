@@ -1,0 +1,56 @@
+21:46:20.179 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+21:46:20.182 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+21:46:20.183 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+21:46:20.183 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+21:46:20.184 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+21:46:27.002 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+21:46:28.478 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+21:46:28.486 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+21:46:28.767 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+21:46:28.767 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+21:46:28.968 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+21:46:28.969 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+21:46:28.970 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+21:46:28.972 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+21:46:28.975 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+21:46:28.989 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+21:46:28.990 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+21:46:29.874 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+21:46:29.877 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+21:46:29.878 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+21:46:37.692 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=kuwo&type=toplists
+21:46:41.043 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+21:46:52.858 [Thread-15] INFO  c.s.d.p.node.SearchResultContainer - 开始搜索关键词: 我的名字
+21:46:52.860 [Thread-15] INFO  c.s.d.common.utils.TuneHubApiUtils - 聚合搜索歌曲: 关键词=我的名字
+21:46:53.422 [Thread-15] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api?type=aggregateSearch&keyword=%E6%88%91%E7%9A%84%E5%90%8D%E5%AD%97
+21:46:53.422 [Thread-15] INFO  c.s.d.p.node.SearchResultContainer - 搜索结果JSON: null
+21:47:46.023 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 加载专辑封面: https://qnm.hunliji.com/o_1j4004gdbik71aj219fb1ahrqk4j.jpg
+21:47:46.026 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+21:47:46.379 [Thread-18] INFO  c.s.d.p.n.MusicPlayDetailContainer - 实际专辑封面URL: https://qnm.hunliji.com/o_1j4004gdbik71aj219fb1ahrqk4j.jpg
+21:47:46.903 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 11%
+21:47:46.972 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 21%
+21:47:47.114 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 32%
+21:47:47.120 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 43%
+21:47:47.127 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 54%
+21:47:47.131 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 64%
+21:47:47.234 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 75%
+21:47:47.240 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 86%
+21:47:47.289 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 97%
+21:47:47.291 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载进度: 100%
+21:47:47.292 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 图片加载完成，加入缓存
+21:47:47.411 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+21:48:07.656 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+21:48:07.657 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
+21:48:07.659 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+21:48:08.105 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+21:48:11.991 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+21:48:11.992 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
+21:48:11.993 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+21:48:12.359 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+21:48:15.135 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+21:48:15.135 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
+21:48:15.138 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0
+21:48:15.650 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 暂停--95.0
+21:48:28.575 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 暂停旋转
+21:48:28.575 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前播放状态: PAUSED
+21:48:28.576 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 当前旋转角度: 播放--95.0

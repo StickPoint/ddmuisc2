@@ -35,33 +35,86 @@ public class HomePageHeaderContainer extends HBox {
 
     public HomePageHeaderContainer() {
         // 设置整体样式
-        setStyle("-fx-background-color: #f5f5f5; -fx-padding: 10px;");
+        setStyle("-fx-background-color: white; -fx-padding: 10px;");
         setAlignment(Pos.CENTER_LEFT);
         setSpacing(20);
         // 设置固定高度
         setPrefHeight(60);
 
+        // 创建搜索框容器
+        HBox searchBox = new HBox();
+        searchBox.setStyle("-fx-background-color: white; " +
+                "-fx-background-radius: 18px; " +
+                "-fx-border-radius: 18px; " +
+                "-fx-border-color: #ddd; " +
+                "-fx-border-width: 1px; " +
+                "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 2);");
+        searchBox.setAlignment(Pos.CENTER_LEFT);
+        searchBox.setSpacing(4); // 减小搜索图标和输入框之间的间距
+        searchBox.setPadding(new javafx.geometry.Insets(0, 12, 0, 12));
+        searchBox.setPrefHeight(36);
+        // 确保点击搜索框外部时能失去焦点
+        searchBox.setFocusTraversable(true);
+        // 设置初始宽度和最大宽度，确保hint文字完全显示
+        searchBox.setMinWidth(300);
+        searchBox.setPrefWidth(300);
+        searchBox.setMaxWidth(500); // 设置为箭头所指位置的大致宽度
+        
+        // 创建搜索图标
+        SvgIcon searchIcon = new SvgIcon("M512 1024c-282.773333 0-512-229.226667-512-512s229.226667-512 512-512 512 229.226667 512 512-229.226667 512-512 512zM512 106.666667c-223.573333 0-405.333333 181.76-405.333333 405.333333s181.76 405.333333 405.333333 405.333333 405.333333-181.76 405.333333-405.333333S735.573333 106.666667 512 106.666667zM928 970.666667l-184.96-184.96c28.16-34.133333 44.8-78.506667 44.8-128 0-110.933333-90.133333-201.066667-201.066667-201.066667s-201.066667 90.133333-201.066667 201.066667 90.133333 201.066667 201.066667 201.066667c49.493333 0 93.866667-16.64 128-44.8l184.96 184.96c12.8 12.8 33.28 12.8 46.08 0s12.8-33.28 0-46.08z");
+        searchIcon.setIconSize(18, 18);
+        searchIcon.setStyle("-fx-background-color: transparent; " +
+                "-fx-fill: #999;");
+        
         // 创建搜索框
         searchField = new TextField();
         searchField.setPromptText("请输入 歌曲|歌手|专辑|MV ");
-        searchField.setPrefWidth(120);
-        searchField.setPrefHeight(36);
-        searchField.setStyle("-fx-background-color: white; " +
-                "-fx-background-radius: 10px; " +
-                "-fx-border-radius: 10px; " +
-                "-fx-border-color: #ddd; " +
-                "-fx-border-width: 1px; " +
+        searchField.setStyle("-fx-background-color: transparent; " +
+                "-fx-border: none; " +
                 "-fx-font-size: 14px; " +
-                "-fx-padding: 0 12px;");
+                "-fx-padding: 0; " +
+                "-fx-text-fill: #333;");
 
         searchField.setFont(Font.font("Microsoft YaHei", 14));
         // 设置不通过Tab键获得焦点
         searchField.setFocusTraversable(false);
         // 添加鼠标点击事件来获取焦点
         searchField.setOnMouseClicked(event -> searchField.requestFocus());
+        
+        // 移除搜索框的默认焦点边框
+        searchField.focusedProperty().addListener((obs, oldVal, newVal) -> {
+            if (newVal) {
+                searchBox.setStyle("-fx-background-color: white; " +
+                        "-fx-background-radius: 18px; " +
+                        "-fx-border-radius: 18px; " +
+                        "-fx-border-color: #D7000F; " +
+                        "-fx-border-width: 1px; " +
+                        "-fx-effect: dropshadow(gaussian, rgba(215,0,15,0.1), 5, 0, 0, 2);");
+                // 展开动画
+                javafx.animation.Timeline expandTimeline = new javafx.animation.Timeline(
+                        new javafx.animation.KeyFrame(javafx.util.Duration.millis(300),
+                                new javafx.animation.KeyValue(searchBox.prefWidthProperty(), 500, javafx.animation.Interpolator.EASE_OUT)));
+                expandTimeline.play();
+            } else {
+                searchBox.setStyle("-fx-background-color: white; " +
+                        "-fx-background-radius: 18px; " +
+                        "-fx-border-radius: 18px; " +
+                        "-fx-border-color: #ddd; " +
+                        "-fx-border-width: 1px; " +
+                        "-fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 5, 0, 0, 2);");
+                // 收缩动画
+                javafx.animation.Timeline collapseTimeline = new javafx.animation.Timeline(
+                        new javafx.animation.KeyFrame(javafx.util.Duration.millis(300),
+                                new javafx.animation.KeyValue(searchBox.prefWidthProperty(), 300, javafx.animation.Interpolator.EASE_OUT)));
+                collapseTimeline.play();
+            }
+        });
 
         // 让搜索框占据剩余空间
         HBox.setHgrow(searchField, Priority.ALWAYS);
+        
+        // 将搜索图标和搜索框添加到搜索框容器
+        searchBox.getChildren().addAll(searchIcon, searchField);
 
         // 创建功能按钮区域
         // 改为HBox使按钮水平排列
@@ -89,8 +142,25 @@ public class HomePageHeaderContainer extends HBox {
         // 添加到按钮组
         buttonGroup.getChildren().addAll(menuButton, minimizeButton, maximizeButton);
 
+        // 创建弹簧组件，将按钮组推到右侧
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
         // 添加到主容器
-        getChildren().addAll(searchField, buttonGroup);
+        getChildren().addAll(searchBox, spacer, buttonGroup);
+
+        // 添加场景点击监听器，点击外部时让搜索框失去焦点
+        searchField.sceneProperty().addListener((obs, oldScene, newScene) -> {
+            if (newScene != null) {
+                newScene.setOnMouseClicked(event -> {
+                    // 检查点击位置是否在搜索框外部
+                    if (!searchBox.getBoundsInParent().contains(searchBox.parentToLocal(event.getSceneX(), event.getSceneY()))) {
+                        searchField.getParent().requestFocus();
+                        searchField.getScene().getRoot().requestFocus();
+                    }
+                });
+            }
+        });
 
     }
 

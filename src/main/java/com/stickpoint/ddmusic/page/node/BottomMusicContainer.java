@@ -3,6 +3,10 @@ package com.stickpoint.ddmusic.page.node;
 import com.leewyatt.rxcontrols.controls.RXAvatar;
 import com.leewyatt.rxcontrols.controls.RXMediaProgressBar;
 import com.stickpoint.ddmusic.page.skin.RedVerticalSliderSkin;
+import com.stickpoint.ddmusic.common.utils.HttpUtils;
+import com.stickpoint.ddmusic.page.state.MusicState;
+import java.io.IOException;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
@@ -12,6 +16,7 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.Tooltip;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -68,6 +73,10 @@ public class BottomMusicContainer extends HBox {
      */
     private MediaPlayer musicPlayer;
     /**
+     * 当前媒体对象
+     */
+    private Media currentMedia;
+    /**
      * 播放/暂停按钮
      */
     private SvgIcon playPauseButton;
@@ -116,11 +125,33 @@ public class BottomMusicContainer extends HBox {
      * 分享按钮
      */
     private SvgIcon shareButton;
+    /**
+     * 音乐播放核心State
+     */
+    private MusicState musicState;
+    
+    /**
+     * 播放器状态监听器，用于移除监听器
+     */
+    private ChangeListener<MediaPlayer.Status> statusChangeListener;
+    private ChangeListener<MediaPlayer.Status> playerStatusSyncListener;
+    private ChangeListener<MediaPlayer.Status> statePlayerStatusListener;
+    private ChangeListener<String> songTitleListener;
+    private ChangeListener<String> artistListener;
+    private ChangeListener<String> albumCoverListener;
+    private boolean musicStateBound = false;
+    private final java.util.concurrent.ExecutorService coverLoadExecutor = java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "Bottom-Cover-Loader");
+        t.setDaemon(true);
+        return t;
+    });
+    private final java.util.concurrent.atomic.AtomicLong coverLoadVersion = new java.util.concurrent.atomic.AtomicLong(0);
+    private final Tooltip songNameTooltip = new Tooltip();
+    private final Tooltip artistNameTooltip = new Tooltip();
 
 
-
-
-    public BottomMusicContainer() {
+    public BottomMusicContainer(MusicState musicState) {
+        this.musicState = musicState;
         albumImageView = new RXAvatar("https://qnm.hunliji.com/o_1j3tjm1ceud2cup11k31hpfh7217.jpeg");
         songNameLabel = new Label();
         artistNameLabel = new Label();
@@ -134,7 +165,8 @@ public class BottomMusicContainer extends HBox {
         shareButton = new SvgIcon();
         playerProgressBar = new RXMediaProgressBar();
         playerTimeLabel = new Label();
-        musicPlayer = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/media/jar-of-love.mp3")).toString()));
+        musicPlayer = null;
+        currentMedia = null;
 
         // 设置容器基本属性
         setPrefHeight(70);
@@ -187,41 +219,29 @@ public class BottomMusicContainer extends HBox {
 
         // 为播放/暂停按钮添加点击事件处理器
         playPauseButton.setOnMouseClicked(event -> {
-            if (musicPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
-                playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
-                musicPlayer.pause();
-                // 更新按钮图标为播放图标
-            } else {
-                // 更新按钮图标为暂停图标 (你可以替换为实际的暂停图标路径)
-                playPauseButton.modifyContent("M512 1024C228.266667 1024 0 795.733333 0 512S228.266667 0 512 0s512 228.266667 512 512-228.266667 512-512 512z m0-42.666667c260.266667 0 469.333333-209.066667 469.333333-469.333333S772.266667 42.666667 512 42.666667 42.666667 251.733333 42.666667 512s209.066667 469.333333 469.333333 469.333333z m-106.666667-682.666666c12.8 0 21.333333 8.533333 21.333334 21.333333v384c0 12.8-8.533333 21.333333-21.333334 21.333333s-21.333333-8.533333-21.333333-21.333333V320c0-12.8 8.533333-21.333333 21.333333-21.333333z m213.333334 0c12.8 0 21.333333 8.533333 21.333333 21.333333v384c0 12.8-8.533333 21.333333-21.333333 21.333333s-21.333333-8.533333-21.333334-21.333333V320c0-12.8 8.533333-21.333333 21.333334-21.333333z");
+            if (musicPlayer == null) {
+                loadMedia("https://qnm.hunliji.com/o_1j4aiov931him1nmo1ujh2221jdqo.mp3");
                 musicPlayer.play();
-            }
-        });
-
-        // 监听播放器状态变化，同步更新按钮图标
-        musicPlayer.statusProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue == MediaPlayer.Status.PLAYING) {
-                // 可以设置为暂停图标
-                playPauseButton.modifyContent("M512 1024C228.266667 1024 0 795.733333 0 512S228.266667 0 512 0s512 228.266667 512 512-228.266667 512-512 512z m0-42.666667c260.266667 0 469.333333-209.066667 469.333333-469.333333S772.266667 42.666667 512 42.666667 42.666667 251.733333 42.666667 512s209.066667 469.333333 469.333333 469.333333z m-106.666667-682.666666c12.8 0 21.333333 8.533333 21.333334 21.333333v384c0 12.8-8.533333 21.333333-21.333334 21.333333s-21.333333-8.533333-21.333333-21.333333V320c0-12.8 8.533333-21.333333 21.333333-21.333333z m213.333334 0c12.8 0 21.333333 8.533333 21.333333 21.333333v384c0 12.8-8.533333 21.333333-21.333333 21.333333s-21.333333-8.533333-21.333334-21.333333V320c0-12.8 8.533333-21.333333 21.333334-21.333333z");
+                musicState.playMusic("Jar Of Love",
+                        "曲婉婷",
+                        "我的歌声里",
+                        "https://qnm.hunliji.com/o_1j4004gdbik71aj219fb1ahrqk4j.jpg",
+                        "网易云",
+                        "https://qnm.hunliji.com/o_1j4aiov931him1nmo1ujh2221jdqo.mp3",
+                        "https://qnm.hunliji.com/o_1j4ai6c611vfmr8ql9nng1a8oe.lrc",
+                        musicPlayer != null ? musicPlayer.getCurrentTime() : Duration.ZERO);
             } else {
-                // 设置为播放图标
-                playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
+                MediaPlayer.Status currentStatus = musicPlayer.getStatus();
+                if (currentStatus == MediaPlayer.Status.PLAYING) {
+                    musicPlayer.pause();
+                    musicState.setPlayerStatusProperty(MediaPlayer.Status.PAUSED);
+                } else {
+                    musicPlayer.play();
+                    musicState.setPlayerStatusProperty(MediaPlayer.Status.PLAYING);
+                }
             }
         });
-
-        // 监听播放完成事件，释放资源
-        musicPlayer.setOnEndOfMedia(() -> {
-            // 播放完成后释放资源
-            musicPlayer.dispose();
-
-            // 重置按钮状态为播放图标
-            playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
-
-            // 重新加载媒体，这里重新创建 MediaPlayer
-             musicPlayer = new MediaPlayer(new Media(Objects.requireNonNull(getClass().getResource("/media/jar-of-love.mp3")).toString()));
-             playerProgressBar.durationProperty().bind(musicPlayer.getMedia().durationProperty());
-             musicPlayer.currentTimeProperty().addListener(durationChangeListener);
-        });
+        bindToMusicState();
     }
 
     /**
@@ -250,7 +270,7 @@ public class BottomMusicContainer extends HBox {
         songNameLabel.setStyle("-fx-text-fill: #212529;");
         songNameLabel.setEllipsisString("...");
 
-        Tooltip songNameTooltip = new Tooltip("歌曲名称");
+        songNameTooltip.setText(songNameLabel.getText());
         Tooltip.install(songNameLabel, songNameTooltip);
 
         artistNameLabel = new Label("艺术家");
@@ -260,7 +280,7 @@ public class BottomMusicContainer extends HBox {
         artistNameLabel.setStyle("-fx-text-fill: #6c757d;");
         artistNameLabel.setEllipsisString("...");
 
-        Tooltip artistNameTooltip = new Tooltip("艺术家");
+        artistNameTooltip.setText(artistNameLabel.getText());
         Tooltip.install(artistNameLabel, artistNameTooltip);
 
         songInfoBox.getChildren().addAll(songNameLabel, artistNameLabel);
@@ -326,10 +346,8 @@ public class BottomMusicContainer extends HBox {
         playerProgressBar.setMinHeight(18);
         playerProgressBar.getStyleClass().add("rx-media-progress-bar");
         // 设置最小宽度
-        // 音乐总时长
-        playerProgressBar.durationProperty().bind(musicPlayer.getMedia().durationProperty());
-        //播放器的进度修改监听器
-        musicPlayer.currentTimeProperty().addListener(durationChangeListener);
+        // 音乐总时长 - 延迟到loadMedia中设置
+        //播放器的进度修改监听器 - 延迟到loadMedia中设置
 
         progressSection.getChildren().addAll(playerProgressBar, playerTimeLabel);
     }
@@ -436,6 +454,10 @@ public class BottomMusicContainer extends HBox {
     private final ChangeListener<Duration> durationChangeListener = (ob1, ov1, nv1) -> {
         playerProgressBar.setCurrentTime(nv1);
         changeTimeLabel(nv1);
+        // 添加这一行将当前播放时间同步到MusicState
+        if (musicState != null) {
+            musicState.setCurrentTimeProperty(nv1);
+        }
     };
 
     /**
@@ -447,10 +469,139 @@ public class BottomMusicContainer extends HBox {
             if (musicPlayer.getStatus() == MediaPlayer.Status.PLAYING) {
                 musicPlayer.stop();
             }
+            // 移除所有监听器
+            try {
+                if (statusChangeListener != null) {
+                    musicPlayer.statusProperty().removeListener(statusChangeListener);
+                    statusChangeListener = null;
+                }
+                if (playerStatusSyncListener != null) {
+                    musicPlayer.statusProperty().removeListener(playerStatusSyncListener);
+                    playerStatusSyncListener = null;
+                }
+                musicPlayer.currentTimeProperty().removeListener(durationChangeListener);
+                musicPlayer.setOnEndOfMedia(null);
+                musicPlayer.setOnError(null);
+            } catch (Exception e) {
+                System.err.println("移除监听器时出错: " + e.getMessage());
+            }
             // 释放资源
             musicPlayer.dispose();
             musicPlayer = null;
         }
+        if (playerProgressBar != null && playerProgressBar.durationProperty().isBound()) {
+            playerProgressBar.durationProperty().unbind();
+        }
+        currentMedia = null;
+    }
+
+    /**
+     * 清理所有资源
+     */
+    public void disposeAll() {
+        disposeMediaPlayer();
+        if (musicState != null && musicStateBound) {
+            if (statePlayerStatusListener != null) {
+                musicState.playerStatusPropertyProperty().removeListener(statePlayerStatusListener);
+            }
+            if (songTitleListener != null) {
+                musicState.songTitlePropertyProperty().removeListener(songTitleListener);
+            }
+            if (artistListener != null) {
+                musicState.singerPropertyProperty().removeListener(artistListener);
+            }
+            if (albumCoverListener != null) {
+                musicState.albumCoverPropertyProperty().removeListener(albumCoverListener);
+            }
+            musicStateBound = false;
+        }
+        coverLoadVersion.incrementAndGet();
+        coverLoadExecutor.shutdownNow();
+    }
+
+    /**
+     * 加载媒体文件
+     * @param mediaUrl 媒体URL
+     */
+    private void loadMedia(String mediaUrl) {
+        // 先释放旧的资源
+        disposeMediaPlayer();
+        
+        try {
+            // 处理HTTP重定向，获取实际的媒体文件URL
+            String actualUrl = HttpUtils.getRedirectUrl(mediaUrl);
+            System.out.println("实际媒体URL: " + actualUrl);
+            
+            // 不缓存 Media 实例，避免重型解码对象持续占用内存
+            currentMedia = new Media(actualUrl);
+            
+            // 创建新的MediaPlayer
+            musicPlayer = new MediaPlayer(currentMedia);
+            
+            // 重新绑定进度条
+            if (playerProgressBar.durationProperty().isBound()) {
+                playerProgressBar.durationProperty().unbind();
+            }
+            playerProgressBar.durationProperty().bind(musicPlayer.getMedia().durationProperty());
+            musicPlayer.currentTimeProperty().addListener(durationChangeListener);
+            if (soundSlider != null) {
+                musicPlayer.setVolume(soundSlider.getValue() / 100.0);
+            }
+            
+            // 重新设置监听器
+            setupPlayerListeners();
+            
+        } catch (Exception e) {
+            System.err.println("加载媒体失败: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    /**
+     * 加载并播放媒体文件
+     * @param mediaUrl 媒体URL
+     */
+    public void loadAndPlayMedia(String mediaUrl) {
+        loadMedia(mediaUrl);
+        if (musicPlayer != null) {
+            musicPlayer.play();
+        }
+    }
+
+    /**
+     * 设置播放器监听器
+     */
+    private void setupPlayerListeners() {
+        if (musicPlayer == null) {
+            return;
+        }
+        
+        // 监听播放器状态变化，同步更新按钮图标
+        statusChangeListener = (observable, oldValue, newValue) -> {
+            if (newValue == MediaPlayer.Status.PLAYING) {
+                // 可以设置为暂停图标
+                playPauseButton.modifyContent("M512 1024C228.266667 1024 0 795.733333 0 512S228.266667 0 512 0s512 228.266667 512 512-228.266667 512-512 512z m0-42.666667c260.266667 0 469.333333-209.066667 469.333333-469.333333S772.266667 42.666667 512 42.666667 42.666667 251.733333 42.666667 512s209.066667 469.333333 469.333333 469.333333z m-106.666667-682.666666c12.8 0 21.333333 8.533333 21.333334 21.333333v384c0 12.8-8.533333 21.333333-21.333334 21.333333s-21.333333-8.533333-21.333333-21.333333V320c0-12.8 8.533333-21.333333 21.333333-21.333333z m213.333334 0c12.8 0 21.333333 8.533333 21.333333 21.333333v384c0 12.8-8.533333 21.333333-21.333333 21.333333s-21.333333-8.533333-21.333334-21.333333V320c0-12.8 8.533333-21.333333 21.333334-21.333333z");
+            } else {
+                // 设置为播放图标
+                playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
+            }
+        };
+        musicPlayer.statusProperty().addListener(statusChangeListener);
+        playerStatusSyncListener = (observable, oldValue, newValue) -> {
+            if (musicState != null && newValue != null && !Objects.equals(musicState.getPlayerStatusProperty(), newValue)) {
+                musicState.setPlayerStatusProperty(newValue);
+            }
+        };
+        musicPlayer.statusProperty().addListener(playerStatusSyncListener);
+
+        // 监听播放完成事件，释放资源
+        musicPlayer.setOnEndOfMedia(() -> {
+            // 播放完成后释放资源
+            disposeMediaPlayer();
+
+            // 重置按钮状态为播放图标
+            playPauseButton.modifyContent("M692.224 495.616 692.224 495.616 692.224 495.616c-4.096-4.096-4.096-4.096-4.096-4.096l-258.048-147.456 0 0c-4.096-4.096-8.192-4.096-12.288-4.096-12.288 0-20.48 8.192-20.48 20.48l0 303.104c0 12.288 8.192 20.48 20.48 20.48 4.096 0 8.192 0 12.288-4.096l0 0 258.048-147.456c0 0 0 0 0 0l4.096 0 0 0c4.096-4.096 8.192-8.192 8.192-16.384S696.32 499.712 692.224 495.616zM438.272 630.784 438.272 393.216l208.896 118.784L438.272 630.784zM512 98.304C282.624 98.304 98.304 282.624 98.304 512s184.32 413.696 413.696 413.696c229.376 0 413.696-184.32 413.696-413.696S741.376 98.304 512 98.304zM512 888.832c-208.896 0-376.832-167.936-376.832-376.832 0-208.896 167.936-376.832 376.832-376.832 208.896 0 376.832 167.936 376.832 376.832C888.832 720.896 720.896 888.832 512 888.832z");
+        });
     }
 
     /**
@@ -504,6 +655,97 @@ public class BottomMusicContainer extends HBox {
         });
 
 
+    }
+    /**
+     * 设置专辑封面点击事件处理器
+     * @param handler 点击事件处理器
+     */
+    public void setAlbumImageClickHandler(EventHandler<MouseEvent> handler) {
+        albumImageView.setOnMouseClicked(handler);
+    }
+
+    private void bindToMusicState() {
+        if (musicState == null || musicStateBound) {
+            return;
+        }
+        musicStateBound = true;
+
+        // 监听 MusicState 的播放状态变化并控制 MediaPlayer（仅绑定一次）
+        statePlayerStatusListener = (obs, oldVal, newVal) -> {
+            if (musicPlayer != null) {
+                MediaPlayer.Status playerStatus = musicPlayer.getStatus();
+                if (Objects.equals(newVal, MediaPlayer.Status.PLAYING) && !Objects.equals(playerStatus, MediaPlayer.Status.PLAYING)) {
+                    musicPlayer.play();
+                } else if (Objects.equals(newVal, MediaPlayer.Status.PAUSED) && !Objects.equals(playerStatus, MediaPlayer.Status.PAUSED)) {
+                    musicPlayer.pause();
+                } else if (Objects.equals(newVal, MediaPlayer.Status.STOPPED) && !Objects.equals(playerStatus, MediaPlayer.Status.STOPPED)) {
+                    musicPlayer.stop();
+                }
+            }
+        };
+        musicState.playerStatusPropertyProperty().addListener(statePlayerStatusListener);
+
+        // UI 字段监听（仅绑定一次）
+        songTitleListener = (obs, oldVal, newVal) -> Platform.runLater(() -> updateSongTitle(newVal));
+        artistListener = (obs, oldVal, newVal) -> Platform.runLater(() -> updateArtistName(newVal));
+        albumCoverListener = (obs, oldVal, newVal) -> updateAlbumCoverAsync(newVal);
+
+        musicState.songTitlePropertyProperty().addListener(songTitleListener);
+        musicState.singerPropertyProperty().addListener(artistListener);
+        musicState.albumCoverPropertyProperty().addListener(albumCoverListener);
+
+        // 初始渲染
+        Platform.runLater(() -> {
+            updateSongTitle(musicState.getSongTitleProperty());
+            updateArtistName(musicState.getSingerProperty());
+        });
+        updateAlbumCoverAsync(musicState.getAlbumCoverProperty());
+    }
+
+    private void updateSongTitle(String newTitle) {
+        String safeTitle = (newTitle == null || newTitle.isBlank()) ? "Unknown Song" : newTitle;
+        songNameLabel.setText(safeTitle);
+        songNameTooltip.setText(safeTitle);
+    }
+
+    private void updateArtistName(String newArtist) {
+        String safeArtist = (newArtist == null || newArtist.isBlank()) ? "Unknown Artist" : newArtist;
+        artistNameLabel.setText(safeArtist);
+        artistNameTooltip.setText(safeArtist);
+    }
+
+    private void updateAlbumCoverAsync(String coverUrl) {
+        if (coverUrl == null || coverUrl.isBlank() || coverLoadExecutor.isShutdown()) {
+            return;
+        }
+        long requestId = coverLoadVersion.incrementAndGet();
+        try {
+            coverLoadExecutor.submit(() -> {
+                try {
+                    String actualUrl = HttpUtils.getRedirectUrl(coverUrl);
+                    Platform.runLater(() -> {
+                        if (requestId != coverLoadVersion.get()) {
+                            return;
+                        }
+                        try {
+                            Image albumImage = new Image(actualUrl, true);
+                            albumImage.errorProperty().addListener((imgObs, imgOldVal, imgNewVal) -> {
+                                if (imgNewVal) {
+                                    System.err.println("底部播放器专辑封面加载失败: " + actualUrl);
+                                }
+                            });
+                            albumImageView.setImage(albumImage);
+                        } catch (Exception e) {
+                            System.err.println("底部播放器加载专辑封面失败: " + e.getMessage());
+                        }
+                    });
+                } catch (IOException e) {
+                    System.err.println("底部播放器获取实际图片URL失败: " + e.getMessage());
+                }
+            });
+        } catch (java.util.concurrent.RejectedExecutionException ignored) {
+            // 容器销毁后任务可能被拒绝
+        }
     }
 
 

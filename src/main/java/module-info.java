@@ -2,7 +2,7 @@
 open module com.stickpoint.ddmusic {
     uses com.stickpoint.ddmusic.common.config.DdmusicSpiMonitor;
     // 第三方依赖
-    requires animatefx;
+    // requires animatefx;
     requires rxcontrols;
     requires ch.qos.logback.classic;
     requires ch.qos.logback.core;
@@ -22,12 +22,14 @@ open module com.stickpoint.ddmusic {
     requires javafx.media;
     requires javafx.base;
     requires javafx.swing;
+    requires animatefx;
     // 配置SPI机制下的HttpConfig封装
     //provides com.stickpoint.ddmusic.common.config.DdmusicSpiMonitor  with com.stickpoint.ddmusic.common.config.DdMusicHttpConfig;
     // 导出SPI依赖
     exports com.stickpoint.ddmusic;
     exports com.stickpoint.ddmusic.common.config;
     exports com.stickpoint.ddmusic.common.utils;
+    exports com.stickpoint.ddmusic.page.state;
     exports com.stickpoint.ddmusic.page.node;
     exports com.stickpoint.ddmusic.page.component;
 }

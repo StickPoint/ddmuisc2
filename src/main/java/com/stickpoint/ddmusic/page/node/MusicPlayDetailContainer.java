@@ -1,0 +1,582 @@
+package com.stickpoint.ddmusic.page.node;
+
+import com.leewyatt.rxcontrols.controls.RXLrcView;
+import com.leewyatt.rxcontrols.pojo.LrcDoc;
+import com.stickpoint.ddmusic.common.utils.ConfigUtils;
+import com.stickpoint.ddmusic.common.utils.EncodingDetectUtil;
+import com.stickpoint.ddmusic.common.utils.HttpUtils;
+import com.stickpoint.ddmusic.common.utils.TuneHubApiUtils;
+import com.stickpoint.ddmusic.page.state.MusicState;
+import java.io.IOException;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.RotateTransition;
+import javafx.animation.Timeline;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.transform.Rotate;
+import javafx.util.Duration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.Objects;
+
+/**
+ * 音乐播放详情容器
+ * @author fntp
+ * @date 2025/8/31
+ */
+public class MusicPlayDetailContainer extends VBox {
+
+    private StackPane recordPane;
+    private ImageView needleImageView;
+    // 歌曲信息组件
+    private Label songTitle;
+    private Label songTags;
+    private Label albumInfo;
+    private Label artistInfo;
+    private Label sourceInfo;
+    private HBox infoBar;
+    private RXLrcView lrcView;
+    private ImageView albumView;
+    // 主内容区域
+    private HBox mainContent;
+    private ChangeListener<MediaPlayer.Status> playingStateListener;
+    private MusicState musicState;
+    private ChangeListener<String> lrcUrlListener;
+    /**
+     * 当前专辑封面图片
+     */
+    private Image currentAlbumImage;
+    /**
+     * 图片缓存
+     */
+    private final java.util.Map<String, Image> imageCache = new java.util.concurrent.ConcurrentHashMap<>();
+    /**
+     * 歌词加载线程池
+     */
+    private final java.util.concurrent.ExecutorService lyricsExecutor = java.util.concurrent.Executors.newSingleThreadExecutor(r -> {
+        Thread t = new Thread(r, "Lyrics-Loader");
+        t.setDaemon(true);
+        return t;
+    });
+    /**
+     * 构建日志工具
+     */
+    private static final Logger log = LoggerFactory.getLogger(MusicPlayDetailContainer.class);
+
+    public MusicPlayDetailContainer(MusicState paramState) {
+        musicState = paramState;
+        initialize();
+        setupLayout();
+        setSharedStateModel(musicState);
+    }
+
+    private void initialize() {
+        // 初始化的时候加载css文件
+        getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/MusicPlayDetailContainer.css")).toExternalForm());
+
+        // 初始化唱片区域
+        recordPane = createRecord();
+        
+        // 初始化唱针
+        needleImageView = createNeedle();
+
+        // 初始化歌曲信息
+        songTitle = new Label("歌曲名称");
+        songTitle.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        songTitle.setStyle("-fx-text-fill: #141313;");
+
+        // 显示默认音乐品质
+        String defaultQuality = ConfigUtils.getDefaultQuality().getValue();
+        songTags = new Label(defaultQuality);
+        // 中国红打底，鱼肚白文字颜色
+        songTags.setStyle("-fx-text-fill: #f0f0f0; -fx-font-size: 12px; -fx-padding: 2 6 2 6; -fx-background-color: #d81e06; -fx-background-radius: 4; -fx-font-weight: bold;");
+
+        albumInfo = new Label("专辑: Bloom");
+        // 现代化样式，参考网易云APP
+        albumInfo.setStyle("-fx-text-fill: #666666; -fx-font-size: 14px; -fx-font-weight: 500;");
+        artistInfo = new Label("歌手: Troye Sivan");
+        artistInfo.setStyle("-fx-text-fill: #666666; -fx-font-size: 14px; -fx-font-weight: 500;");
+        sourceInfo = new Label("来源: Wild");
+        sourceInfo.setStyle("-fx-text-fill: #666666; -fx-font-size: 14px; -fx-font-weight: 500;");
+
+        // 操作按钮
+        infoBar = new HBox(10);
+        infoBar.setAlignment(Pos.CENTER_LEFT);
+
+        // 歌词组件
+        lrcView = new RXLrcView();
+        lrcView.setPrefHeight(400);
+        lrcView.setMaxHeight(Double.MAX_VALUE);
+        lrcView.setPrefWidth(500);
+        lrcView.getStyleClass().add("rx-lrc-view");
+    }
+
+    private void setupLayout() {
+        setSpacing(20);
+        setAlignment(Pos.TOP_CENTER);
+        setStyle("-fx-background-color: rgba(43,40,40,0.02)");
+
+        // 创建左右布局
+        mainContent = new HBox(50);
+        mainContent.setAlignment(Pos.CENTER);
+        mainContent.setPrefWidth(900);
+
+        // 左侧唱片区域
+        VBox leftPane = new VBox();
+        leftPane.setAlignment(Pos.CENTER);
+        
+        // 创建唱片和唱针的容器
+        StackPane recordWithNeedle = new StackPane();
+        recordWithNeedle.getChildren().addAll(recordPane, needleImageView);
+        // 设置唱片容器的下边距为30，实现整体下移
+        VBox.setMargin(recordWithNeedle, new javafx.geometry.Insets(30, 0, 0, 0));
+
+        //装载左右两个容器
+        leftPane.getChildren().add(recordWithNeedle);
+
+        // 右侧信息区域
+        VBox rightPane = new VBox();
+        // 减小区域1与区域2之间的间距
+        rightPane.setSpacing(10);
+        rightPane.setAlignment(Pos.CENTER);
+        rightPane.setPrefWidth(400);
+        // 允许右侧面板垂直扩展
+        VBox.setVgrow(rightPane, Priority.ALWAYS);
+
+        // 歌曲信息部分（区域1）- 向下挪动
+        VBox songInfoPane = new VBox(8);
+        songInfoPane.setAlignment(Pos.CENTER_LEFT);
+        // 添加上边距，将歌曲信息区域向下挪动
+        VBox.setMargin(songInfoPane, new javafx.geometry.Insets(50, 0, 0, 0));
+        songInfoPane.getChildren().addAll(
+                songTitle,
+                songTags,
+                albumInfo,
+                artistInfo,
+                sourceInfo,
+                infoBar
+        );
+
+        // 歌词区域（区域2）- 拉伸高度
+        VBox lrcContainer = new VBox();
+        lrcContainer.setAlignment(Pos.CENTER);
+        lrcContainer.getChildren().add(lrcView);
+        // 增加歌词区域高度
+        lrcContainer.setPrefHeight(500);
+        lrcContainer.setMaxHeight(Double.MAX_VALUE);
+        // 允许歌词容器在VBox中自动扩展
+        VBox.setVgrow(lrcContainer, Priority.ALWAYS);
+
+        rightPane.getChildren().addAll(songInfoPane, lrcContainer);
+        mainContent.getChildren().addAll(leftPane, rightPane);
+
+        // 添加到主容器
+        getChildren().addAll(mainContent);
+        mainContent.setMaxHeight(javafx.scene.layout.Region.USE_COMPUTED_SIZE);
+        setMaxHeight(javafx.scene.layout.Region.USE_COMPUTED_SIZE);
+        // 绑定宽度自适应
+        bindWidthProperties();
+    }
+
+    /**
+     * 绑定宽度自适应属性
+     */
+    private void bindWidthProperties() {
+        // 主内容区域水平居中
+        mainContent.prefWidthProperty().bind(widthProperty().multiply(0.9));
+        mainContent.maxWidthProperty().bind(widthProperty().multiply(0.9));
+
+        // 唱片大小随窗口大小自适应
+        recordPane.prefWidthProperty().bind(mainContent.widthProperty().multiply(0.4));
+        recordPane.prefHeightProperty().bind(recordPane.prefWidthProperty());
+    }
+
+    private StackPane createRecord() {
+        StackPane record = new StackPane();
+        record.setPrefSize(380, 380);
+
+        try {
+            // 加载黑胶唱片素材
+            Image vinylImage = new Image("https://qnm.hunliji.com/o_1j3vvv7781s3jvbe13pa1vu81o7le.png");
+            ImageView vinylView = new ImageView(vinylImage);
+            vinylView.setFitWidth(370);
+            vinylView.setFitHeight(370);
+            vinylView.setPreserveRatio(true);
+
+            // 加载专辑图片
+            albumView = new ImageView();
+            albumView.setFitWidth(167);
+            albumView.setFitHeight(167);
+            albumView.setPreserveRatio(false); // 不保持比例，确保图片填充整个区域
+            albumView.setSmooth(true); // 开启平滑缩放
+
+            // 创建圆形裁剪区域
+            Circle clip = new Circle(83.5);
+            clip.setCenterX(83.5);
+            clip.setCenterY(83.5);
+            albumView.setClip(clip);
+
+            // 创建白色边框
+            Circle albumBorder = new Circle(83.5);
+            albumBorder.setFill(Color.TRANSPARENT);
+            albumBorder.setStroke(Color.WHITE);
+            albumBorder.setStrokeWidth(2);
+
+            // 创建专辑容器
+            StackPane albumContainer = new StackPane();
+            albumContainer.getChildren().addAll(albumView, albumBorder);
+            albumContainer.setMaxSize(167, 167);
+
+            // 将专辑图片放置在唱片中心
+            StackPane.setAlignment(albumContainer, Pos.CENTER);
+
+            // 只添加黑胶唱片和专辑容器
+            record.getChildren().addAll(vinylView, albumContainer);
+
+            // 绑定专辑封面属性
+            musicState.albumCoverPropertyProperty().addListener((obs, oldVal, newVal) -> {
+                Platform.runLater(() -> {
+                    if (newVal != null && !newVal.isEmpty()) {
+                        try {
+                            loadAlbumCover(newVal);
+                        } catch (Exception e) {
+                            System.err.println("专辑封面加载失败: " + e.getMessage());
+                        }
+                    }
+                });
+            });
+            // 初始化专辑封面
+            if (musicState.getAlbumCoverProperty() != null && !musicState.getAlbumCoverProperty().isEmpty()) {
+                try {
+                    loadAlbumCover(musicState.getAlbumCoverProperty());
+                } catch (Exception e) {
+                    System.err.println("初始专辑封面加载失败: " + e.getMessage());
+                }
+            }
+
+            record.setTranslateX(-25);
+        } catch (Exception e) {
+            // 如果图片加载失败，使用默认占位符
+            System.err.println("图片加载失败: " + e.getMessage());
+
+            Circle placeholder = new Circle(190);
+            placeholder.setFill(Color.rgb(50, 50, 50));
+
+            Label placeholderText = new Label("图片加载失败");
+            placeholderText.setFont(Font.font("Arial", FontWeight.NORMAL, 12));
+            placeholderText.setTextFill(Color.LIGHTGRAY);
+
+            StackPane placeholderContainer = new StackPane();
+            placeholderContainer.getChildren().addAll(placeholder, placeholderText);
+
+            record.getChildren().add(placeholderContainer);
+        }
+
+        return record;
+    }
+
+    /**
+     * 创建唱针
+     */
+    private ImageView createNeedle() {
+        try {
+            // 从本地资源加载唱针图片
+            Image needleImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/img/cz.png")));
+            ImageView needle = new ImageView(needleImage);
+            
+            // 设置唱针的尺寸
+            needle.setFitWidth(100);
+            needle.setFitHeight(500);
+            needle.setPreserveRatio(true);
+            
+            // 设置唱针的初始位置（抬起状态） 初始抬起 30 度
+            needle.setRotate(-95);
+
+            // 设置唱针的旋转中心点（左上角） 向右偏移
+            needle.setTranslateX(175);
+            // 向上偏移
+            needle.setTranslateY(-250);
+
+            
+            return needle;
+            
+        } catch (Exception e) {
+            System.err.println("唱针图片加载失败: " + e.getMessage());
+            
+            // 如果图片加载失败，创建一个简单的占位符
+            ImageView placeholder = new ImageView();
+            placeholder.setFitWidth(150);
+            placeholder.setFitHeight(150);
+            placeholder.setStyle("-fx-background-color: #666666;");
+            return placeholder;
+        }
+    }
+
+    // Setter 方法用于外部设置数据
+    public void setSongTitle(String title) {
+        songTitle.setText(title);
+    }
+
+    public void setAlbumInfo(String album) {
+        albumInfo.setText("专辑: " + album);
+    }
+
+    public void setArtistInfo(String artist) {
+        artistInfo.setText("歌手: " + artist);
+    }
+
+    public void setSourceInfo(String source) {
+        sourceInfo.setText("来源: " + source);
+    }
+
+    // 更新专辑封面的方法
+    public void updateAlbumCover(String imageUrl) {
+        // 这里需要重新创建专辑封面组件并替换原有的
+        // 具体实现可以根据需要添加
+    }
+
+    /**
+     * 加载专辑封面（带缓存）
+     * @param imageUrl 图片URL
+     */
+    private void loadAlbumCover(String imageUrl) {
+        // 检查缓存
+        log.info("加载专辑封面: {}", imageUrl);
+        Image cachedImage = imageCache.get(imageUrl);
+        if (cachedImage != null) {
+            log.info("使用缓存的专辑封面");
+            albumView.setImage(cachedImage);
+            return;
+        }
+        
+        // 处理空URL或本地播放的情况，使用本地默认图片
+        if (imageUrl == null || imageUrl.isEmpty()) {
+            log.info("本地播放，使用本地默认唱片中心图片");
+            // 使用存在的本地默认图片ddgy.jpg
+            Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/img/ddgy.jpg")));
+            albumView.setImage(defaultImage);
+            imageCache.put(imageUrl, defaultImage);
+            return;
+        }
+
+        // 在后台线程处理URL重定向
+        new Thread(() -> {
+            try {
+                // 获取实际的图片URL
+                String actualUrl = HttpUtils.getRedirectUrl(imageUrl);
+                log.info("实际专辑封面URL: {}", actualUrl);
+                
+                // 回到JavaFX应用线程加载图片
+                Platform.runLater(() -> {
+                    // 创建新图片
+                    Image newImage = new Image(actualUrl, true);
+                    
+                    // 添加错误监听器
+                    newImage.errorProperty().addListener((obs, oldVal, newVal) -> {
+                        if (newVal) {
+                            log.error("专辑封面加载失败: {}", actualUrl);
+                            // 加载失败时使用本地默认封面
+                            Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/img/ddgy.jpg")));
+                            albumView.setImage(defaultImage);
+                            imageCache.put(imageUrl, defaultImage);
+                        }
+                    });
+                    
+                    newImage.progressProperty().addListener((obs, oldVal, newVal) -> {
+                        log.info("图片加载进度: {}%", (int)(newVal.doubleValue() * 100));
+                        if (newVal.doubleValue() >= 1.0) {
+                            // 图片加载完成，加入缓存
+                            log.info("图片加载完成，加入缓存");
+                            // 检查缓存大小，如果超过限制，移除最旧的缓存项
+                            if (imageCache.size() >= 10) {
+                                // 移除最旧的缓存项（使用迭代器移除第一个元素）
+                                String oldestKey = imageCache.keySet().iterator().next();
+                                imageCache.remove(oldestKey);
+                            }
+                            imageCache.put(imageUrl, newImage);
+                        }
+                    });
+
+                    // 释放旧图片
+                    if (currentAlbumImage != null) {
+                        currentAlbumImage = null;
+                    }
+
+                    // 设置新图片
+                    albumView.setImage(newImage);
+                    currentAlbumImage = newImage;
+                });
+            } catch (IOException e) {
+                log.error("获取实际图片URL失败: {}", e.getMessage());
+                // 发生异常时使用本地默认封面
+                Platform.runLater(() -> {
+                    Image defaultImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/img/ddgy.jpg")));
+                    albumView.setImage(defaultImage);
+                    imageCache.put(imageUrl, defaultImage);
+                });
+            }
+        }).start();
+    }
+
+    /**
+     * 清理资源
+     */
+    public void dispose() {
+        // 清理图片缓存
+        imageCache.clear();
+        
+        // 释放当前图片
+        if (currentAlbumImage != null) {
+            currentAlbumImage = null;
+        }
+
+        // 停止动画
+        if (recordPane != null) {
+            recordPane.getTransforms().clear();
+        }
+
+        // 关闭歌词加载线程池
+        if (lyricsExecutor != null && !lyricsExecutor.isShutdown()) {
+            lyricsExecutor.shutdown();
+            try {
+                if (!lyricsExecutor.awaitTermination(2, java.util.concurrent.TimeUnit.SECONDS)) {
+                    lyricsExecutor.shutdownNow();
+                }
+            } catch (InterruptedException e) {
+                lyricsExecutor.shutdownNow();
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+
+    private void setSharedStateModel(MusicState paramState) {
+        musicState = paramState;
+        // 创建监听器
+        RotateTransition recordRotateTransition = new RotateTransition();
+        recordRotateTransition.setNode(recordPane);
+        // 25秒一圈
+        recordRotateTransition.setDuration(Duration.seconds(25));
+        // 旋转360度
+        recordRotateTransition.setByAngle(360);
+        // 无限循环
+        recordRotateTransition.setCycleCount(Animation.INDEFINITE);
+        // 取消自动倒转
+        recordRotateTransition.setAutoReverse(false);
+
+        // 创建一个 Rotate 变换，指定旋转中心点
+        // 初始角度 -30°，pivot=(20,20)
+        Rotate needleRotate = new Rotate(60, 45, 45);
+        needleImageView.getTransforms().add(needleRotate);
+
+        log.info("旋转角度: " + needleRotate.getAngle());
+        Timeline needleUp = new Timeline(new KeyFrame(Duration.seconds(0.6), new KeyValue(needleRotate.angleProperty(), 60)));
+        Timeline downUp = new Timeline(new KeyFrame(Duration.seconds(0.6), new KeyValue(needleRotate.angleProperty(), 80)));
+        playingStateListener = (obs, oldVal, newVal) -> {
+            if (MediaPlayer.Status.PLAYING.equals(newVal)) {
+                Platform.runLater(()->{
+                    recordRotateTransition.play();
+                    downUp.playFromStart();
+                    log.info("当前旋转角度: 暂停-" + needleImageView.getRotate());
+                });
+            } else if (MediaPlayer.Status.PAUSED.equals(newVal) || MediaPlayer.Status.STOPPED.equals(newVal)){
+                //pauseRotation();
+                log.info("暂停旋转");
+                log.info("当前播放状态: " + newVal);
+                Platform.runLater(()->{
+                    recordRotateTransition.stop();
+                    needleUp.playFromStart(); // 抬针
+                    log.info("当前旋转角度: 播放-" + needleImageView.getRotate());
+                });
+            }
+        };
+        // 注册弱监听器
+        musicState.addWeakPlayingListener(playingStateListener);
+
+        // 监听歌曲标题变化
+        musicState.songTitlePropertyProperty().addListener((obs, oldVal, newVal) -> {
+            Platform.runLater(() -> setSongTitle(newVal));
+        });
+        // 监听艺术家信息变化
+        musicState.singerPropertyProperty().addListener((obs, oldVal, newVal) -> {
+            Platform.runLater(() -> setArtistInfo(newVal));
+        });
+        // 监听专辑信息变化
+        musicState.albumPropertyProperty().addListener((obs, oldVal, newVal) -> {
+            Platform.runLater(() -> setAlbumInfo(newVal));
+        });
+        // 监听来源信息变化
+        musicState.sourcePropertyProperty().addListener((obs, oldVal, newVal) -> {
+            Platform.runLater(() -> setSourceInfo(newVal));
+        });
+        // 监听歌词URL变化
+        lrcUrlListener = (obs, oldVal, newVal) -> {
+            Platform.runLater(() -> loadAndSetLrc(newVal));
+        };
+        // 监听歌词进度 - 创建独立的监听器
+        ChangeListener<Duration> currentTimeListener = (obs, oldVal, newVal) -> {
+            if (lrcView != null && newVal != null) {
+                lrcView.setCurrentTime(newVal);
+            }
+        };
+        musicState.currentTimePropertyProperty().addListener(currentTimeListener);
+        musicState.lrcTextPropertyProperty().addListener(lrcUrlListener);
+        // 初始化唱片状态 - 移到方法末尾确保所有组件都已初始化
+    }
+
+    // 添加加载和设置歌词的方法
+    private void loadAndSetLrc(String lrcUrl) {
+        if (lrcUrl == null || lrcUrl.isEmpty()) {
+            return;
+        }
+
+        // 在后台线程中加载歌词
+        lyricsExecutor.submit(() -> {
+            try {
+                // 从URL读取字节数据
+                java.net.URL url = new java.net.URL(lrcUrl);
+                byte[] bytes;
+                try (java.io.InputStream inputStream = url.openStream();
+                     java.io.ByteArrayOutputStream buffer = new java.io.ByteArrayOutputStream()) {
+                    int nRead;
+                    byte[] data = new byte[1024];
+                    while ((nRead = inputStream.read(data, 0, data.length)) != -1) {
+                        buffer.write(data, 0, nRead);
+                    }
+                    buffer.flush();
+                    bytes = buffer.toByteArray();
+                }
+
+                // 解析歌词
+                LrcDoc lrcDoc = LrcDoc.parseLrcDoc(
+                        new String(bytes, EncodingDetectUtil.detect(bytes))
+                );
+
+                // 在JavaFX线程中设置歌词
+                Platform.runLater(() -> {
+                    if (lrcView != null && lrcDoc != null) {
+                        lrcView.setLrcDoc(lrcDoc);
+                    }
+                });
+            } catch (Exception e) {
+                System.err.println("歌词加载失败: " + e.getMessage());
+                e.printStackTrace();
+            }
+        });
+    }
+}

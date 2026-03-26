@@ -1,5 +1,5 @@
 .root-pane {
-    -fx-background-color: #f5f5f5;
+    -fx-background-color: white;
 }
 
 .recommend-container {
@@ -22,8 +22,27 @@
 }
 
 .rx-carousel .root-pane .carousel-subscene,
-.rx-carousel .root-pane .effect-pane {
+.rx-carousel .root-pane .effect-pane,
+.rx-carousel .root-pane .pane-container {
     -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+.rx-carousel .root-pane {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+/* 为轮播图的内容区域添加圆角 */
+.rx-carousel {
+    -fx-background-radius: 20;
+    -fx-border-radius: 20;
+}
+
+/* 确保轮播图的所有子容器都继承圆角属性 */
+.rx-carousel * {
+    -fx-background-radius: inherit;
+    -fx-border-radius: inherit;
 }
 .rx-carousel .nav-pane .nav-bar .nav-button {
     -fx-background-color: rgb(192, 192, 192);

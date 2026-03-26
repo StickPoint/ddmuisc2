@@ -1,0 +1,202 @@
+10:38:11.639 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+10:38:11.641 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+10:38:11.642 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+10:38:11.643 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+10:38:11.643 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+10:38:16.322 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+10:38:16.972 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+10:38:16.978 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+10:38:17.205 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+10:38:17.206 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+10:38:17.285 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+10:38:17.286 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+10:38:17.286 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+10:38:17.287 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+10:38:17.287 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+10:38:17.288 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+10:38:17.288 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+10:38:17.716 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+10:38:17.718 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+10:38:17.719 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+10:38:27.544 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=kuwo&type=toplists
+10:38:32.447 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+16:39:15.044 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+16:39:15.062 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+16:39:15.063 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+16:39:15.064 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+16:39:15.064 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+16:39:21.770 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+16:39:22.008 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+16:39:22.033 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+16:39:22.543 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+16:39:22.600 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+16:39:22.849 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+16:39:22.852 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+16:39:22.873 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+16:39:22.874 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+16:39:22.875 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+16:39:22.895 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+16:39:22.896 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+16:39:23.515 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+16:39:23.518 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+16:39:23.519 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+16:49:45.528 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+16:49:45.534 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+16:49:45.535 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+16:49:45.536 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+16:49:45.536 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+16:49:47.302 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+16:49:47.454 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+16:49:47.467 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+16:49:47.735 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+16:49:47.735 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+16:49:47.847 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+16:49:47.848 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+16:49:47.849 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+16:49:47.850 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+16:49:47.851 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+16:49:47.861 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+16:49:47.861 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+16:49:48.326 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+16:49:48.328 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+16:49:48.329 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+17:05:59.372 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+17:05:59.391 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+17:05:59.392 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+17:05:59.392 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+17:05:59.393 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+17:06:05.949 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+17:06:06.140 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+17:06:06.149 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+17:06:06.418 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+17:06:06.419 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+17:06:06.572 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+17:06:06.572 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+17:06:06.573 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+17:06:06.573 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+17:06:06.574 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+17:06:06.597 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+17:06:06.597 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+17:06:07.093 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+17:06:07.096 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+17:06:07.097 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+17:17:46.334 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+17:17:46.337 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+17:17:46.338 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+17:17:46.339 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+17:17:46.339 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+17:17:47.567 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+17:17:47.717 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+17:17:47.730 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+17:17:47.916 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+17:17:47.917 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+17:17:47.993 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+17:17:47.994 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+17:17:47.995 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+17:17:47.995 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+17:17:47.997 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+17:17:47.999 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+17:17:47.999 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+17:17:48.497 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+17:17:48.499 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+17:17:48.500 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+17:41:31.855 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+17:41:31.857 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+17:41:31.857 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+17:41:31.858 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+17:41:31.858 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+17:41:35.577 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+17:41:35.705 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+17:41:35.716 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+17:41:35.908 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+17:41:35.909 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+17:41:36.005 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+17:41:36.005 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+17:41:36.006 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+17:41:36.006 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+17:41:36.007 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+17:41:36.008 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+17:41:36.009 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+17:41:36.474 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+17:41:36.476 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+17:41:36.476 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+17:45:57.134 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+17:45:57.137 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+17:45:57.137 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+17:45:57.138 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+17:45:57.138 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+17:45:58.434 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+17:45:58.559 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+17:45:58.571 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+17:45:58.739 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+17:45:58.739 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+17:45:58.810 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+17:45:58.811 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+17:45:58.812 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+17:45:58.813 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+17:45:58.817 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+17:45:58.819 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+17:45:58.820 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+17:45:59.300 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+17:45:59.303 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+17:45:59.303 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+17:48:51.723 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+17:48:51.728 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+17:48:51.729 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+17:48:51.729 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+17:48:51.730 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+17:48:53.099 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+17:48:53.258 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+17:48:53.274 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+17:48:53.487 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+17:48:53.488 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+17:48:53.617 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+17:48:53.617 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+17:48:53.619 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+17:48:53.619 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+17:48:53.620 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+17:48:53.637 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+17:48:53.637 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+17:48:54.056 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+17:48:54.059 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+17:48:54.060 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+17:52:43.240 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+17:52:43.244 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+17:52:43.244 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+17:52:43.244 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+17:52:43.245 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+17:52:44.855 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+17:52:44.925 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+17:52:44.934 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+17:52:45.085 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+17:52:45.086 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+17:52:45.156 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+17:52:45.157 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+17:52:45.157 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+17:52:45.158 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+17:52:45.159 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+17:52:45.160 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+17:52:45.161 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+17:52:45.637 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+17:52:45.640 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+17:52:45.640 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
+19:28:06.868 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - === 应用启动调试信息 ===
+19:28:06.886 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - Java 版本: 21.0.8
+19:28:06.887 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - JavaFX 版本: 21.0.7
+19:28:06.887 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 工作目录: E:\codeData\javaProject\javafx-ddmusic\ddmuisc2
+19:28:06.887 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 1. 开始创建 HomePage
+19:28:14.179 [JavaFX Application Thread] ERROR c.s.ddmusic.common.utils.HttpUtils - TuneFree API请求失败: Server returned HTTP response code: 502 for URL: https://music-dl.sayqz.com/api/?source=netease&type=toplists
+19:28:14.384 [JavaFX Application Thread] INFO  c.s.ddmusic.common.utils.ConfigUtils - 配置文件读取成功: C:\Users\Administrator\ddmusic.dd
+19:28:14.390 [JavaFX Application Thread] INFO  c.s.d.p.n.MusicPlayDetailContainer - 旋转角度: 60.0
+19:28:14.690 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 2. HomePage 创建成功
+19:28:14.691 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 3. 开始创建场景
+19:28:14.837 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 4. 场景创建成功
+19:28:14.838 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 5. 设置舞台属性
+19:28:14.839 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 6. 舞台属性设置完成
+19:28:14.839 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 7. 加载图标
+19:28:14.840 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 图标URL: file:/E:/codeData/javaProject/javafx-ddmusic/ddmuisc2/target/classes/img/logo.svg
+19:28:14.874 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 8. 图标加载成功
+19:28:14.874 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 9. 显示舞台
+19:28:15.339 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 10. 添加窗口缩放支持
+19:28:15.340 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 11. 居中显示
+19:28:15.341 [JavaFX Application Thread] INFO  com.stickpoint.ddmusic.App - 12. 应用启动完成
