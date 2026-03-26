@@ -66,22 +66,48 @@ public class HomePageContentContainer extends VBox {
 
         // 初始化轮播图
         List<String> bannerList = List.of(
-                "https://qnm.hunliji.com/o_1j3te8vlh16va1hqh81515hvsgd.jpg",
-                "https://qnm.hunliji.com/o_1j3te8vlhd781kpc7b8obf15sae.jpg",
-                "https://qnm.hunliji.com/o_1j3te8vlh3f0e5c1ao51oaq1eo7f.jpg",
-                "https://qnm.hunliji.com/o_1j3te8vlhavd1e8i1av91ujt1j7ig.jpg",
-                "https://qnm.hunliji.com/o_1j3te8vlh1p9p1uqbfdj1kqi1ag6h.jpg"
+                "https://qnm.hunliji.com/o_1jfo2rnqtdijj2l1c8o6441lecd.png",
+                "https://qnm.hunliji.com/o_1jfo2rnqt12us1984v4b1e7hrie.png",
+                "https://qnm.hunliji.com/o_1jfo2rnqtahe1svm1bpc16b81fojf.png",
+                "https://qnm.hunliji.com/o_1jfo2rnqtd9poamgunequ1856g.png",
+                "https://qnm.hunliji.com/o_1jfo2rnqt1dbs1r3k1ia21ihc1bsvh.png"
         );
         sceneryCarousel = new RXCarousel();
         // 设置轮播图最小宽度
         sceneryCarousel.setPrefSize(378,138);
         initCarousel(bannerList);
-
+        
         recommendContainer = new HomePageContentRecommendContainer();
         // 设置推荐容器最小宽度
         recommendContainer.setMinWidth(138);
-        // 将组件添加到HBox中
-        topContainer.getChildren().addAll(sceneryCarousel, recommendContainer);
+        
+        // 创建一个VBox作为轮播图的容器，用于添加裁剪效果
+        javafx.scene.layout.VBox carouselContainer = new javafx.scene.layout.VBox();
+        carouselContainer.setPrefSize(378, 138);
+        // 移除内边距和外边距，确保裁剪效果完整
+        carouselContainer.setPadding(new Insets(0));
+        carouselContainer.setSpacing(0);
+        
+        // 将轮播图添加到容器中
+        carouselContainer.getChildren().add(sceneryCarousel);
+        
+        // 确保轮播图完全填充容器，没有额外边距
+        sceneryCarousel.setPrefSize(378, 138);
+        sceneryCarousel.setMinSize(378, 138);
+        sceneryCarousel.setMaxSize(378, 138);
+        sceneryCarousel.setPadding(new Insets(0));
+        
+        // 设置容器的裁剪区域，确保整个轮播图都是圆角，四个角落圆角大小一致
+        javafx.scene.shape.Rectangle containerClip = new javafx.scene.shape.Rectangle(378, 138);
+        containerClip.setArcWidth(20);
+        containerClip.setArcHeight(20);
+        carouselContainer.setClip(containerClip);
+        
+        // 确保容器本身也有圆角样式
+        carouselContainer.setStyle("-fx-background-radius: 20; -fx-border-radius: 20;");
+        
+        // 将带裁剪效果的容器和推荐容器添加到HBox中
+        topContainer.getChildren().addAll(carouselContainer, recommendContainer);
 
         // 设置水平布局优先级，让两个组件都能撑满高度
         HBox.setHgrow(sceneryCarousel, Priority.NEVER);
@@ -104,9 +130,14 @@ public class HomePageContentContainer extends VBox {
      * 初始化轮播图
      */
     private void initCarousel(List<String> bannerList) {
+        // 设置轮播图容器的圆角
+        sceneryCarousel.setStyle("-fx-background-radius: 20; -fx-border-radius: 20;");
+        
         // 创建轮播图页面
         for (String url : bannerList) {
             RXCarouselPane pane = new RXCarouselPane();
+            pane.setStyle("-fx-background-radius: 20;");
+            
             ImageView imageView = new ImageView();
             imageView.setPreserveRatio(true);
             // 设置合适的宽度
@@ -116,10 +147,16 @@ public class HomePageContentContainer extends VBox {
             // 使用缓存加载图片
             Image image = loadImageWithCache(url, 378, 138);
             imageView.setImage(image);
+            
+            // 设置ImageView的圆角
+            imageView.setStyle("-fx-background-radius: 20; -fx-border-radius: 20;");
+            
+            // 创建裁剪区域，确保所有角落都是圆角
             Rectangle clip = new Rectangle(378, 138);
             clip.setArcWidth(20);
             clip.setArcHeight(20);
             imageView.setClip(clip);
+            
             pane.setCenter(imageView);
             sceneryCarousel.getPaneList().add(pane);
         }

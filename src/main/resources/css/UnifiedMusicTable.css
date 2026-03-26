@@ -16,7 +16,7 @@
     -fx-control-inner-background: transparent;
     -fx-focus-color: transparent;
     -fx-faint-focus-color: transparent;
-    -fx-padding: 0;
+    -fx-padding: 8px;
 }
 
 /* 表格列标题 */
@@ -30,30 +30,31 @@
 
 .unified-music-table .column-header {
     -fx-background-color: transparent;
-    -fx-padding: 12px 0;
+    -fx-padding: 16px 0;
     -fx-border-width: 0;
+    -fx-cursor: default;
 }
 
 .unified-music-table .column-header .label {
-    -fx-font-size: 13px;
+    -fx-font-size: 14px;
     -fx-font-weight: 600;
     -fx-text-fill: #666666;
     -fx-alignment: CENTER_LEFT;
-    -fx-padding: 0 16px;
+    -fx-padding: 0 20px;
 }
 
 /* 表格行 */
 .unified-music-table .table-row-cell {
     -fx-background-color: transparent;
-    -fx-padding: 16px 0;
-    -fx-border-width: 0 0 1px 0;
-    -fx-border-color: #f5f5f5;
-    -fx-transition: all 0.2s ease;
+    -fx-padding: 12px 0;
+    -fx-border-width: 0;
+    -fx-transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
+    -fx-cursor: hand;
 }
 
 .unified-music-table .table-row-cell:selected {
-    -fx-background-color: #fafafa; /* 鱼肚白 */
-    -fx-background-radius: 4px;
+    -fx-background-color: rgba(229, 62, 62, 0.08); /* 淡红色背景 */
+    -fx-background-radius: 8px;
 }
 
 .unified-music-table .table-row-cell:selected .table-cell {
@@ -78,57 +79,60 @@
 }
 
 .unified-music-table .table-row-cell:hover {
-    -fx-background-color: #fafafa;
-    -fx-background-radius: 4px;
+    -fx-background-color: rgba(229, 62, 62, 0.05);
+    -fx-background-radius: 8px;
 }
 
 /* 表格单元格 */
 .unified-music-table .table-cell {
     -fx-background-color: transparent;
     -fx-border-width: 0;
-    -fx-padding: 0 16px;
-    -fx-font-size: 14px;
-    -fx-text-fill: #333333;
+    -fx-padding: 0 20px;
     -fx-alignment: CENTER_LEFT;
     -fx-transition: all 0.2s ease;
 }
 
 /* 表格单元格内容 */
 .unified-music-table .table-cell.song-name {
+    -fx-font-size: 15px;
     -fx-font-weight: 500;
     -fx-text-fill: #1a1a1a;
 }
 
 .unified-music-table .table-cell.artist-name {
+    -fx-font-size: 14px;
     -fx-text-fill: #666666;
 }
 
 .unified-music-table .table-cell.album-name {
+    -fx-font-size: 14px;
     -fx-text-fill: #999999;
 }
 
 .unified-music-table .table-cell.source-name {
+    -fx-font-size: 13px;
     -fx-text-fill: #999999;
     -fx-alignment: CENTER;
-    -fx-font-size: 12px;
+    -fx-font-weight: 500;
 }
 
 /* 操作列按钮 */
 .unified-music-table .action-button {
     -fx-background-color: transparent;
     -fx-text-fill: #999999;
-    -fx-font-size: 18px;
+    -fx-font-size: 20px;
     -fx-padding: 8px;
-    -fx-min-width: 40px;
-    -fx-min-height: 40px;
+    -fx-min-width: 36px;
+    -fx-min-height: 36px;
     -fx-cursor: hand;
     -fx-transition: all 0.2s ease;
     -fx-background-radius: 50%;
+    -fx-focus-traversable: false;
 }
 
 .unified-music-table .action-button:hover {
-    -fx-background-color: #fffcfc;
-    -fx-text-fill: #920707;
+    -fx-background-color: rgba(229, 62, 62, 0.1);
+    -fx-text-fill: #e53e3e;
 }
 
 /* 上下文菜单 */
@@ -267,29 +271,32 @@ MenuItem:focused .label {
 /* 分页控件 */
 .unified-music-table .pagination-box {
     -fx-alignment: CENTER;
-    -fx-spacing: 16px;
-    -fx-padding: 16px 0;
+    -fx-spacing: 20px;
+    -fx-padding: 20px;
+    -fx-background-color: #ffffff;
     -fx-border-width: 1px 0 0 0;
-    -fx-border-color: #f5f5f5;
+    -fx-border-color: #f0f0f0;
 }
 
 .unified-music-table .page-button {
     -fx-background-color: #ffffff;
     -fx-text-fill: #666666;
     -fx-border-color: #e0e0e0;
-    -fx-border-radius: 6px;
-    -fx-background-radius: 6px;
-    -fx-padding: 8px 16px;
+    -fx-border-radius: 8px;
+    -fx-background-radius: 8px;
+    -fx-padding: 10px 20px;
     -fx-font-size: 14px;
     -fx-cursor: hand;
     -fx-transition: all 0.2s ease;
-    -fx-min-width: 80px;
+    -fx-min-width: 90px;
+    -fx-font-weight: 500;
+    -fx-focus-traversable: false;
 }
 
 .unified-music-table .page-button:hover {
-    -fx-background-color: #fafafa;
-    -fx-border-color: #d0d0d0;
-    -fx-text-fill: #333333;
+    -fx-background-color: rgba(229, 62, 62, 0.1);
+    -fx-border-color: #e53e3e;
+    -fx-text-fill: #e53e3e;
 }
 
 .unified-music-table .page-button:disabled {
@@ -297,12 +304,14 @@ MenuItem:focused .label {
     -fx-text-fill: #cccccc;
     -fx-border-color: #e0e0e0;
     -fx-cursor: default;
+    -fx-opacity: 0.6;
 }
 
 .unified-music-table .page-info {
     -fx-font-size: 14px;
-    -fx-text-fill: #666666;
-    -fx-padding: 8px 0;
+    -fx-text-fill: #888888;
+    -fx-padding: 10px 0;
+    -fx-font-weight: 500;
 }
 
 /* 隐藏所有滚动条 */

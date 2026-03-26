@@ -118,7 +118,7 @@ public class App extends Application {
         log.info("开始加载加载远程系统配置");
         ServiceLoader<DdmusicSpiMonitor> s = ServiceLoader.load(DdmusicSpiMonitor.class);
         for (DdmusicSpiMonitor search : s) {
-            search.loadRemoteProperties();
+            search.loadRemoteProperties();              
         }
     }
 

@@ -102,14 +102,17 @@ public class UnifiedMusicTable extends VBox {
         musicTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         musicTable.setTableMenuButtonVisible(false);
         musicTable.setEditable(false);
+        musicTable.setFocusTraversable(false);
+        musicTable.setStyle("-fx-background-color: transparent; -fx-border-color: transparent; -fx-padding: 8px;");
         
         // 添加CSS类
         musicTable.getStyleClass().add("music-table");
         
-        // 创建列
+        // 创建列，优化样式
         TableColumn<MusicItem, String> nameColumn = new TableColumn<>("歌曲名");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        nameColumn.setPrefWidth(250);
+        nameColumn.setPrefWidth(280);
+        nameColumn.setStyle("-fx-font-weight: 600;");
         nameColumn.setCellFactory(col -> {
             TableCell<MusicItem, String> cell = new TableCell<>() {
                 @Override
@@ -122,6 +125,7 @@ public class UnifiedMusicTable extends VBox {
                     } else {
                         setText(item);
                         getStyleClass().add("song-name");
+                        setStyle("-fx-font-size: 15px; -fx-font-weight: 500; -fx-text-fill: #1a1a1a;");
                     }
                 }
             };
@@ -130,7 +134,7 @@ public class UnifiedMusicTable extends VBox {
         
         TableColumn<MusicItem, String> artistColumn = new TableColumn<>("艺术家");
         artistColumn.setCellValueFactory(new PropertyValueFactory<>("artist"));
-        artistColumn.setPrefWidth(150);
+        artistColumn.setPrefWidth(160);
         artistColumn.setCellFactory(col -> {
             TableCell<MusicItem, String> cell = new TableCell<>() {
                 @Override
@@ -143,6 +147,7 @@ public class UnifiedMusicTable extends VBox {
                     } else {
                         setText(item);
                         getStyleClass().add("artist-name");
+                        setStyle("-fx-font-size: 14px; -fx-text-fill: #666666;");
                     }
                 }
             };
@@ -151,7 +156,7 @@ public class UnifiedMusicTable extends VBox {
         
         TableColumn<MusicItem, String> albumColumn = new TableColumn<>("专辑");
         albumColumn.setCellValueFactory(new PropertyValueFactory<>("album"));
-        albumColumn.setPrefWidth(200);
+        albumColumn.setPrefWidth(220);
         albumColumn.setCellFactory(col -> {
             TableCell<MusicItem, String> cell = new TableCell<>() {
                 @Override
@@ -164,6 +169,7 @@ public class UnifiedMusicTable extends VBox {
                     } else {
                         setText(item);
                         getStyleClass().add("album-name");
+                        setStyle("-fx-font-size: 14px; -fx-text-fill: #999999;");
                     }
                 }
             };
@@ -188,6 +194,7 @@ public class UnifiedMusicTable extends VBox {
                         setText(chineseSource);
                         getStyleClass().add("source-name");
                         setAlignment(Pos.CENTER);
+                        setStyle("-fx-font-size: 13px; -fx-text-fill: #999999; -fx-font-weight: 500;");
                     }
                 }
             };
@@ -202,10 +209,24 @@ public class UnifiedMusicTable extends VBox {
         // 添加列到表格
         musicTable.getColumns().addAll(nameColumn, artistColumn, albumColumn, sourceColumn, actionColumn);
         
-        // 双击播放
+        // 双击播放，优化行样式
         musicTable.setRowFactory(tv -> {
             TableRow<MusicItem> row = new TableRow<>();
             row.setCursor(javafx.scene.Cursor.HAND);
+            row.setStyle("-fx-background-color: transparent; -fx-padding: 12px 0; -fx-border-width: 0; -fx-transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);");
+            
+            // 鼠标悬停效果
+            row.setOnMouseEntered(event -> {
+                if (!row.isEmpty()) {
+                    row.setStyle("-fx-background-color: rgba(229, 62, 62, 0.05); -fx-padding: 12px 0; -fx-border-width: 0; -fx-background-radius: 8px; -fx-transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);");
+                }
+            });
+            
+            row.setOnMouseExited(event -> {
+                if (!row.isEmpty()) {
+                    row.setStyle("-fx-background-color: transparent; -fx-padding: 12px 0; -fx-border-width: 0; -fx-transition: all 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);");
+                }
+            });
             
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && !row.isEmpty()) {
@@ -228,12 +249,19 @@ public class UnifiedMusicTable extends VBox {
         
         public ActionTableCell() {
             actionButton.setText("⋮");
-            actionButton.setFont(Font.font(20));
+            actionButton.setFont(Font.font("System", 20));
+            actionButton.setStyle("-fx-background-color: transparent; -fx-text-fill: #999999; -fx-padding: 8px; -fx-min-width: 36px; -fx-min-height: 36px; -fx-background-radius: 50%; -fx-transition: all 0.2s ease;");
             actionButton.setFocusTraversable(false);
-            
-            // 添加CSS类
-            actionButton.getStyleClass().add("action-button");
             actionButton.setCursor(javafx.scene.Cursor.HAND);
+            
+            // 添加悬停效果
+            actionButton.setOnMouseEntered(e -> {
+                actionButton.setStyle("-fx-background-color: rgba(229, 62, 62, 0.1); -fx-text-fill: #e53e3e; -fx-padding: 8px; -fx-min-width: 36px; -fx-min-height: 36px; -fx-background-radius: 50%; -fx-transition: all 0.2s ease;");
+            });
+            
+            actionButton.setOnMouseExited(e -> {
+                actionButton.setStyle("-fx-background-color: transparent; -fx-text-fill: #999999; -fx-padding: 8px; -fx-min-width: 36px; -fx-min-height: 36px; -fx-background-radius: 50%; -fx-transition: all 0.2s ease;");
+            });
             
             // 创建上下文菜单
             actionButton.setOnAction(e -> {
@@ -260,32 +288,38 @@ public class UnifiedMusicTable extends VBox {
         private void showContextMenu(MusicItem item) {
             ContextMenu contextMenu = new ContextMenu();
             
-            // 为上下文菜单和菜单项添加CSS类
+            // 为上下文菜单和菜单项添加CSS类和样式
             contextMenu.getStyleClass().add("custom-context-menu");
+            contextMenu.setStyle("-fx-background-color: white; -fx-border-color: #e0e0e0; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 12, 0, 0, 6); -fx-padding: 8px 0; -fx-min-width: 140px;");
             
             // 播放菜单项
             MenuItem playItem = new MenuItem("播放");
             playItem.getStyleClass().add("custom-menu-item");
+            playItem.setStyle("-fx-background-color: transparent; -fx-padding: 10px 16px; -fx-cursor: hand; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-transition: all 0.2s ease;");
             playItem.setOnAction(e -> handlePlay(item));
             
             // 收藏菜单项
             MenuItem collectItem = new MenuItem("收藏");
             collectItem.getStyleClass().add("custom-menu-item");
+            collectItem.setStyle("-fx-background-color: transparent; -fx-padding: 10px 16px; -fx-cursor: hand; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-transition: all 0.2s ease;");
             collectItem.setOnAction(e -> handleCollect(item));
             
             // 分享菜单项
             MenuItem shareItem = new MenuItem("分享");
             shareItem.getStyleClass().add("custom-menu-item");
+            shareItem.setStyle("-fx-background-color: transparent; -fx-padding: 10px 16px; -fx-cursor: hand; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-transition: all 0.2s ease;");
             shareItem.setOnAction(e -> handleShare(item));
             
             // 下载菜单项
             MenuItem downloadItem = new MenuItem("下载");
             downloadItem.getStyleClass().add("custom-menu-item");
+            downloadItem.setStyle("-fx-background-color: transparent; -fx-padding: 10px 16px; -fx-cursor: hand; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-transition: all 0.2s ease;");
             downloadItem.setOnAction(e -> handleDownload(item));
             
             // 下一首菜单项
             MenuItem nextItem = new MenuItem("下一首");
             nextItem.getStyleClass().add("custom-menu-item");
+            nextItem.setStyle("-fx-background-color: transparent; -fx-padding: 10px 16px; -fx-cursor: hand; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-transition: all 0.2s ease;");
             nextItem.setOnAction(e -> handleNext(item));
             
             // 添加菜单项
@@ -293,8 +327,9 @@ public class UnifiedMusicTable extends VBox {
             
             // 如果是本地歌曲，添加文件夹菜单项
             if (isLocalMusic) {
-                MenuItem folderItem = new MenuItem("文件夹");
+                MenuItem folderItem = new MenuItem("打开文件夹");
                 folderItem.getStyleClass().add("custom-menu-item");
+                folderItem.setStyle("-fx-background-color: transparent; -fx-padding: 10px 16px; -fx-cursor: hand; -fx-font-size: 14px; -fx-text-fill: #333333; -fx-transition: all 0.2s ease;");
                 folderItem.setOnAction(e -> handleOpenFolder(item));
                 contextMenu.getItems().add(folderItem);
             }
@@ -314,12 +349,42 @@ public class UnifiedMusicTable extends VBox {
         nextPageButton.getStyleClass().add("page-button");
         currentPageLabel.getStyleClass().add("page-info");
         
+        // 设置分页容器样式
         paginationBox.setAlignment(Pos.CENTER);
-        paginationBox.setSpacing(16);
+        paginationBox.setSpacing(20);
+        paginationBox.setStyle("-fx-padding: 20px; -fx-background-color: #ffffff; -fx-border-color: #f0f0f0; -fx-border-width: 1px 0 0 0;");
         
-        // 设置按钮属性
-        prevPageButton.setCursor(javafx.scene.Cursor.HAND);
-        nextPageButton.setCursor(javafx.scene.Cursor.HAND);
+        // 设置按钮属性和样式
+        prevPageButton.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #666666; -fx-border-color: #e0e0e0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px 20px; -fx-font-size: 14px; -fx-cursor: hand; -fx-transition: all 0.2s ease; -fx-font-weight: 500;");
+        nextPageButton.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #666666; -fx-border-color: #e0e0e0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px 20px; -fx-font-size: 14px; -fx-cursor: hand; -fx-transition: all 0.2s ease; -fx-font-weight: 500;");
+        
+        // 添加悬停效果
+        prevPageButton.setOnMouseEntered(e -> {
+            if (!prevPageButton.isDisabled()) {
+                prevPageButton.setStyle("-fx-background-color: rgba(229, 62, 62, 0.1); -fx-text-fill: #e53e3e; -fx-border-color: #e53e3e; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px 20px; -fx-font-size: 14px; -fx-cursor: hand; -fx-transition: all 0.2s ease; -fx-font-weight: 500;");
+            }
+        });
+        
+        prevPageButton.setOnMouseExited(e -> {
+            if (!prevPageButton.isDisabled()) {
+                prevPageButton.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #666666; -fx-border-color: #e0e0e0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px 20px; -fx-font-size: 14px; -fx-cursor: hand; -fx-transition: all 0.2s ease; -fx-font-weight: 500;");
+            }
+        });
+        
+        nextPageButton.setOnMouseEntered(e -> {
+            if (!nextPageButton.isDisabled()) {
+                nextPageButton.setStyle("-fx-background-color: rgba(229, 62, 62, 0.1); -fx-text-fill: #e53e3e; -fx-border-color: #e53e3e; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px 20px; -fx-font-size: 14px; -fx-cursor: hand; -fx-transition: all 0.2s ease; -fx-font-weight: 500;");
+            }
+        });
+        
+        nextPageButton.setOnMouseExited(e -> {
+            if (!nextPageButton.isDisabled()) {
+                nextPageButton.setStyle("-fx-background-color: #ffffff; -fx-text-fill: #666666; -fx-border-color: #e0e0e0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-padding: 10px 20px; -fx-font-size: 14px; -fx-cursor: hand; -fx-transition: all 0.2s ease; -fx-font-weight: 500;");
+            }
+        });
+        
+        // 设置当前页码标签样式
+        currentPageLabel.setStyle("-fx-font-size: 14px; -fx-text-fill: #888888; -fx-font-weight: 500;");
         
         // 添加事件监听器
         prevPageButton.setOnAction(e -> goToPage(currentPage - 1));
@@ -328,6 +393,10 @@ public class UnifiedMusicTable extends VBox {
         // 初始状态
         prevPageButton.setDisable(true);
         nextPageButton.setDisable(true);
+        
+        // 禁用状态样式
+        prevPageButton.setStyle(prevPageButton.getStyle() + " -fx-opacity: 0.6; -fx-cursor: default; -fx-background-color: #f5f5f5; -fx-text-fill: #cccccc; -fx-border-color: #e0e0e0;");
+        nextPageButton.setStyle(nextPageButton.getStyle() + " -fx-opacity: 0.6; -fx-cursor: default; -fx-background-color: #f5f5f5; -fx-text-fill: #cccccc; -fx-border-color: #e0e0e0;");
         
         // 添加到分页容器
         paginationBox.getChildren().addAll(prevPageButton, currentPageLabel, nextPageButton);

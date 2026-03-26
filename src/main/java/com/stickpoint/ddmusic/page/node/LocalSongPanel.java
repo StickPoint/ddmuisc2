@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
@@ -44,10 +45,11 @@ public class LocalSongPanel extends BorderPane {
         // 创建统一音乐表格
         songTable = new UnifiedMusicTable(musicState, bottomMusicContainer);
         
-        // 创建文件夹选择器
+        // 创建文件夹选择器，优化样式
         folderComboBox = new ComboBox<>();
         folderComboBox.setPromptText("选择音乐文件夹");
-        folderComboBox.setPrefWidth(300);
+        folderComboBox.setPrefWidth(350);
+        folderComboBox.setStyle("-fx-background-color: #ffffff; -fx-border-color: #e0e0e0; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-font-size: 14px; -fx-padding: 8px 12px; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.05), 4, 0, 0, 2);");
         
         // 显式创建并设置ObservableList，确保初始时有一个选项
         ObservableList<String> folderItems = FXCollections.observableArrayList();
@@ -61,6 +63,7 @@ public class LocalSongPanel extends BorderPane {
                 // 打开文件夹选择对话框
                 DirectoryChooser directoryChooser = new DirectoryChooser();
                 directoryChooser.setTitle("选择音乐文件夹");
+                directoryChooser.setInitialDirectory(new java.io.File(System.getProperty("user.home")));
                 Stage stage = (Stage) folderComboBox.getScene().getWindow();
                 java.io.File selectedDirectory = directoryChooser.showDialog(stage);
                 
@@ -80,40 +83,37 @@ public class LocalSongPanel extends BorderPane {
             }
         });
         
-        // 创建扫描按钮
+        // 创建扫描按钮，优化样式
         scanButton = new Button("扫描文件夹");
-        scanButton.setStyle("-fx-background-color: #ff3c3c; -fx-text-fill: white; -fx-font-weight: bold;");
+        scanButton.setStyle("-fx-background-color: #e53e3e; -fx-text-fill: white; -fx-font-weight: 600; -fx-font-size: 14px; -fx-padding: 10px 24px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(229,62,62,0.2), 8, 0, 0, 4); -fx-transition: all 0.2s ease;");
+        scanButton.setOnMouseEntered(e -> scanButton.setStyle("-fx-background-color: #c53030; -fx-text-fill: white; -fx-font-weight: 600; -fx-font-size: 14px; -fx-padding: 10px 24px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(229,62,62,0.3), 10, 0, 0, 5); -fx-transition: all 0.2s ease;")
+        );
+        scanButton.setOnMouseExited(e -> scanButton.setStyle("-fx-background-color: #e53e3e; -fx-text-fill: white; -fx-font-weight: 600; -fx-font-size: 14px; -fx-padding: 10px 24px; -fx-border-radius: 8px; -fx-background-radius: 8px; -fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(229,62,62,0.2), 8, 0, 0, 4); -fx-transition: all 0.2s ease;")
+        );
         scanButton.setOnAction(e -> scanFolder());
         
-        // 创建状态标签
+        // 创建状态标签，优化样式
         statusLabel = new Label("无数据");
-        statusLabel.setFont(FontUtil.loadFont("/font/Y-B008YeZiGongChangDanDanHei-2.ttf", 16));
-        statusLabel.setTextFill(Color.RED);
+        statusLabel.setFont(FontUtil.loadFont("/font/Y-B008YeZiGongChangDanDanHei-2.ttf", 14));
+        statusLabel.setTextFill(Color.web("#666666"));
     }
 
     private void setupLayout() {
-        // 创建顶部控制面板
-        HBox topControl = new HBox();
-        topControl.setSpacing(10);
-        topControl.setPadding(new Insets(15, 20, 15, 20));
-        topControl.setStyle("-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-width: 0 0 1 0;");
-        topControl.setAlignment(Pos.CENTER_LEFT);
-        topControl.getChildren().addAll(folderComboBox, scanButton);
-        
-        // 创建底部信息面板
+        // 创建底部信息面板，简化样式
         HBox bottomInfo = new HBox();
-        bottomInfo.setPadding(new Insets(10, 20, 15, 20));
-        bottomInfo.setStyle("-fx-background-color: #f8f9fa; -fx-border-color: #dee2e6; -fx-border-width: 1 0 0 0;");
+        bottomInfo.setPadding(new Insets(12, 24, 16, 24));
+        bottomInfo.setStyle("-fx-background-color: #ffffff;");
         bottomInfo.setAlignment(Pos.CENTER_LEFT);
         bottomInfo.getChildren().add(statusLabel);
         
-        // 创建中间内容区域
+        // 创建中间内容区域，全铺满，无边框
         VBox centerContent = new VBox();
-        centerContent.setStyle("-fx-background-color: white;");
+        centerContent.setStyle("-fx-background-color: #ffffff; -fx-padding: 0 24 20 24;");
+        centerContent.setFillWidth(true);
+        VBox.setVgrow(songTable, Priority.ALWAYS);
         centerContent.getChildren().add(songTable);
         
-        // 设置布局
-        setTop(topControl);
+        // 设置布局，移除顶部控制面板（扫描和选择文件夹按钮）
         setCenter(centerContent);
         setBottom(bottomInfo);
     }
