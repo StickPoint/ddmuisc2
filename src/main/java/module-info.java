@@ -13,8 +13,6 @@ open module com.stickpoint.ddmusic {
     // 网络依赖
     requires java.net.http;
     // sql依赖
-    //requires org.xerial.sqlitejdbc;
-    requires java.sql;
     // 下面的依赖全是javafx依赖
     requires javafx.graphics;
     requires javafx.controls;
